@@ -14,7 +14,7 @@ GO
 
 CREATE TABLE [UN_CORTADO].[USUARIOS] (
 	[Nombre_Usuario]			VARCHAR(30) NOT NULL PRIMARY KEY,
-	[Contraseña]				VARBINARY(1) NOT NULL,
+	[Contraseña]				VARBINARY(8000) NOT NULL,
 	[Habilitado]				BIT NOT NULL DEFAULT 1,
 	[Cantidad_Intentos]			TINYINT NOT NULL DEFAULT 0
 )
@@ -203,7 +203,7 @@ GO
 ********************************************/
 
 --INSERT INTO [UN_CORTADO].[USUARIOS] (Nombre_Usuario, Contraseña, Habilitado, Cantidad_Intentos)
---VALUES ('admin', 'w23e', 0, 0), ('a', 'a', 1, 1)
+--VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 1, 1), ('a', HASHBYTES('SHA2_256', 'a'), 1, 1)
 
 --INSERT INTO [UN_CORTADO].[ROLES] (Nombre, Estado)
 --VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)

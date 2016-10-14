@@ -56,9 +56,7 @@ namespace ClinicaFrba.Menu
                 {
 
                 }
-            }
-
-            var pepito = 0;
+            }            
         }
 
         public void MostrarFuncionalidades(List<string> funcionalidades)

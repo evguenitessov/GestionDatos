@@ -8,13 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace ClinicaFrba.Login
 {
     public partial class Login : Form
     {
         public DBAccess Access { get; set; }
-        public string Contraseña { get; set; }
+        public byte[] Contraseña { get; set; }
         public bool Estado { get; set; }
         public int Intentos { get; set; }
 
@@ -63,10 +64,10 @@ namespace ClinicaFrba.Login
 
                         return;
                     }
-
-                    Contraseña = dr.GetString(1);
+                    
+                    Contraseña = (byte[])dr.GetValue(1);
                     Estado = dr.GetBoolean(2);
-                    Intentos = dr.GetInt16(3);
+                    Intentos = dr.GetInt16(3);                    
                 }
                 catch
                 {
@@ -80,7 +81,7 @@ namespace ClinicaFrba.Login
                 return;
             }                
 
-            if (!(Contraseña.Equals(password_txt.Text)))
+            if (!(CompararContraseña(Contraseña, password_txt.Text)))
             {
                 Intentos++;
                 if (Intentos == 3)
@@ -98,6 +99,23 @@ namespace ClinicaFrba.Login
             }
 
             IngresarAlSistema(Contraseña, Estado);                       
+        }
+
+        bool CompararContraseña(byte[] a1, string contraseña)
+        {
+            SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
+
+            byte[] inputBytes = Encoding.UTF8.GetBytes(contraseña);
+            byte[] a2 = provider.ComputeHash(inputBytes);
+
+            if (a1.Length != a2.Length)
+                return false;
+
+            for (int i = 0; i < a1.Length; i++)
+                if (a1[i] != a2[i])
+                    return false;
+
+            return true;
         }
 
         private void ResetearIntentosDeIngreso()
@@ -194,9 +212,9 @@ namespace ClinicaFrba.Login
             }
         }
 
-        private void IngresarAlSistema(string contraseña, bool estado)
-        {
-            if (contraseña.Equals(password_txt.Text) && estado)
+        private void IngresarAlSistema(byte[] contraseña, bool estado)
+        {            
+            if (CompararContraseña(contraseña, password_txt.Text))            
             {
                 MessageBox.Show("Bienvenido/a" + " " + user_txt.Text, "EXITO");                
                 Roles.Rol roles = new Roles.Rol(user_txt.Text);
