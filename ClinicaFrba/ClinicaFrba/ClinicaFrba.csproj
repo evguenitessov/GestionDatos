@@ -44,11 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Afiliado\Form1.cs">
+    <Compile Include="Abm Afiliado\alta_afiliado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Afiliado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Afiliado\alta_afiliado.Designer.cs">
+      <DependentUpon>alta_afiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Afiliado\alta_usuario_afiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\alta_usuario_afiliado.Designer.cs">
+      <DependentUpon>alta_usuario_afiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Afiliado\listado_afiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\listado_afiliado.Designer.cs">
+      <DependentUpon>listado_afiliado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Afiliado\modif_afiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\modif_afiliado.Designer.cs">
+      <DependentUpon>modif_afiliado.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Especialidades Medicas\Form1.cs">
       <SubType>Form</SubType>
@@ -143,6 +161,18 @@
     <Compile Include="Roles\Rol.Designer.cs">
       <DependentUpon>Rol.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Afiliado\alta_afiliado.resx">
+      <DependentUpon>alta_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\alta_usuario_afiliado.resx">
+      <DependentUpon>alta_usuario_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\listado_afiliado.resx">
+      <DependentUpon>listado_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\modif_afiliado.resx">
+      <DependentUpon>modif_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
