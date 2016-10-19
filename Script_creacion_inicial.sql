@@ -202,19 +202,19 @@ GO
 ***** POBLADO DE TABLAS ******************** 
 ********************************************/
 
---INSERT INTO [UN_CORTADO].[USUARIOS] (Nombre_Usuario, Contraseña, Habilitado, Cantidad_Intentos)
---VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 1, 1), ('a', HASHBYTES('SHA2_256', 'a'), 1, 1)
+INSERT INTO [UN_CORTADO].[USUARIOS] (Nombre_Usuario, Contraseña, Habilitado, Cantidad_Intentos)
+VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 1, 1), ('a', HASHBYTES('SHA2_256', 'a'), 1, 1)
 
---INSERT INTO [UN_CORTADO].[ROLES] (Nombre, Estado)
---VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)
+INSERT INTO [UN_CORTADO].[ROLES] (Nombre, Estado)
+VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)
 
---INSERT INTO [UN_CORTADO].[ROLPORUSUARIO] (Nombre_Usuario, Id_Rol)
---VALUES ('admin', 1), ('admin', 2), ('admin', 3), ('a', 3)
+INSERT INTO [UN_CORTADO].[ROLPORUSUARIO] (Nombre_Usuario, Id_Rol)
+VALUES ('admin', 1), ('admin', 2), ('admin', 3), ('a', 3)
 
---INSERT INTO [UN_CORTADO].[FUNCIONES] (Nombre)
---VALUES ('Registrar agenda del medico'), ('Registro de llegada para atencion medica'), ('ABM Profesional'), ('ABM Rol'),
---	('Registrar resultado para atencion medica'), ('ABM Especialidades Medicas'), ('ABM Afiliado'), ('ABM Plan'),
---	('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno')
+INSERT INTO [UN_CORTADO].[FUNCIONES] (Nombre)
+VALUES ('Registrar agenda del medico'), ('Registro de llegada para atencion medica'), ('ABM Profesional'), ('ABM Rol'),
+	('Registrar resultado para atencion medica'), ('ABM Especialidades Medicas'), ('ABM Afiliado'), ('ABM Plan'),
+	('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno')
 
 --INSERT INTO [UN_CORTADO].[FUNCIONESPORROL] (Id_Funcion, Id_Rol)
 --VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1),

@@ -17,3 +17,18 @@ D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion De
 D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Roles.Rol.resources
 D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.Menu.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csprojResolveAssemblyReference.cache
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.alta_afiliado.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.alta_usuario_afiliado.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.listado_afiliado.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.modif_afiliado.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Login.Login.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.Menu.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Roles.Rol.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
