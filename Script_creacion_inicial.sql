@@ -216,6 +216,6 @@ VALUES ('Registrar agenda del medico'), ('Registro de llegada para atencion medi
 	('Registrar resultado para atencion medica'), ('ABM Especialidades Medicas'), ('ABM Afiliado'), ('ABM Plan'),
 	('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno')
 
---INSERT INTO [UN_CORTADO].[FUNCIONESPORROL] (Id_Funcion, Id_Rol)
---VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1),
---	   (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (11, 3), (12, 3)
+INSERT INTO [UN_CORTADO].[FUNCIONESPORROL] (Id_Funcion, Id_Rol)
+VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1),
+	   (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (11, 3), (12, 3)

@@ -14,7 +14,7 @@ namespace ClinicaFrba
 
         public DBAccess() 
         {
-            Conexion = @"Data Source=DESKTOP-JH5F50Q\SQLSERVER2012;Initial Catalog=GD2C2016;User ID=gd;Password=gd2016";
+            Conexion = @"Data Source=ESTUDIO\SQLSERVER2012;Initial Catalog=GD2C2016;User ID=gd;Password=gd2016";
         }
     }
 }

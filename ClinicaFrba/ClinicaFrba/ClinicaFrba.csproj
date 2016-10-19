@@ -86,11 +86,11 @@
     <Compile Include="Abm Profesional\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\Form1.cs">
+    <Compile Include="AbmRol\AbmRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRol\AbmRoles.Designer.cs">
+      <DependentUpon>AbmRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Cancelar Atencion\Form1.cs">
       <SubType>Form</SubType>
@@ -172,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\modif_afiliado.resx">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\AbmRoles.resx">
+      <DependentUpon>AbmRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

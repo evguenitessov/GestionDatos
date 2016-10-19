@@ -64,7 +64,7 @@ namespace ClinicaFrba.Menu
             if (!funcionalidades.Contains(button5.Text)) button5.Hide();
             if (!funcionalidades.Contains(button12.Text)) button12.Hide();                                    
             if (!funcionalidades.Contains(button4.Text)) button4.Hide();
-            if (!funcionalidades.Contains(button1.Text)) button1.Hide();
+            if (!funcionalidades.Contains(btnAbmRol.Text)) btnAbmRol.Hide();
             if (!funcionalidades.Contains(button10.Text)) button10.Hide();
             if (!funcionalidades.Contains(button3.Text)) button3.Hide();
             if (!funcionalidades.Contains(button6.Text)) button6.Hide();
@@ -78,6 +78,12 @@ namespace ClinicaFrba.Menu
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {            
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void btnAbmRol_Click(object sender, EventArgs e)
+        {
+             AbmRol.AbmRoles abmRoles = new AbmRol.AbmRoles();
+             abmRoles.Show();
         }
         
     }
