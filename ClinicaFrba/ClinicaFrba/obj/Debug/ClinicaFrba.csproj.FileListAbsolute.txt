@@ -17,7 +17,6 @@ D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion De
 D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Roles.Rol.resources
 D:\Backup compu\UTN\Gestion de Datos\TP CLINICA FRBA 1.0 - 2C 2016\Aplicacion Desktop\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Menu.Menu.resources
-<<<<<<< HEAD
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
@@ -33,7 +32,6 @@ C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaF
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Properties.Resources.resources
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Roles.Rol.resources
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
-=======
 D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
 D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe
 D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.pdb
@@ -49,5 +47,7 @@ D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\obj\D
 D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.csproj.GenerateResource.Cache
 D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 D:\Backup compu\UTN\Gestion de Datos\TPActualizado\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
->>>>>>> 8fe8c3dcbc63a07a54f545ee8a2c8384fc3579ec
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.AbmRoles.resources
+D:\Backup compu\UTN\Gestion de Datos\TPGes\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
+D:\Backup compu\UTN\Gestion de Datos\TPGes\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
+D:\Backup compu\UTN\Gestion de Datos\TPGes\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
