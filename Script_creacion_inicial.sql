@@ -29,7 +29,7 @@ CREATE TABLE [UN_CORTADO].[CONTACTO] (
 	[Direccion]					VARCHAR(255) NOT NULL,
 	[Telefono]					NUMERIC(18,0) NULL,
 	[Mail]						VARCHAR(255) NULL,
-	[Fecha_Nacimiento]			DATETIME NOT NULL,
+	[Fecha_Nacimiento]			DATE NOT NULL,
 	
 	PRIMARY KEY ([Nombre_Usuario])	
 )
@@ -38,7 +38,7 @@ GO
 CREATE TABLE [UN_CORTADO].[ROLES] (
 	[Id]						INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Nombre]					VARCHAR(50) NOT NULL,
-	[Estado]					BIT NOT NULL
+	[Estado]					BIT DEFAULT 1
 )
 GO
 
@@ -64,8 +64,9 @@ GO
 CREATE TABLE [UN_CORTADO].[PLANES] (
 	[Id]						INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Nombre]					VARCHAR(50) NOT NULL,	
-	[Abono]						INT NOT NULL,
-	[Costo_Bono]				INT NOT NULL
+	[Abono]						INT DEFAULT 0,
+	[Precio_Bono_Consulta]		INT NOT NULL,
+	[Precio_Bono_Farmacia]		INT NOT NULL
 	)
 GO
 
@@ -120,16 +121,6 @@ CREATE TABLE [UN_CORTADO].[PROFESIONALES] (
 	PRIMARY KEY ([Nombre_Usuario])	
 )
 GO
-
-
-
-
-
-
-
-
-
-
 
 CREATE TABLE [UN_CORTADO].[TIPOESPECIALIDAD] (
 	[Id]						INT NOT NULL IDENTITY(1,1) PRIMARY KEY,	
@@ -204,21 +195,111 @@ GO
 --/*******************************************
 --***** POBLADO DE TABLAS ******************** 
 --********************************************/
+CREATE PROCEDURE [UN_CORTADO].[MIGRACION]
+AS
+BEGIN
 
---INSERT INTO [UN_CORTADO].[USUARIOS] (Nombre_Usuario, Contraseña, Habilitado, Cantidad_Intentos)
---VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 1, 1), ('a', HASHBYTES('SHA2_256', 'a'), 1, 1)
+--Declaracion de variables
+DECLARE @DNI numeric (18,0)
 
---INSERT INTO [UN_CORTADO].[ROLES] (Nombre, Estado)
---VALUES ('Administrativo', 1), ('Profesional', 1), ('Afiliado', 1)
+--LOAD TABLA [ROLES]
 
---INSERT INTO [UN_CORTADO].[ROLPORUSUARIO] (Nombre_Usuario, Id_Rol)
---VALUES ('admin', 1), ('admin', 2), ('admin', 3), ('a', 3)
+INSERT INTO [UN_CORTADO].[ROLES] (Nombre)
+	VALUES ('Administrativo'), ('Profesional'), ('Afiliado')
 
---INSERT INTO [UN_CORTADO].[FUNCIONES] (Nombre)
---VALUES ('Registrar agenda del medico'), ('Registro de llegada para atencion medica'), ('ABM Profesional'), ('ABM Rol'),
---	('Registrar resultado para atencion medica'), ('ABM Especialidades Medicas'), ('ABM Afiliado'), ('ABM Plan'),
---	('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno')
+--LOAD TABLA [FUNCIONES]
+INSERT INTO [UN_CORTADO].[FUNCIONES] (Nombre)
+	VALUES ('Registrar agenda del medico'), ('Registro de llegada para atencion medica'), ('ABM Profesional'), ('ABM Rol'),
+		('Registrar resultado para atencion medica'), ('ABM Especialidades Medicas'), ('ABM Afiliado'), ('ABM Plan'),
+		('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno')
 
---INSERT INTO [UN_CORTADO].[FUNCIONESPORROL] (Id_Funcion, Id_Rol)
---VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1),
---	   (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (11, 3), (12, 3)
+--LOAD TABLA [FUNCIONESPORROL]
+INSERT INTO [UN_CORTADO].[FUNCIONESPORROL] (Id_Funcion, Id_Rol)
+	VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1),
+		   (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (11, 3), (12, 3)
+
+--LOAD DE TABLA [TIPOESPECIALIDAD]
+
+SET IDENTITY_INSERT [UN_CORTADO].[TIPOESPECIALIDAD] ON
+INSERT INTO [UN_CORTADO].[TIPOESPECIALIDAD]
+           ([Id]
+           ,[Nombre])
+    SELECT DISTINCT(Tipo_Especialidad_Codigo),(Tipo_Especialidad_Descripcion) FROM gd_esquema.Maestra
+	WHERE Tipo_Especialidad_Codigo IS NOT NULL
+	ORDER BY 1
+
+SET IDENTITY_INSERT [UN_CORTADO].[TIPOESPECIALIDAD] OFF
+
+--LOAD DE TABLA [ESPECIALIDADES]
+SET IDENTITY_INSERT [UN_CORTADO].[ESPECIALIDADES] ON
+INSERT INTO [UN_CORTADO].[ESPECIALIDADES]
+           ([Id]
+           ,[Nombre]
+		   ,[Id_Tipo])
+	SELECT DISTINCT[Especialidad_Codigo]
+      ,[Especialidad_Descripcion]
+	  ,[Tipo_Especialidad_Codigo]
+    FROM [GD2C2016].[gd_esquema].[Maestra] 
+	WHERE Especialidad_Codigo IS NOT NULL
+	ORDER BY 1 
+ 
+SET IDENTITY_INSERT [UN_CORTADO].[ESPECIALIDADES] OFF
+
+-- LOAD TABLA [USUARIOS]  --
+INSERT INTO [UN_CORTADO].[USUARIOS] (Nombre_Usuario, Contraseña)
+VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'))
+
+INSERT INTO [UN_CORTADO].[USUARIOS]
+           ([Nombre_Usuario]
+           ,[Contraseña])
+	SELECT DISTINCT [Paciente_Dni],HASHBYTES('SHA2_256','123456')
+    FROM [GD2C2016].[gd_esquema].[Maestra] 
+	UNION
+	SELECT DISTINCT [Medico_dni],HASHBYTES('SHA2_256', '123456')
+    FROM [GD2C2016].[gd_esquema].[Maestra] 
+	WHERE Medico_Dni IS NOT NULL
+	ORDER BY 1
+
+--LOAD TABLA [ROLPORUSUARIO]
+INSERT INTO [UN_CORTADO].[ROLPORUSUARIO] (Nombre_Usuario, Id_Rol)
+	VALUES ('admin', 1), ('admin', 2), ('admin', 3)
+
+--LOAD TABLA [CONTACTO]
+INSERT INTO [UN_CORTADO].[CONTACTO]
+           ([Nombre_Usuario]
+           ,[Nombre]
+           ,[Apellido]
+           ,[Tipo_Documento]
+           ,[Numero_Documento]
+           ,[Direccion]
+           ,[Telefono]
+           ,[Mail]
+           ,[Fecha_Nacimiento])
+    SELECT DISTINCT [Paciente_Dni],[Paciente_Nombre],[Paciente_Apellido],'DNI',[Paciente_Dni],[Paciente_Direccion],[Paciente_Telefono],[Paciente_Mail],[Paciente_Fecha_Nac]
+    FROM [GD2C2016].[gd_esquema].[Maestra] 
+	UNION
+	SELECT DISTINCT [Medico_Dni],[Medico_Nombre],[Medico_Apellido],'DNI',[Medico_Dni],[Medico_Direccion],[Medico_Telefono],[Medico_Mail],[Medico_Fecha_Nac]
+    FROM [GD2C2016].[gd_esquema].[Maestra] 
+	WHERE Medico_Dni IS NOT NULL
+	ORDER BY 1
+
+--LOAD TABLA [PLANES]
+SET IDENTITY_INSERT [UN_CORTADO].[PLANES] ON
+INSERT INTO [UN_CORTADO].[PLANES]
+           ([Id]
+		   ,[Nombre]
+           ,[Precio_Bono_Consulta]
+           ,[Precio_Bono_Farmacia])
+    SELECT DISTINCT [Plan_Med_Codigo]
+		,[Plan_Med_Descripcion]
+		,[Plan_Med_Precio_Bono_Consulta]
+        ,[Plan_Med_Precio_Bono_Farmacia]  
+  FROM [GD2C2016].[gd_esquema].[Maestra]
+SET IDENTITY_INSERT [UN_CORTADO].[PLANES] OFF
+END
+GO
+-- MIGRACION DE DATOS
+BEGIN
+	EXECUTE [UN_CORTADO].[MIGRACION]
+END
+GO

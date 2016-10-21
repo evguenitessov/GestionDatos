@@ -1,6 +1,8 @@
 USE [GD2C2016]
 GO
 
+BEGIN TRAN
+
 /*******************************************
 ***** ELIMINAR TABLAS ***************** 
 ********************************************/
@@ -43,9 +45,13 @@ DROP TABLE [UN_CORTADO].[PROFESIONALES]
 
 DROP TABLE [UN_CORTADO].[USUARIOS]
 
+DROP PROCEDURE [UN_CORTADO].[Migracion]
+
 
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
 ********************************************/
 
 DROP SCHEMA [UN_CORTADO]
+
+COMMIT TRAN
