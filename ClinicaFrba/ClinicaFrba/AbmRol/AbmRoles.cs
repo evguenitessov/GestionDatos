@@ -30,8 +30,7 @@ namespace ClinicaFrba.AbmRol
         {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT r.Id, r.Nombre, r.Estado FROM [GD2C2016].[UN_CORTADO].[ROLES] r INNER JOIN [GD2C2016].[UN_CORTADO].[ROLPORUSUARIO] rxu " +
-                                             "ON r.Id = rxu.Id_Rol WHERE rxu.Nombre_Usuario = '{0}'", Usuario);
+                string query = String.Format("SELECT r.Id, r.Nombre, r.Estado FROM [GD2C2016].[UN_CORTADO].[ROLES] r");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -211,6 +210,14 @@ namespace ClinicaFrba.AbmRol
                         conexion.Dispose();
                 }
             }
+        }
+
+        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            NuevoRol nuevoRol = new NuevoRol();
+
+            if (nuevoRol.ShowDialog() == DialogResult.OK)
+                CargarRoles();
         }
     }
 }
