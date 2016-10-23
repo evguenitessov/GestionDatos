@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClinicaFrba.Pedir_Turno
 {
-    public partial class pedido_turno : Form
+    public partial class pedir_turno : Form
     {
-        public pedido_turno()
+        public pedir_turno()
         {
             InitializeComponent();
         }
