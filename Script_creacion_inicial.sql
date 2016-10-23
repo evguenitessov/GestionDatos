@@ -72,9 +72,9 @@ GO
 
 CREATE TABLE [UN_CORTADO].[AFILIADOS] (
 	[Nombre_Usuario]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[USUARIOS],
-	[Numero_Afiliado]			INT NOT NULL,
+	[Numero_Afiliado]			INT IDENTITY(1,1),
 	[Numero_Familia]			TINYINT NOT NULL DEFAULT 0,
-	[Estado_Civil]				VARCHAR(20) NOT NULL,
+	[Estado_Civil]				VARCHAR(20) NOT NULL DEFAULT 'SOLTERO',
 	[Cantidad_Hijos]			TINYINT NOT NULL DEFAULT 0,
 	[Id_Plan]					INT NOT NULL REFERENCES [UN_CORTADO].[PLANES],
 
@@ -83,23 +83,23 @@ CREATE TABLE [UN_CORTADO].[AFILIADOS] (
 GO
 
 CREATE TABLE [UN_CORTADO].[COMPRABONOS] (
-	[Id]						NUMERIC(18,0) NOT NULL PRIMARY KEY,
+	[Id]						INT IDENTITY(1,1) PRIMARY KEY,
 	[Nombre_Usuario]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],	
-	[Cantidad_Bonos]			INT NOT NULL,
-	[Precio_Total]				INT NOT NULL,
+	[Cantidad_Bonos]			INT NOT NULL DEFAULT 1,
+	[Precio_Total]				INT NOT NULL DEFAULT 0,
 	[Fecha_Compra]				DATETIME NOT NULL DEFAULT GETDATE()	
 )
 GO
 
 CREATE TABLE [UN_CORTADO].[BONOS] (
-	[Id]						NUMERIC(18,0) NOT NULL PRIMARY KEY,
-	[Numero_Consulta_Medica]	INT NOT NULL,	
-	[Id_Compra_Bono]		    NUMERIC(18,0) NOT NULL REFERENCES [UN_CORTADO].[COMPRABONOS],	
-	[Fecha_Uso]					DATETIME NOT NULL,
+	[Id]						NUMERIC(18,0) IDENTITY(1,1) PRIMARY KEY,
+	[Numero_Consulta_Medica]	INT NOT NULL DEFAULT 0,	
+	[Id_Compra_Bono]		    INT NOT NULL REFERENCES [UN_CORTADO].[COMPRABONOS],	
 	[Numero_Familiar]			INT NOT NULL,
 	[Plan]						VARCHAR(30) NOT NULL,
-	[Nombre_Usuario_Uso]		VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],	
-	[Habilitado]				BIT NOT NULL
+	[Fecha_Uso]					DATETIME,
+	[Nombre_Usuario_Uso]		VARCHAR(30) REFERENCES [UN_CORTADO].[AFILIADOS],	
+	[Habilitado]				BIT DEFAULT 1
 )
 GO
 
@@ -296,6 +296,65 @@ INSERT INTO [UN_CORTADO].[PLANES]
         ,[Plan_Med_Precio_Bono_Farmacia]  
   FROM [GD2C2016].[gd_esquema].[Maestra]
 SET IDENTITY_INSERT [UN_CORTADO].[PLANES] OFF
+
+--LOAD TABLA AFILIADOS
+INSERT INTO [UN_CORTADO].[AFILIADOS]
+           ([Nombre_Usuario]
+		   ,[Id_Plan])
+	SELECT  DISTINCT [Paciente_Dni],[Plan_Med_Codigo]
+    FROM [GD2C2016].[gd_esquema].[Maestra]
+	ORDER BY 1
+
+--LOAD TABLA [COMPRABONOS]    @FALTA VER EL TEMA DE CALCULAR EL COSTO TOTAL
+INSERT INTO [UN_CORTADO].[COMPRABONOS]
+           ([Nombre_Usuario]
+           ,[Cantidad_Bonos]
+           ,[Fecha_Compra])
+SELECT [Paciente_Dni], COUNT ( * ), Compra_Bono_Fecha
+  FROM [GD2C2016].[gd_esquema].[Maestra]
+  WHERE Compra_Bono_Fecha IS NOT NULL
+  GROUP BY Paciente_Dni,Compra_Bono_Fecha
+  ORDER BY 1,3
+
+--LOAD TABLA [BONOS]
+SET IDENTITY_INSERT [UN_CORTADO].[BONOS] ON
+INSERT INTO [UN_CORTADO].[BONOS]
+           ([Id]
+           ,[Numero_Consulta_Medica]
+           ,[Id_Compra_Bono]
+           ,[Fecha_Uso]
+           ,[Numero_Familiar]
+           ,[Plan]
+           ,[Nombre_Usuario_Uso]
+           ,[Habilitado])
+SELECT DISTINCT M.Bono_Consulta_Numero,1, C.id,M.Bono_Consulta_Fecha_Impresion,0,A.Id_Plan,C.Nombre_Usuario,1
+  FROM [GD2C2016].[gd_esquema].[Maestra] AS M
+  JOIN [UN_CORTADO].[COMPRABONOS] AS C
+  ON M.Paciente_Dni = C.Nombre_Usuario AND C.Fecha_Compra = M.Compra_Bono_Fecha 
+  JOIN [UN_CORTADO].[AFILIADOS] AS A
+  ON A.Nombre_Usuario = M.Paciente_Dni	
+  WHERE M.Bono_Consulta_Fecha_Impresion IS NOT NULL
+  ORDER BY 1
+SET IDENTITY_INSERT [UN_CORTADO].[BONOS] OFF
+
+--LOAD TABLA [PROFESIONALES]    @VERIFICAR EL TEMA DE LA MATRICULA   
+INSERT INTO [UN_CORTADO].[PROFESIONALES]
+           ([Nombre_Usuario]
+           ,[Matricula])
+SELECT DISTINCT[Medico_Dni],00000
+FROM [GD2C2016].[gd_esquema].[Maestra]
+WHERE Medico_Dni  IS NOT NULL
+ORDER BY 1
+
+--LOAD TABLA [ESPECIALIDADPORPROFESIONAL]
+INSERT INTO [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL]
+           ([Id_Especialidad]
+           ,[Id_Medico])
+SELECT DISTINCT Especialidad_Codigo,Medico_Dni
+FROM [GD2C2016].[gd_esquema].[Maestra] 
+WHERE Medico_Dni is not null
+ORDER BY 2
+
 END
 GO
 -- MIGRACION DE DATOS
