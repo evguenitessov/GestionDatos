@@ -30,8 +30,7 @@ namespace ClinicaFrba.AbmRol
         {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT r.Id, r.Nombre, r.Estado FROM [GD2C2016].[UN_CORTADO].[ROLES] r INNER JOIN [GD2C2016].[UN_CORTADO].[ROLPORUSUARIO] rxu " +
-                                             "ON r.Id = rxu.Id_Rol WHERE rxu.Nombre_Usuario = '{0}'", Usuario);
+                string query = String.Format("SELECT r.Id, r.Nombre, r.Estado FROM [GD2C2016].[UN_CORTADO].[ROLES] r");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -74,9 +73,13 @@ namespace ClinicaFrba.AbmRol
                                             "ON f.Id = fxr.Id_Funcion " +
                                             "INNER JOIN [GD2C2016].[UN_CORTADO].[ROLES] r " +
                                             "ON fxr.Id_Rol = r.Id " +
-                                            "WHERE r.Id = {0}", int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                                            "WHERE r.Id = @RolId");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
+
+                SqlParameter param = new SqlParameter("@RolId", int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                param.SqlDbType = System.Data.SqlDbType.Int;
+                cmd.Parameters.Add(param);
 
                 try
                 {
@@ -141,16 +144,30 @@ namespace ClinicaFrba.AbmRol
 
                 try
                 {
-                    string query = String.Format("UPDATE [UN_CORTADO].[ROLES] SET [Nombre] = '{0}', [Estado] = {1} WHERE [Id] = {2}",
-                                                  nombre_rol_txt.Text,
-                                                  habilitado_chbx.Checked ? 1 : 0,
-                                                  int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                    string query = String.Format("UPDATE [UN_CORTADO].[ROLES] SET [Nombre] = @Nombre, [Estado] = @Estado WHERE [Id] = @Id");
                     command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@Nombre", nombre_rol_txt.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@Estado", habilitado_chbx.Checked ? 1 : 0);
+                    param.SqlDbType = System.Data.SqlDbType.Bit;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@Id", int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
                     command.ExecuteNonQuery();
 
-                    query = String.Format("DELETE FROM [UN_CORTADO].[FUNCIONESPORROL] WHERE [Id_Rol] = {0}",
-                                           int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                    query = String.Format("DELETE FROM [UN_CORTADO].[FUNCIONESPORROL] WHERE [Id_Rol] = @IdRol");
                     command.CommandText = query;
+
+                    param = new SqlParameter("@IdRol", int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
                     command.ExecuteNonQuery();
 
 
@@ -188,9 +205,13 @@ namespace ClinicaFrba.AbmRol
 
                     if (!habilitado_chbx.Checked)
                     {
-                        query = String.Format("DELETE FROM [UN_CORTADO].[ROLPORUSUARIO] WHERE [Id_Rol] = {0}",
-                                           int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                        query = String.Format("DELETE FROM [UN_CORTADO].[ROLPORUSUARIO] WHERE [Id_Rol] = @IdRolPorUsuario");
                         command.CommandText = query;
+
+                        param = new SqlParameter("@IdRolPorUsuario", int.Parse(roles_dgrvw.CurrentRow.Cells["Id"].Value.ToString()));
+                        param.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param);
+
                         command.ExecuteNonQuery();
                     }
 
@@ -211,6 +232,14 @@ namespace ClinicaFrba.AbmRol
                         conexion.Dispose();
                 }
             }
+        }
+
+        private void linkLabel2_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            NuevoRol nuevoRol = new NuevoRol();
+
+            if (nuevoRol.ShowDialog() == DialogResult.OK)
+                CargarRoles();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ClinicaFrba.AbmRol
 {
-    partial class AbmRoles
+    partial class NuevoRol
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.detalle_rol_grbx = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.checkBox12 = new System.Windows.Forms.CheckBox();
@@ -56,54 +53,11 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.habilitado_chbx = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.nombre_rol_txt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.roles_dgrvw = new System.Windows.Forms.DataGridView();
-            this.detalle_rol_grbx.SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.roles_dgrvw)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(465, 357);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 39);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Modificar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(345, 366);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(95, 20);
-            this.linkLabel2.TabIndex = 10;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Crear nuevo";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked_1);
-            // 
-            // detalle_rol_grbx
-            // 
-            this.detalle_rol_grbx.Controls.Add(this.groupBox2);
-            this.detalle_rol_grbx.Controls.Add(this.habilitado_chbx);
-            this.detalle_rol_grbx.Controls.Add(this.label15);
-            this.detalle_rol_grbx.Controls.Add(this.nombre_rol_txt);
-            this.detalle_rol_grbx.Controls.Add(this.label1);
-            this.detalle_rol_grbx.Location = new System.Drawing.Point(269, 21);
-            this.detalle_rol_grbx.Name = "detalle_rol_grbx";
-            this.detalle_rol_grbx.Size = new System.Drawing.Size(318, 330);
-            this.detalle_rol_grbx.TabIndex = 9;
-            this.detalle_rol_grbx.TabStop = false;
-            this.detalle_rol_grbx.Text = "Detalle rol";
             // 
             // groupBox2
             // 
@@ -131,7 +85,7 @@
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Location = new System.Drawing.Point(20, 45);
+            this.groupBox2.Location = new System.Drawing.Point(25, 49);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(276, 279);
             this.groupBox2.TabIndex = 29;
@@ -354,27 +308,9 @@
             this.checkBox1.TabIndex = 27;
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // habilitado_chbx
-            // 
-            this.habilitado_chbx.AutoSize = true;
-            this.habilitado_chbx.Location = new System.Drawing.Point(281, 19);
-            this.habilitado_chbx.Name = "habilitado_chbx";
-            this.habilitado_chbx.Size = new System.Drawing.Size(15, 14);
-            this.habilitado_chbx.TabIndex = 28;
-            this.habilitado_chbx.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(217, 20);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(54, 13);
-            this.label15.TabIndex = 27;
-            this.label15.Text = "Habilitado";
-            // 
             // nombre_rol_txt
             // 
-            this.nombre_rol_txt.Location = new System.Drawing.Point(80, 19);
+            this.nombre_rol_txt.Location = new System.Drawing.Point(85, 23);
             this.nombre_rol_txt.Name = "nombre_rol_txt";
             this.nombre_rol_txt.Size = new System.Drawing.Size(117, 20);
             this.nombre_rol_txt.TabIndex = 1;
@@ -382,51 +318,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 20);
+            this.label1.Location = new System.Drawing.Point(22, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
-            // groupBox1
+            // button1
             // 
-            this.groupBox1.Controls.Add(this.roles_dgrvw);
-            this.groupBox1.Location = new System.Drawing.Point(12, 21);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 330);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Roles";
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(187, 344);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(114, 44);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Crear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // roles_dgrvw
-            // 
-            this.roles_dgrvw.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.roles_dgrvw.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.roles_dgrvw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.roles_dgrvw.Location = new System.Drawing.Point(18, 19);
-            this.roles_dgrvw.Name = "roles_dgrvw";
-            this.roles_dgrvw.Size = new System.Drawing.Size(194, 291);
-            this.roles_dgrvw.TabIndex = 0;
-            // 
-            // AbmRoles
+            // NuevoRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 421);
+            this.ClientSize = new System.Drawing.Size(334, 400);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.detalle_rol_grbx);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "AbmRoles";
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nombre_rol_txt);
+            this.Name = "NuevoRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ABM Rol";
-            this.Load += new System.EventHandler(this.AbmRol_Load);
-            this.detalle_rol_grbx.ResumeLayout(false);
-            this.detalle_rol_grbx.PerformLayout();
+            this.Text = "NuevoRol";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.roles_dgrvw)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,9 +356,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.GroupBox detalle_rol_grbx;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox checkBox12;
@@ -462,11 +381,8 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox habilitado_chbx;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox nombre_rol_txt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView roles_dgrvw;
+        private System.Windows.Forms.Button button1;
     }
 }
