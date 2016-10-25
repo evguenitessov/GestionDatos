@@ -51,3 +51,7 @@ C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaF
 D:\Backup compu\UTN\Gestion de Datos\TPGes\ClinicaFrba\ClinicaFrba\bin\Debug\ClinicaFrba.exe.config
 D:\Backup compu\UTN\Gestion de Datos\TPGes\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.exe
 D:\Backup compu\UTN\Gestion de Datos\TPGes\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.pdb
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.AbmRol.NuevoRol.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Pedir_Turno.pedir_turno.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.registrar_agenda.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Planes.abmPlan.resources

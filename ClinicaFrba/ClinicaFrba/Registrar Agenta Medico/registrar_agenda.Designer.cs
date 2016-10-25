@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.aceptar_dias = new System.Windows.Forms.Button();
             this.checkedlist_dias = new System.Windows.Forms.CheckedListBox();
             this.box_rango = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.desde = new System.Windows.Forms.DateTimePicker();
-            this.hasta = new System.Windows.Forms.DateTimePicker();
-            this.aceptar_dias = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.aceptar_rango = new System.Windows.Forms.Button();
-            this.atras = new System.Windows.Forms.Button();
+            this.hasta = new System.Windows.Forms.DateTimePicker();
+            this.desde = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.confirmar = new System.Windows.Forms.Button();
+            this.atras = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.box_rango.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -56,6 +56,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccione día/s";
+            // 
+            // aceptar_dias
+            // 
+            this.aceptar_dias.Location = new System.Drawing.Point(179, 172);
+            this.aceptar_dias.Name = "aceptar_dias";
+            this.aceptar_dias.Size = new System.Drawing.Size(192, 32);
+            this.aceptar_dias.TabIndex = 5;
+            this.aceptar_dias.Text = "Aceptar";
+            this.aceptar_dias.UseVisualStyleBackColor = true;
+            this.aceptar_dias.Click += new System.EventHandler(this.aceptar_dias_Click);
             // 
             // checkedlist_dias
             // 
@@ -87,32 +97,15 @@
             this.box_rango.TabStop = false;
             this.box_rango.Text = "Seleccione rango horario";
             // 
-            // label1
+            // aceptar_rango
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(118, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 18);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Desde:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(367, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 18);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Hasta:";
-            // 
-            // desde
-            // 
-            this.desde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.desde.Location = new System.Drawing.Point(52, 59);
-            this.desde.Name = "desde";
-            this.desde.ShowUpDown = true;
-            this.desde.Size = new System.Drawing.Size(200, 26);
-            this.desde.TabIndex = 3;
+            this.aceptar_rango.Location = new System.Drawing.Point(179, 91);
+            this.aceptar_rango.Name = "aceptar_rango";
+            this.aceptar_rango.Size = new System.Drawing.Size(192, 32);
+            this.aceptar_rango.TabIndex = 6;
+            this.aceptar_rango.Text = "Aceptar ";
+            this.aceptar_rango.UseVisualStyleBackColor = true;
+            this.aceptar_rango.Click += new System.EventHandler(this.aceptar_rango_Click);
             // 
             // hasta
             // 
@@ -123,15 +116,32 @@
             this.hasta.Size = new System.Drawing.Size(200, 26);
             this.hasta.TabIndex = 4;
             // 
-            // aceptar_dias
+            // desde
             // 
-            this.aceptar_dias.Location = new System.Drawing.Point(179, 172);
-            this.aceptar_dias.Name = "aceptar_dias";
-            this.aceptar_dias.Size = new System.Drawing.Size(192, 32);
-            this.aceptar_dias.TabIndex = 5;
-            this.aceptar_dias.Text = "Aceptar";
-            this.aceptar_dias.UseVisualStyleBackColor = true;
-            this.aceptar_dias.Click += new System.EventHandler(this.aceptar_dias_Click);
+            this.desde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.desde.Location = new System.Drawing.Point(52, 59);
+            this.desde.Name = "desde";
+            this.desde.ShowUpDown = true;
+            this.desde.Size = new System.Drawing.Size(200, 26);
+            this.desde.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(367, 38);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 18);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Hasta:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(118, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Desde:";
             // 
             // groupBox3
             // 
@@ -144,15 +154,15 @@
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             // 
-            // aceptar_rango
+            // confirmar
             // 
-            this.aceptar_rango.Location = new System.Drawing.Point(179, 91);
-            this.aceptar_rango.Name = "aceptar_rango";
-            this.aceptar_rango.Size = new System.Drawing.Size(192, 32);
-            this.aceptar_rango.TabIndex = 6;
-            this.aceptar_rango.Text = "Aceptar ";
-            this.aceptar_rango.UseVisualStyleBackColor = true;
-            this.aceptar_rango.Click += new System.EventHandler(this.aceptar_rango_Click);
+            this.confirmar.Location = new System.Drawing.Point(362, 25);
+            this.confirmar.Name = "confirmar";
+            this.confirmar.Size = new System.Drawing.Size(192, 32);
+            this.confirmar.TabIndex = 9;
+            this.confirmar.Text = "Confirmar";
+            this.confirmar.UseVisualStyleBackColor = true;
+            this.confirmar.Click += new System.EventHandler(this.confirmar_Click);
             // 
             // atras
             // 
@@ -162,15 +172,6 @@
             this.atras.TabIndex = 8;
             this.atras.Text = "Atrás";
             this.atras.UseVisualStyleBackColor = true;
-            // 
-            // confirmar
-            // 
-            this.confirmar.Location = new System.Drawing.Point(362, 25);
-            this.confirmar.Name = "confirmar";
-            this.confirmar.Size = new System.Drawing.Size(192, 32);
-            this.confirmar.TabIndex = 9;
-            this.confirmar.Text = "Confirmar";
-            this.confirmar.UseVisualStyleBackColor = true;
             // 
             // registrar_agenda
             // 

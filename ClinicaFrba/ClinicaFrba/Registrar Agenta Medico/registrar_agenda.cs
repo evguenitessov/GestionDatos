@@ -88,5 +88,10 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 return false;
             }
         }
+
+        private void confirmar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
