@@ -104,8 +104,8 @@ namespace ClinicaFrba.Menu
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Abm_Profesional.abmProfesional abmProfesional = new Abm_Profesional.abmProfesional();
-            abmProfesional.Show();
+            MessageBox.Show("Esta opción no está disponible por el momento", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -116,8 +116,7 @@ namespace ClinicaFrba.Menu
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Abm_Especialidades_Medicas.abmEspMedicas abmEspMed = new Abm_Especialidades_Medicas.abmEspMedicas();
-            abmEspMed.Show();
+            MessageBox.Show("Esta opción no está disponible por el momento", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -128,8 +127,7 @@ namespace ClinicaFrba.Menu
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Abm_Planes.abmPlan abmPlan = new Abm_Planes.abmPlan();
-            abmPlan.Show();
+            MessageBox.Show("Esta opción no está disponible por el momento", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button8_Click(object sender, EventArgs e)
