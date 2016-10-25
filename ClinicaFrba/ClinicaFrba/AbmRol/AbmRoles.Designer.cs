@@ -419,7 +419,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "AbmRoles";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "ABM Rol";
             this.Load += new System.EventHandler(this.AbmRol_Load);
             this.detalle_rol_grbx.ResumeLayout(false);
             this.detalle_rol_grbx.PerformLayout();

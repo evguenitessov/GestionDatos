@@ -46,9 +46,13 @@ namespace ClinicaFrba.Login
                                              "ON u.Nombre_Usuario = rxu.Nombre_Usuario " +
                                              "INNER JOIN [GD2C2016].[UN_CORTADO].[ROLES] r " +
                                              "ON r.Id = rxu.Id_Rol " +
-                                             "WHERE u.Nombre_Usuario = '{0}'", user_txt.Text);
+                                             "WHERE u.Nombre_Usuario = @UserName");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
+
+                SqlParameter param = new SqlParameter("@UserName", user_txt.Text);
+                param.SqlDbType = System.Data.SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
 
                 try
                 {
@@ -130,9 +134,13 @@ namespace ClinicaFrba.Login
                 try
                 {
                     string query = String.Format("UPDATE [GD2C2016].[UN_CORTADO].[USUARIOS] " +
-                                                 "SET Cantidad_Intentos = 0 WHERE Nombre_Usuario = '{0}'",
-                                                 user_txt.Text);
+                                                 "SET Cantidad_Intentos = 0 WHERE Nombre_Usuario = @UserName");
                     command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@UserName", user_txt.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
                     command.ExecuteNonQuery();
                     transaction.Commit();
                 }
@@ -160,9 +168,17 @@ namespace ClinicaFrba.Login
                 try
                 {
                     string query = String.Format("UPDATE [GD2C2016].[UN_CORTADO].[USUARIOS] " +
-                                                 "SET Cantidad_Intentos = {0} WHERE Nombre_Usuario = '{1}'",
-                                                 intentos, user_txt.Text);
+                                                 "SET Cantidad_Intentos = @Intentos WHERE Nombre_Usuario = @UserName");
                     command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@UserName", user_txt.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@Intentos", intentos);
+                    param.SqlDbType = System.Data.SqlDbType.TinyInt;
+                    command.Parameters.Add(param);
+
                     command.ExecuteNonQuery();
                     transaction.Commit();
 
@@ -192,9 +208,17 @@ namespace ClinicaFrba.Login
                 try
                 {
                     string query = String.Format("UPDATE [GD2C2016].[UN_CORTADO].[USUARIOS] " +
-                                                 "SET Habilitado = 0, Cantidad_Intentos = {0} WHERE Nombre_Usuario = '{1}'",
-                                                 intentos, user_txt.Text);
+                                                 "SET Habilitado = 0, Cantidad_Intentos = @Intentos WHERE Nombre_Usuario = @UserName");
                     command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@UserName", user_txt.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@Intentos", intentos);
+                    param.SqlDbType = System.Data.SqlDbType.TinyInt;
+                    command.Parameters.Add(param);
+
                     command.ExecuteNonQuery();
                     transaction.Commit();
 
@@ -218,8 +242,7 @@ namespace ClinicaFrba.Login
             {
                 MessageBox.Show("Bienvenido/a" + " " + user_txt.Text, "EXITO");                
                 Roles.Rol roles = new Roles.Rol(user_txt.Text);
-                this.Hide();
-                //roles.Activate();
+                this.Hide();                
                 roles.ShowDialog();
                 this.Show();
             }

@@ -49,7 +49,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(167, 102);
             this.button5.TabIndex = 6;
-            this.button5.Text = "Registrar agenda del médico";
+            this.button5.Text = "Registrar agenda del medico";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button7

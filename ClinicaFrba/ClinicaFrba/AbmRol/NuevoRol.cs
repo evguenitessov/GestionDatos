@@ -40,9 +40,11 @@ namespace ClinicaFrba.AbmRol
 
                 try
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[ROLES] ([Nombre] ,[Estado]) VALUES ('{0}', 1); SELECT CAST(scope_identity() AS int)",
-                                                  nombre_rol_txt.Text);
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[ROLES] ([Nombre] ,[Estado]) VALUES (@NombreRol, 1); SELECT CAST(scope_identity() AS int)");
                     command.CommandText = query;
+                    SqlParameter param = new SqlParameter("@NombreRol", nombre_rol_txt.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
                     ultimoIdRol = (Int32)command.ExecuteScalar();
 
                     StringBuilder insertQuery = new StringBuilder();

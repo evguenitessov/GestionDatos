@@ -35,9 +35,13 @@ namespace ClinicaFrba.Menu
                                             "ON f.Id = fxr.Id_Funcion " +
                                             "INNER JOIN [GD2C2016].[UN_CORTADO].[ROLES] r " +
                                             "ON fxr.Id_Rol = r.Id " +
-                                            "WHERE r.Nombre = '{0}'", rol);
+                                            "WHERE r.Nombre = @Rol");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
+
+                SqlParameter param = new SqlParameter("@Rol", rol);
+                param.SqlDbType = System.Data.SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
 
                 try
                 {

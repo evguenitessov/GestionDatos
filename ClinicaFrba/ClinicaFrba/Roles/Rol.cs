@@ -29,9 +29,13 @@ namespace ClinicaFrba.Roles
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
                 string query = String.Format("SELECT r.Nombre FROM [GD2C2016].[UN_CORTADO].[ROLES] r INNER JOIN [GD2C2016].[UN_CORTADO].[ROLPORUSUARIO] rxu " +
-                                             "ON r.Id = rxu.Id_Rol WHERE rxu.Nombre_Usuario = '{0}'", Usuario);
+                                             "ON r.Id = rxu.Id_Rol WHERE rxu.Nombre_Usuario = @UserName");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
+
+                SqlParameter param = new SqlParameter("@UserName", Usuario);
+                param.SqlDbType = System.Data.SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
 
                 try
                 {
