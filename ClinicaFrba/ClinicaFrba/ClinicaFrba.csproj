@@ -173,6 +173,9 @@
     <EmbeddedResource Include="Abm Afiliado\modif_afiliado.resx">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Planes\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AbmRoles.resx">
       <DependentUpon>AbmRoles.cs</DependentUpon>
     </EmbeddedResource>
