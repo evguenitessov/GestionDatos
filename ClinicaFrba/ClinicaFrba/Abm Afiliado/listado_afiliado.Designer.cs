@@ -31,9 +31,7 @@
             this.filtros = new System.Windows.Forms.GroupBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-            this.nrodoc = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.mail = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.nroafiliado = new System.Windows.Forms.ToolStripTextBox();
@@ -46,10 +44,8 @@
             this.bot_mprincipal = new System.Windows.Forms.Button();
             this.bot_buscar = new System.Windows.Forms.Button();
             this.bot_borrar = new System.Windows.Forms.Button();
-            this.tipodocu = new System.Windows.Forms.ToolStripComboBox();
             this.filtros.SuspendLayout();
             this.toolStrip4.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_afiliados)).BeginInit();
@@ -58,7 +54,6 @@
             // filtros
             // 
             this.filtros.Controls.Add(this.toolStrip4);
-            this.filtros.Controls.Add(this.toolStrip3);
             this.filtros.Controls.Add(this.toolStrip2);
             this.filtros.Controls.Add(this.toolStrip1);
             this.filtros.Location = new System.Drawing.Point(4, 4);
@@ -74,8 +69,8 @@
             // 
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel4,
-            this.nrodoc});
-            this.toolStrip4.Location = new System.Drawing.Point(4, 99);
+            this.mail});
+            this.toolStrip4.Location = new System.Drawing.Point(4, 74);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Size = new System.Drawing.Size(569, 25);
             this.toolStrip4.TabIndex = 3;
@@ -84,30 +79,13 @@
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(111, 22);
-            this.toolStripLabel4.Text = "Nro. de documento";
+            this.toolStripLabel4.Size = new System.Drawing.Size(30, 22);
+            this.toolStripLabel4.Text = "Mail";
             // 
-            // nrodoc
+            // mail
             // 
-            this.nrodoc.Name = "nrodoc";
-            this.nrodoc.Size = new System.Drawing.Size(100, 25);
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel3,
-            this.tipodocu});
-            this.toolStrip3.Location = new System.Drawing.Point(4, 74);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(569, 25);
-            this.toolStrip3.TabIndex = 2;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(112, 22);
-            this.toolStripLabel3.Text = "Tipo de documento";
+            this.mail.Name = "mail";
+            this.mail.Size = new System.Drawing.Size(100, 25);
             // 
             // toolStrip2
             // 
@@ -211,12 +189,6 @@
             this.bot_borrar.UseVisualStyleBackColor = true;
             this.bot_borrar.Click += new System.EventHandler(this.bot_borrar_Click);
             // 
-            // tipodocu
-            // 
-            this.tipodocu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tipodocu.Name = "tipodocu";
-            this.tipodocu.Size = new System.Drawing.Size(121, 25);
-            // 
             // listado_afiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -235,8 +207,6 @@
             this.filtros.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -252,9 +222,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
-        private System.Windows.Forms.ToolStripTextBox nrodoc;
-        private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripTextBox mail;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripTextBox nroafiliado;
@@ -266,6 +234,5 @@
         private System.Windows.Forms.Button bot_mprincipal;
         private System.Windows.Forms.Button bot_buscar;
         private System.Windows.Forms.Button bot_borrar;
-        private System.Windows.Forms.ToolStripComboBox tipodocu;
     }
 }
