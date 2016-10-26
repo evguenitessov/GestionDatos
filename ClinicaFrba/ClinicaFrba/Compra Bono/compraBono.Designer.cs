@@ -1,6 +1,6 @@
-﻿namespace ClinicaFrba.Abm_Especialidades_Medicas
+﻿namespace ClinicaFrba.Compra_Bono
 {
-    partial class Form1
+    partial class compraBono
     {
         /// <summary>
         /// Required designer variable.

@@ -68,23 +68,23 @@
     <Compile Include="Abm Afiliado\modif_afiliado.Designer.cs">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Especialidades Medicas\Form1.cs">
+    <Compile Include="Abm Especialidades Medicas\abmEspMedicas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Especialidades Medicas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Especialidades Medicas\abmEspMedicas.Designer.cs">
+      <DependentUpon>abmEspMedicas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Planes\Form1.cs">
+    <Compile Include="Abm Planes\abmPlan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Planes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Planes\abmPlan.Designer.cs">
+      <DependentUpon>abmPlan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Profesional\Form1.cs">
+    <Compile Include="Abm Profesional\abmProfesional.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Profesional\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Profesional\abmProfesional.Designer.cs">
+      <DependentUpon>abmProfesional.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmRol\AbmRoles.cs">
       <SubType>Form</SubType>
@@ -98,17 +98,17 @@
     <Compile Include="AbmRol\NuevoRol.Designer.cs">
       <DependentUpon>NuevoRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Atencion\Form1.cs">
+    <Compile Include="Cancelar Atencion\cancelarAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cancelar Atencion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Cancelar Atencion\cancelarAtencion.Designer.cs">
+      <DependentUpon>cancelarAtencion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra Bono\Form1.cs">
+    <Compile Include="Compra Bono\compraBono.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra Bono\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra Bono\compraBono.Designer.cs">
+      <DependentUpon>compraBono.cs</DependentUpon>
     </Compile>
     <Compile Include="DBAccess.cs" />
     <Compile Include="Form1.cs">
@@ -154,17 +154,17 @@
     <Compile Include="Registrar Agenta Medico\registrar_agenda.Designer.cs">
       <DependentUpon>registrar_agenda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada\Form1.cs">
+    <Compile Include="Registro Llegada\registrar_llegada.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Llegada\registrar_llegada.Designer.cs">
+      <DependentUpon>registrar_llegada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Resultado\Form1.cs">
+    <Compile Include="Registro Resultado\registroResultado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Resultado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Resultado\registroResultado.Designer.cs">
+      <DependentUpon>registroResultado.cs</DependentUpon>
     </Compile>
     <Compile Include="Roles\Rol.cs">
       <SubType>Form</SubType>
@@ -183,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\modif_afiliado.resx">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Planes\abmPlan.resx">
+      <DependentUpon>abmPlan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\AbmRoles.resx">
       <DependentUpon>AbmRoles.cs</DependentUpon>
