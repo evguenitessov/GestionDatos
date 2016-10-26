@@ -18,6 +18,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             desde.CustomFormat = "HH:mm";
             hasta.CustomFormat = "HH:mm";
             box_rango.Hide();
+            box_dias.Hide();
             confirmar.Hide();
         }
 
@@ -92,6 +93,11 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
         private void confirmar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void aceptar_fechas_Click(object sender, EventArgs e)
+        {
+            box_dias.Show();
         }
     }
 }
