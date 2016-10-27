@@ -209,6 +209,9 @@
     <EmbeddedResource Include="Registrar Agenta Medico\registrar_agenda.resx">
       <DependentUpon>registrar_agenda.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada\registrar_llegada.resx">
+      <DependentUpon>registrar_llegada.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Roles\Rol.resx">
       <DependentUpon>Rol.cs</DependentUpon>
     </EmbeddedResource>
