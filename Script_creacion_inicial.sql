@@ -25,6 +25,7 @@ CREATE TABLE [UN_CORTADO].[CONTACTO] (
 	[Nombre]					VARCHAR(255) NOT NULL,
 	[Apellido]					VARCHAR(255) NOT NULL,
 	[Tipo_Documento]			VARCHAR(20) NOT NULL,
+	[Genero]					CHAR(1) NULL,
 	[Numero_Documento]			NUMERIC(18,0) NOT NULL,
 	[Direccion]					VARCHAR(255) NOT NULL,
 	[Telefono]					NUMERIC(18,0) NULL,
@@ -188,47 +189,39 @@ CREATE TABLE [UN_CORTADO].[CANCELACIONES] (
 )
 GO
 
---/*******************************************    @OBS ANTES DE INSETAR EN AGENDA VALIDAR 40 HS SEM y VALIDAR EL RANGO HORARIO
---***** TRIGGERS CREACION ********************		OSEA SOLO MOSTRAR LO DISPONIBLE
---********************************************/
+--/***********************************************    @OBS ANTES DE INSETAR EN AGENDA VALIDAR 40 HS SEM y VALIDAR EL RANGO HORARIO
+--***** PROCEDURE CARGA AGENDA********************		OSEA SOLO MOSTRAR LO DISPONIBLE
+--************************************************/
+CREATE PROCEDURE [UN_CORTADO].[CARGAR_AGENDA] (@Dia_Atencion int,@Id_Especialidad_Medico Int,@Fecha_Desde DATE,@Fecha_Hasta DATE,@Hora_Inicio TIME,@Hora_Fin TIME) AS 
+BEGIN
 
-CREATE TRIGGER CARGAR_TURNOS_TRIGGER ON UN_CORTADO.AGENDA AFTER INSERT AS
+BEGIN TRAN 
+
 	DECLARE @Id_Agenda int;
-	DECLARE @Dia_Atencion int;
-	DECLARE @Id_Especialidad_Medico Int;
-	DECLARE @Fecha_Desde DATE;
-	DECLARE @Fecha_Hasta DATE;
 	DECLARE @Fecha_Aux DATE;
-	DECLARE @Hora_Inicio TIME;
-	DECLARE @Hora_Fin TIME;
 	DECLARE @Hora_Aux_Inicio TIME;
 	DECLARE @Hora_Aux_Fin TIME;
 	DECLARE @Especialidad varchar(30);
+	
+	INSERT INTO [UN_CORTADO].[AGENDA]
+	       ([Dia_Atencion]
+           ,[Id_Especialidad_Medico]
+           ,[Fecha_Desde]
+           ,[Fecha_Hasta]
+           ,[Hora_Inicio]
+           ,[Hora_Fin])
+     VALUES
+           (@Dia_Atencion
+           ,@Id_Especialidad_Medico
+		   ,@Fecha_Desde
+           ,@Fecha_Hasta
+           ,@Hora_Inicio
+           ,@Hora_Fin)
 
-  --SET @Hora_Sem_Inicio = '07:00.0000000';		--Horario INICIO SEMANAL	07:00
-  --SET @Hora_Sem_Fin = '20:00.0000000';		--Horario FIN SEMANAL		20:00
-  --SET @Hora_FinSem_Inicio = '10:00.0000000';	--Horario INICIO SABADOS	10:00
-  --SET @Hora_FinSem_Fin = '15:00.0000000';		--Horario FIN SABADOS		15:00
-  --WHEN DATEPART(dw,getdate()) = 1    then 'Domingo' 
-  --WHEN DATEPART(dw,getdate()) = 2    then 'Lunes'
-  --when DATEPART(dw,getdate()) = 3    then 'Martes'
-  --WHEN DATEPART(dw,getdate()) = 4    then 'Miercoles'
-  --WHEN DATEPART(dw,getdate()) = 5    then 'Jueves'
-  --WHEN DATEPART(dw,getdate()) = 6    then 'Viernes'
-  --WHEN DATEPART(dw,getdate()) =     then 'Sabado'
-
-	SELECT  @Id_Agenda=(Id) FROM INSERTED
-	SELECT  @Dia_Atencion=(Dia_atencion) FROM INSERTED
-	SELECT  @Id_Especialidad_Medico=(Id_Especialidad_Medico) FROM INSERTED
-	SELECT  @Fecha_Desde=(Fecha_Desde) FROM INSERTED
-	SELECT  @Fecha_Hasta=(Fecha_Hasta) FROM INSERTED
-	SELECT  @Hora_Inicio=(Hora_Inicio) FROM INSERTED
-	SELECT  @Hora_Fin=(Hora_Fin) FROM INSERTED
-
+	SET @Id_Agenda = @@IDENTITY  	       --@ NO SE SI ES LA MEJOR MANERA DE RESOLVERLO
 	SET @Especialidad = (SELECT Id_Especialidad FROM [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] 
 							WHERE @Id_Especialidad_Medico = Id)
 	SET @Fecha_Aux = @Fecha_Desde
-	
 	
 	WHILE (@Fecha_Aux <= @Fecha_Hasta)
 	BEGIN
@@ -261,6 +254,8 @@ CREATE TRIGGER CARGAR_TURNOS_TRIGGER ON UN_CORTADO.AGENDA AFTER INSERT AS
 		ELSE
 		SET @Fecha_Aux = DATEADD(DAY,1,@Fecha_Aux)
 	END --END 1 WHILE
+COMMIT TRAN
+END --PROCEDURE
 GO
 
 --/*******************************************
@@ -408,18 +403,18 @@ FROM [GD2C2016].[gd_esquema].[Maestra]
 WHERE Medico_Dni is not null
 ORDER BY 2
 --LOAD TABLA [AGENDA] Y TURNOS POR MEDIO DE TRIGGER  @VERIFICAR CARGA 145600 REGISTROS PERO TRIGGER EJECUTA UNA VEZ
-INSERT INTO [UN_CORTADO].[AGENDA]
-           ([Dia_Atencion]
-           ,[Id_Especialidad_Medico]
-           ,[Fecha_Desde]
-           ,[Fecha_Hasta]
-           ,[Hora_Inicio]
-           ,[Hora_Fin])
-SELECT DISTINCT DATEPART(dw,[Turno_Fecha]),EM.Id,[Turno_Fecha],[Turno_Fecha],[Turno_Fecha],DATEADD(minute,30,[Turno_Fecha])
-FROM [GD2C2016].[gd_esquema].[Maestra] 
-INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
-ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
-ORDER BY 3
+--INSERT INTO [UN_CORTADO].[AGENDA]
+--           ([Dia_Atencion]
+--           ,[Id_Especialidad_Medico]
+--           ,[Fecha_Desde]
+--           ,[Fecha_Hasta]
+--           ,[Hora_Inicio]
+--           ,[Hora_Fin])
+--SELECT DISTINCT DATEPART(dw,[Turno_Fecha]),EM.Id,[Turno_Fecha],[Turno_Fecha],[Turno_Fecha],DATEADD(minute,30,[Turno_Fecha])
+--FROM [GD2C2016].[gd_esquema].[Maestra] 
+--INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
+--ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
+--ORDER BY 3
 --LOAD TABLA [TURNOS]
 
 
