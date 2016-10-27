@@ -73,5 +73,10 @@ namespace ClinicaFrba.Registro_Llegada
         {
             groupBox2.Visible = true;
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
