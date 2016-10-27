@@ -47,6 +47,8 @@ DROP TABLE [UN_CORTADO].[USUARIOS]
 
 DROP PROCEDURE [UN_CORTADO].[Migracion]
 
+DROP PROCEDURE [UN_CORTADO].[CARGAR_AGENDA]
+
 
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
