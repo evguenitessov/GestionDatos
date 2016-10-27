@@ -32,12 +32,43 @@ namespace ClinicaFrba.Abm_Afiliado
         private void grid_afiliados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.grid_afiliados.Columns[e.ColumnIndex].Name == "baja")
-            { 
-                //baja logica, deshabilitar usuario
+            {
+                bajaparaelmiembro();
             }
             if (this.grid_afiliados.Columns[e.ColumnIndex].Name == "modificar")
             {
                 //abre formulario de modificacion y carga datos
+            }
+        }
+
+        private void bajaparaelmiembro()
+        {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                SqlTransaction transaction = conexion.BeginTransaction();
+                SqlCommand command = conexion.CreateCommand();
+                command.Transaction = transaction;
+                try
+                {
+                    string query = String.Format("UPDATE [GD2C2016].[UN_CORTADO].[USUARIOS] " +
+                                                 "SET Habilitado = 0 WHERE Nombre_Usuario = '{0}'",
+                                                 usuario.Text);
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                    transaction.Commit();
+                    MessageBox.Show("El usuario fue dado de baja exitosamente.", "Exito");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo.", "Error");
+                    transaction.Rollback();
+                }
+                finally
+                {
+                    if (conexion.State == System.Data.ConnectionState.Open)
+                        conexion.Dispose();
+                }
             }
         }
 
@@ -47,33 +78,33 @@ namespace ClinicaFrba.Abm_Afiliado
             string condicion = "WHERE";
             string nombreusuario = usuario.Text;
             string nroafi = nroafiliado.Text;
-            string nrodocu = nrodoc.Text;
-            string tipodoc = tipodocu.Text;
+            string email = mail.Text;
             //crear vista datosafiliados
             if (!(nombreusuario.Equals("")))
             {
-                nombre += string.Format("{0} Contacto_Nombre LIKE '%{1}%'", condicion, nombreusuario);
+                nombre += string.Format("{0} Nombre_Usuario LIKE '%{1}%'", condicion, nombreusuario);
                 condicion = "AND";
 
             }
 
-            if (!(nroafi.Equals("")))
-            {
-                nombre += string.Format("{0} Contacto_Apellido LIKE '%{1}%'", condicion, nroafi);
-                condicion = "AND";
+            //if (!(nroafi.Equals("")))
+            //{
+            //    nombre += string.Format("{0} Numero_Afiliado LIKE '%{1}%'", condicion, nroafi);
+            //    condicion = "AND";
 
-            }
+            //}
 
-            if (!(nrodoc.Equals("")))
-            {
-                nombre += string.Format("{0} Contacto_DNI = '{1}'", condicion, nrodoc);
-                condicion = "AND";
-            }
-            if (!(tipodoc.Equals("")))
-            {
-                nombre += string.Format("{0} Contacto_Mail LIKE '%{1}%'", condicion, tipodoc);
-                condicion = "AND";
-            }
+            //if (!(mail.Equals("")))
+            //{
+            //    nombre += string.Format("{0} Mail = '{1}'", condicion, email);
+            //    condicion = "AND";
+            //}
+
+            //if (!(tipodoc.Equals("")))
+            //{
+            //    nombre += string.Format("{0} Contacto_Mail LIKE '%{1}%'", condicion, tipodoc);
+            //    condicion = "AND";
+            //}
 
             cargarenlagrid(nombre);
         }
@@ -84,7 +115,7 @@ namespace ClinicaFrba.Abm_Afiliado
             conexion.Open();
 
             //crear vista datosafiliados
-            pagingAdapter = new SqlDataAdapter("SELECT * FROM UN_CORTADO.DatosAfiliados " + filtros + "", conexion); 
+            pagingAdapter = new SqlDataAdapter("SELECT * FROM UN_CORTADO.AFILIADOS " + filtros + "", conexion); 
             pagingDS = new DataSet();
             pagingAdapter.Fill(pagingDS);
             conexion.Close();
