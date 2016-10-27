@@ -199,9 +199,13 @@ namespace ClinicaFrba.AbmRol
                             contador++;
                         }
                     }
-                    query = insertQuery.ToString();
-                    command.CommandText = query;
-                    command.ExecuteNonQuery();
+
+                    if (!primerInsert)
+                    {
+                        query = insertQuery.ToString();
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }                    
 
                     if (!habilitado_chbx.Checked)
                     {
