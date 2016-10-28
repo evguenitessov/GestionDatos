@@ -16,6 +16,7 @@ namespace ClinicaFrba.Abm_Afiliado
         public DBAccess Access { get; set; }
         SqlDataAdapter pagingAdapter;
         DataSet pagingDS;
+        private string nombreplan;
 
         public listado_afiliado()
         {
@@ -37,8 +38,38 @@ namespace ClinicaFrba.Abm_Afiliado
             }
             if (this.grid_afiliados.Columns[e.ColumnIndex].Name == "modificar")
             {
-                //abre formulario de modificacion y carga datos
+                string usu = (string)grid_afiliados.Rows[e.RowIndex].Cells["Nombre_Usuario"].Value.ToString();
+                string eciv = (string)grid_afiliados.Rows[e.RowIndex].Cells["Estado_Civil"].Value.ToString();
+                string canthijos = (string)grid_afiliados.Rows[e.RowIndex].Cells["Cantidad_Hijos"].Value.ToString();
+                string idplan = (string)grid_afiliados.Rows[e.RowIndex].Cells["Id_Plan"].Value.ToString();
+                string direc = (string)grid_afiliados.Rows[e.RowIndex].Cells["Direccion"].Value.ToString();
+                string telef = (string)grid_afiliados.Rows[e.RowIndex].Cells["Telefono"].Value.ToString();
+                string mail = (string)grid_afiliados.Rows[e.RowIndex].Cells["Mail"].Value.ToString();
+
+                
+                string nombreplan= buscarnombreplan(idplan);
+
+                Abm_Afiliado.modif_afiliado modifafi = new Abm_Afiliado.modif_afiliado(usu, eciv, canthijos, nombreplan, direc, telef, mail);
+                this.Hide();
+                modifafi.Show();
             }
+        }
+
+        private string buscarnombreplan(string idplanmed)
+        {
+            SqlConnection conexion = new SqlConnection(Access.Conexion);
+            conexion.Open();
+            string planmedico = " ";
+            string query = "SELECT Id,Nombre FROM UN_CORTADO.PLANES WHERE Id=@idplanmed";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.Parameters.AddWithValue("@idplanmed", idplanmed);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                planmedico = dr.GetString(1);
+            }
+
+            return planmedico;
         }
 
         private void bajaparaelmiembro()
@@ -94,17 +125,11 @@ namespace ClinicaFrba.Abm_Afiliado
 
             //}
 
-            //if (!(mail.Equals("")))
-            //{
-            //    nombre += string.Format("{0} Mail = '{1}'", condicion, email);
-            //    condicion = "AND";
-            //}
-
-            //if (!(tipodoc.Equals("")))
-            //{
-            //    nombre += string.Format("{0} Contacto_Mail LIKE '%{1}%'", condicion, tipodoc);
-            //    condicion = "AND";
-            //}
+            if (!(mail.Equals("")))
+            {
+                nombre += string.Format("{0} Mail = '{1}'", condicion, email);
+                condicion = "AND";
+            }
 
             cargarenlagrid(nombre);
         }
@@ -114,8 +139,7 @@ namespace ClinicaFrba.Abm_Afiliado
             SqlConnection conexion = new SqlConnection(Access.Conexion);
             conexion.Open();
 
-            //crear vista datosafiliados
-            pagingAdapter = new SqlDataAdapter("SELECT * FROM UN_CORTADO.AFILIADOS " + filtros + "", conexion); 
+            pagingAdapter = new SqlDataAdapter("SELECT * FROM UN_CORTADO.listado_afiliados " + filtros + "", conexion); 
             pagingDS = new DataSet();
             pagingAdapter.Fill(pagingDS);
             conexion.Close();
