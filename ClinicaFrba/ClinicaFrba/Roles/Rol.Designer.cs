@@ -41,6 +41,7 @@
             this.roles_cbx.Name = "roles_cbx";
             this.roles_cbx.Size = new System.Drawing.Size(206, 21);
             this.roles_cbx.TabIndex = 11;
+            this.roles_cbx.SelectedIndexChanged += new System.EventHandler(this.roles_cbx_SelectedIndexChanged);
             // 
             // button2
             // 

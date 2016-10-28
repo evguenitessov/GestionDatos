@@ -67,5 +67,10 @@ namespace ClinicaFrba.Roles
             menu.ShowDialog();
             this.Show();
         }
+
+        private void roles_cbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

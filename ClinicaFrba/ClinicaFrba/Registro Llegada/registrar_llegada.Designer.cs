@@ -131,6 +131,7 @@
             this.comboBusqueda.Name = "comboBusqueda";
             this.comboBusqueda.Size = new System.Drawing.Size(151, 21);
             this.comboBusqueda.TabIndex = 1;
+            this.comboBusqueda.SelectedIndexChanged += new System.EventHandler(this.comboBusqueda_SelectedIndexChanged);
             // 
             // textBox1
             // 
