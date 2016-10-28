@@ -20,6 +20,7 @@ namespace ClinicaFrba.Abm_Afiliado
         private string direc1;
         private string telef1;
         private string mail1;
+        private int id_plan;
 
         public DBAccess Access { get; set; }
 
@@ -93,19 +94,123 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (verificardatos().Equals(true))
             {
-                actualizarbd();
+                //actualizarafiliados();
+                actualizarcontacto();
             }
         }
 
-        private void actualizarbd()
+        private void actualizarcontacto()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                SqlTransaction sqlTransact = conexion.BeginTransaction();
+                SqlCommand command = conexion.CreateCommand();
+                command.Transaction = sqlTransact;
+                try
+                {
+                    string query = String.Format("UPDATE [UN_CORTADO].[CONTACTO] SET Direccion=@direc,Mail=@mail,Telefono=@telef WHERE Nombre_Usuario=@usuario");
+                    command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@usuario", usu);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@direc", direc.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@tel", telef.Text);
+                    param.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@mail", mail.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    command.ExecuteNonQuery();
+                    sqlTransact.Commit();
+                    MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
+                    sqlTransact.Rollback();
+                }
+                finally
+                {
+                    if (conexion.State == System.Data.ConnectionState.Open)
+                        conexion.Dispose();
+                }
+            }
+        }
+
+        private void actualizarafiliados()
+        {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                SqlTransaction sqlTransact = conexion.BeginTransaction();
+                SqlCommand command = conexion.CreateCommand();
+                command.Transaction = sqlTransact;
+                try
+                {
+                    string query = String.Format("UPDATE [UN_CORTADO].[AFILIADOS] SET Estado_Civil=@ecivil,Cantidad_Hijos=@canthijos,Id_Plan=@idplan WHERE Nombre_Usuario=@usuario");
+                    command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@usuario", usu);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@ecivil", ecivil.SelectedItem);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    int hijosfamacargo = Int32.Parse(canthijosfamcargo.Text);
+                    param = new SqlParameter("@canthijos", hijosfamacargo);
+                    param.SqlDbType = System.Data.SqlDbType.TinyInt;
+                    command.Parameters.Add(param);
+
+                    buscaridplan();
+                    param = new SqlParameter("@idplan", id_plan);
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
+                    command.ExecuteNonQuery();
+                    sqlTransact.Commit();
+                    MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
+                    sqlTransact.Rollback();
+                }
+                finally
+                {
+                    if (conexion.State == System.Data.ConnectionState.Open)
+                        conexion.Dispose();
+                }
+            }
+        }
+
+        private void buscaridplan()
+        {            
+            SqlConnection conexion = new SqlConnection(Access.Conexion);
+            conexion.Open();
+            string query = "SELECT Id FROM UN_CORTADO.PLANES WHERE Nombre=@nombreplan";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.Parameters.AddWithValue("@nombreplan", planmed.SelectedItem);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                id_plan = dr.GetInt32(0);
+            }
         }
 
         private bool verificardatos()
         {
-            if (direc.Text.Equals("") || telef.Text.Equals("") || mail.Text.Equals("") || ecivil.SelectedIndex.Equals(-1) ||
-                canthijosfamcargo.Text.Equals("") || planmed.SelectedIndex.Equals(-1) || IsNumeric(telef.Text).Equals(false) ||
+            if (direc.Text.Equals("") || telef.Text.Equals("") || mail.Text.Equals("") ||
+                canthijosfamcargo.Text.Equals("") || IsNumeric(telef.Text).Equals(false) ||
                 IsNumeric(canthijosfamcargo.Text).Equals(false))
             {
                 MessageBox.Show("Verifique que los tipos de datos ingresados son correctos y/o que los campos estén completos.", "Error");
@@ -129,6 +234,6 @@ namespace ClinicaFrba.Abm_Afiliado
             }
 
             return true;
-        }     
+        }
     }
 }
