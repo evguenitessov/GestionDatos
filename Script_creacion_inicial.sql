@@ -167,12 +167,12 @@ CREATE TABLE [UN_CORTADO].[TURNOS] (                        --@NUMERO PARA QUE E
 )
 GO
 
-CREATE TABLE [UN_CORTADO].[ATENCIONMEDICA] (
+CREATE TABLE [UN_CORTADO].[ATENCIONMEDICA] (   --@DIAGNOSTICO DE DONDE SE SACA
 	[Id]						INT NOT NULL IDENTITY(1,1) PRIMARY KEY,	
 	[Nombre_Profecional]		VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[PROFESIONALES],
 	[Enfermedad]				VARCHAR(255) NOT NULL,
 	[Sintomas]					VARCHAR(255) NOT NULL,
-	[Diagnosticos]				VARCHAR(30) NOT NULL,		
+	[Diagnosticos]				VARCHAR(30) NULL,		
 	[Fecha_Hora]				DATETIME NOT NULL,
 	[Nombre_Afiliado]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],
 	[Îd_turno]			        INT NOT NULL REFERENCES [UN_CORTADO].[TURNOS],
@@ -459,6 +459,24 @@ INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
 INNER JOIN [UN_CORTADO].[AGENDA] AS A
 ON A.Dia_Atencion = DATEPART(dw,[Turno_Fecha]) AND EM.Id = A.[Id_Especialidad_Medico]
+WHERE [Bono_Consulta_Numero] IS NOT NULL
+ORDER BY 1
+
+--LOAD TABLA [ATENCIONMEDICA]
+
+INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
+           ([Nombre_Profecional]
+           ,[Enfermedad]
+           ,[Sintomas]
+		   ,[Fecha_Hora]
+           ,[Nombre_Afiliado]
+           ,[Îd_turno])
+SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],CONVERT(TIME,[Turno_Fecha]) AS HI,[Paciente_Dni] AS ID_AF,T.Id
+FROM [GD2C2016].[gd_esquema].[Maestra]
+INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
+ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
+INNER JOIN [UN_CORTADO].[TURNOS] AS T
+ON [Bono_Consulta_Numero]=T.[Bono_usado]
 WHERE [Bono_Consulta_Numero] IS NOT NULL
 ORDER BY 1
 
