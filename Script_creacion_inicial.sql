@@ -73,9 +73,9 @@ GO
 
 CREATE TABLE [UN_CORTADO].[AFILIADOS] (
 	[Nombre_Usuario]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[USUARIOS],
-	[Numero_Afiliado]			INT IDENTITY(1,1),
+	[Numero_Afiliado]			INT NOT NULL,
 	[Numero_Familia]			TINYINT NOT NULL DEFAULT 0,
-	[Estado_Civil]				VARCHAR(20) NOT NULL DEFAULT 'SOLTERO',
+	[Estado_Civil]				VARCHAR(20) NOT NULL DEFAULT 'SOLTERO/A',
 	[Cantidad_Hijos]			TINYINT NOT NULL DEFAULT 0,
 	[Id_Plan]					INT NOT NULL REFERENCES [UN_CORTADO].[PLANES],
 
@@ -189,6 +189,18 @@ CREATE TABLE [UN_CORTADO].[CANCELACIONES] (
 )
 GO
 
+CREATE TABLE [UN_CORTADO].[#TMP1] (
+	[Nombre_Usuario]			VARCHAR(30) NOT NULL,
+	[Numero_Afiliado]			INT IDENTITY (1,1),
+	[Numero_Familia]			TINYINT NOT NULL DEFAULT 0,
+	[Estado_Civil]				VARCHAR(20) NOT NULL DEFAULT 'SOLTERO/A',
+	[Cantidad_Hijos]			TINYINT NOT NULL DEFAULT 0,
+	[Id_Plan]					INT NOT NULL ,
+
+	PRIMARY KEY ([Nombre_Usuario])	
+)
+GO
+
 --/***********************************************    @OBS ANTES DE INSETAR EN AGENDA VALIDAR 40 HS SEM y VALIDAR EL RANGO HORARIO
 --***** PROCEDURE CARGA AGENDA********************		OSEA SOLO MOSTRAR LO DISPONIBLE
 --************************************************/
@@ -239,7 +251,7 @@ BEGIN TRAN
 				   ,@Hora_Aux_Fin
 				   ,@Fecha_Aux
 				   ,@Especialidad)
-				IF (@Hora_Aux_Fin = @Hora_Fin) 
+				IF (@Hora_Aux_Fin >= @Hora_Fin) 
 				BEGIN
 					SET @Fecha_Aux = DATEADD(DAY,1,@Fecha_Aux)
 					BREAK 
@@ -350,12 +362,19 @@ INSERT INTO [UN_CORTADO].[PLANES]
   FROM [GD2C2016].[gd_esquema].[Maestra]
 SET IDENTITY_INSERT [UN_CORTADO].[PLANES] OFF
 --LOAD TABLA AFILIADOS
-INSERT INTO [UN_CORTADO].[AFILIADOS]
+INSERT INTO [UN_CORTADO].[#TMP1]
            ([Nombre_Usuario]
 		   ,[Id_Plan])
 	SELECT  DISTINCT [Paciente_Dni],[Plan_Med_Codigo]
     FROM [GD2C2016].[gd_esquema].[Maestra]
 	ORDER BY 1
+
+INSERT INTO [UN_CORTADO].[AFILIADOS]
+               SELECT * FROM  [UN_CORTADO].[#TMP1]
+
+DROP TABLE [UN_CORTADO].[#TMP1]
+
+
 --LOAD TABLA [COMPRABONOS]    @FALTA VER EL TEMA DE CALCULAR EL COSTO TOTAL
 INSERT INTO [UN_CORTADO].[COMPRABONOS]
            ([Nombre_Usuario]
@@ -403,18 +422,18 @@ FROM [GD2C2016].[gd_esquema].[Maestra]
 WHERE Medico_Dni is not null
 ORDER BY 2
 --LOAD TABLA [AGENDA] Y TURNOS POR MEDIO DE TRIGGER  @VERIFICAR CARGA 145600 REGISTROS PERO TRIGGER EJECUTA UNA VEZ
---INSERT INTO [UN_CORTADO].[AGENDA]
---           ([Dia_Atencion]
---           ,[Id_Especialidad_Medico]
---           ,[Fecha_Desde]
---           ,[Fecha_Hasta]
---           ,[Hora_Inicio]
---           ,[Hora_Fin])
---SELECT DISTINCT DATEPART(dw,[Turno_Fecha]),EM.Id,[Turno_Fecha],[Turno_Fecha],[Turno_Fecha],DATEADD(minute,30,[Turno_Fecha])
---FROM [GD2C2016].[gd_esquema].[Maestra] 
---INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
---ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
---ORDER BY 3
+INSERT INTO [UN_CORTADO].[AGENDA]
+           ([Dia_Atencion]
+           ,[Id_Especialidad_Medico]
+           ,[Fecha_Desde]
+           ,[Fecha_Hasta]
+           ,[Hora_Inicio]
+           ,[Hora_Fin])
+SELECT DISTINCT DATEPART(dw,[Turno_Fecha]),EM.Id,CONVERT(DATE,[Turno_Fecha]),CONVERT(DATE,[Turno_Fecha]),CONVERT(TIME,[Turno_Fecha]),DATEADD(minute,30,[Turno_Fecha])
+FROM [GD2C2016].[gd_esquema].[Maestra]  AS #AGENDATEMPORAL
+INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
+ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
+ORDER BY 1
 --LOAD TABLA [TURNOS]
 
 
