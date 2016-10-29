@@ -379,9 +379,14 @@ DROP TABLE [UN_CORTADO].[#TMP1]
 INSERT INTO [UN_CORTADO].[COMPRABONOS]
            ([Nombre_Usuario]
            ,[Cantidad_Bonos]
+		   ,[Precio_Total]
            ,[Fecha_Compra])
-SELECT [Paciente_Dni], COUNT ( * ), Compra_Bono_Fecha
+SELECT [Paciente_Dni], COUNT ( * ), (COUNT(*) * MAX(P.[Precio_Bono_Consulta])) ,Compra_Bono_Fecha
   FROM [GD2C2016].[gd_esquema].[Maestra]
+  INNER JOIN [UN_CORTADO].[AFILIADOS] AS A
+  ON [Paciente_Dni]=A.Nombre_Usuario
+  INNER JOIN [UN_CORTADO].[PLANES] AS P
+  ON A.Id_Plan = P.Id
   WHERE Compra_Bono_Fecha IS NOT NULL
   GROUP BY Paciente_Dni,Compra_Bono_Fecha
   ORDER BY 1,3
@@ -398,9 +403,9 @@ INSERT INTO [UN_CORTADO].[BONOS]
            ,[Habilitado])
 SELECT DISTINCT M.Bono_Consulta_Numero,1, C.id,M.Bono_Consulta_Fecha_Impresion,0,A.Id_Plan,C.Nombre_Usuario,1
   FROM [GD2C2016].[gd_esquema].[Maestra] AS M
-  JOIN [UN_CORTADO].[COMPRABONOS] AS C
+  INNER JOIN [UN_CORTADO].[COMPRABONOS] AS C
   ON M.Paciente_Dni = C.Nombre_Usuario AND C.Fecha_Compra = M.Compra_Bono_Fecha 
-  JOIN [UN_CORTADO].[AFILIADOS] AS A
+  INNER JOIN [UN_CORTADO].[AFILIADOS] AS A
   ON A.Nombre_Usuario = M.Paciente_Dni	
   WHERE M.Bono_Consulta_Fecha_Impresion IS NOT NULL
   ORDER BY 1
@@ -421,7 +426,7 @@ SELECT DISTINCT Especialidad_Codigo,Medico_Dni
 FROM [GD2C2016].[gd_esquema].[Maestra] 
 WHERE Medico_Dni is not null
 ORDER BY 2
---LOAD TABLA [AGENDA] Y TURNOS POR MEDIO DE TRIGGER  @VERIFICAR CARGA 145600 REGISTROS PERO TRIGGER EJECUTA UNA VEZ
+--LOAD TABLA [AGENDA] 
 INSERT INTO [UN_CORTADO].[AGENDA]
            ([Dia_Atencion]
            ,[Id_Especialidad_Medico]
@@ -429,60 +434,33 @@ INSERT INTO [UN_CORTADO].[AGENDA]
            ,[Fecha_Hasta]
            ,[Hora_Inicio]
            ,[Hora_Fin])
-SELECT DISTINCT DATEPART(dw,[Turno_Fecha]),EM.Id,CONVERT(DATE,[Turno_Fecha]),CONVERT(DATE,[Turno_Fecha]),CONVERT(TIME,[Turno_Fecha]),DATEADD(minute,30,[Turno_Fecha])
-FROM [GD2C2016].[gd_esquema].[Maestra]  AS #AGENDATEMPORAL
+SELECT DISTINCT DATEPART(dw,[Turno_Fecha])AS Dia_Atencion,EM.Id,MIN(CONVERT(DATE,[Turno_Fecha])),MAX(CONVERT(DATE,[Turno_Fecha])),MIN(CONVERT(TIME,[Turno_Fecha])),MAX(CONVERT(TIME,DATEADD(minute,30,[Turno_Fecha])))
+FROM [GD2C2016].[gd_esquema].[Maestra]
 INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
-ORDER BY 1
+GROUP BY DATEPART(dw,[Turno_Fecha]),EM.Id
+ORDER BY 2,1,3
+
 --LOAD TABLA [TURNOS]
 
-
---LOAD TABLA [AGENDA] 3 DATOS AL AZAR
-
---INSERT INTO [UN_CORTADO].[AGENDA]
---           ([Dia_Atencion]
---           ,[Id_Especialidad_Medico]
---           ,[Fecha_Desde]
---           ,[Fecha_Hasta]
---           ,[Hora_Inicio]
---           ,[Hora_Fin])
---     VALUES
---           (1,
---            1,
---            '2016-10-15', 
---			'2016-12-20', 
---			'10:00:00.0000000', 
---			'12:00:00.0000000')  
-
---INSERT INTO [UN_CORTADO].[AGENDA]
---           ([Dia_Atencion]
---           ,[Id_Especialidad_Medico]
---           ,[Fecha_Desde]
---           ,[Fecha_Hasta]
---           ,[Hora_Inicio]
---           ,[Hora_Fin])
---     VALUES
---           (2,
---            2,
---            '2016-10-15', 
---			'2016-12-20', 
---			'12:00:00.0000000', 
---			'14:00:00.0000000') 
-
---INSERT INTO [UN_CORTADO].[AGENDA]
---           ([Dia_Atencion]
---           ,[Id_Especialidad_Medico]
---           ,[Fecha_Desde]
---           ,[Fecha_Hasta]
---           ,[Hora_Inicio]
---           ,[Hora_Fin])
---     VALUES
---           (2,
---            30,
---            '2016-10-15', 
---			'2016-12-20', 
---			'15:00:00.0000000', 
---			'17:00:00.0000000') 
+INSERT INTO [UN_CORTADO].[TURNOS]
+           ([Id_Agenda]
+           ,[Hora_Inicio]
+           ,[Hora_Fin]
+           ,[Fecha]
+           ,[Especialidad]
+           ,[Disponible]
+           ,[Id_Afiliado]
+           ,[Hora_Llegada_Afiliado]
+           ,[Bono_Usado])
+SELECT DISTINCT A.Id,CONVERT(TIME,[Turno_Fecha]) AS HI,CONVERT(TIME,DATEADD(minute,30,[Turno_Fecha])) AS HF,CONVERT(DATE,[Turno_Fecha]) AS F,EM.Id_Especialidad AS ESP,0 AS DISPO,[Paciente_Dni] AS ID_AF,CONVERT(TIME,[Turno_Fecha]) AS HLL,[Bono_Consulta_Numero] AS BONO
+FROM [GD2C2016].[gd_esquema].[Maestra]
+INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
+ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
+INNER JOIN [UN_CORTADO].[AGENDA] AS A
+ON A.Dia_Atencion = DATEPART(dw,[Turno_Fecha]) AND EM.Id = A.[Id_Especialidad_Medico]
+WHERE [Bono_Consulta_Numero] IS NOT NULL
+ORDER BY 1
 
 END
 GO
