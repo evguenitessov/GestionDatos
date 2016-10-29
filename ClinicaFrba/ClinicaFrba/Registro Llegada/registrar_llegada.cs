@@ -63,7 +63,7 @@ namespace ClinicaFrba.Registro_Llegada
                         comboBusqueda.Items.Add(dr[0]);
                     }
 
-                    comboBusqueda.SelectedIndex = 0;
+                        comboBusqueda.SelectedIndex = 0;
                 }
                 catch
                 {
@@ -71,7 +71,39 @@ namespace ClinicaFrba.Registro_Llegada
                 }
             }
         }
-        
+        private void CargarEspecialidadSegunProfesional()
+        {   
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                string query = String.Format("SELECT E.Nombre FROM [GD2C2016].[UN_CORTADO].ESPECIALIDADES E WHERE E.Id IN(SELECT Id_Especialidad FROM [GD2C2016].[UN_CORTADO].ESPECIALIDADPORPROFESIONAL EP WHERE EP.Id_Medico=(SELECT Nombre_Usuario FROM [GD2C2016].[UN_CORTADO].CONTACTO C WHERE (C.Apellido + ' ' + C.Nombre)= 'Acosta SAYA' ))");
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+
+                SqlParameter param = new SqlParameter("@NombreMedico", comboBusqueda.SelectedText);
+                param.SqlDbType = System.Data.SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
+
+
+               try
+                {
+                    conexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        comboBusqueda2.Items.Add(dr[0]);
+                    }
+
+                        comboBusqueda2.SelectedIndex = 0;
+                     }
+                    
+                catch
+                {
+                   
+                }
+            }
+        }
+        private void CargarProfesionalSegunEspecialidad(){}
         private void registrar_llegada_Load(object sender, EventArgs e)
         {
             pnlCrit.Visible = false;
@@ -131,6 +163,15 @@ namespace ClinicaFrba.Registro_Llegada
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             groupBox2.Visible = true;
+            comboBusqueda2.Items.Clear();
+            if (checkProfesional.Checked==true)
+            {   
+                CargarEspecialidadSegunProfesional();
+            }
+            else
+            {
+                CargarProfesionalSegunEspecialidad();
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
