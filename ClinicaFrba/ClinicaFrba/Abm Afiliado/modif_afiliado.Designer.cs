@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bot_mprincipal = new System.Windows.Forms.Button();
+            this.bot_atras = new System.Windows.Forms.Button();
             this.bot_guardar = new System.Windows.Forms.Button();
             this.bot_borrar = new System.Windows.Forms.Button();
             this.group_alta = new System.Windows.Forms.GroupBox();
@@ -53,7 +53,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bot_mprincipal);
+            this.groupBox1.Controls.Add(this.bot_atras);
             this.groupBox1.Controls.Add(this.bot_guardar);
             this.groupBox1.Controls.Add(this.bot_borrar);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 11.25F);
@@ -63,14 +63,15 @@
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
-            // bot_mprincipal
+            // bot_atras
             // 
-            this.bot_mprincipal.Location = new System.Drawing.Point(6, 25);
-            this.bot_mprincipal.Name = "bot_mprincipal";
-            this.bot_mprincipal.Size = new System.Drawing.Size(124, 40);
-            this.bot_mprincipal.TabIndex = 13;
-            this.bot_mprincipal.Text = "Atrás";
-            this.bot_mprincipal.UseVisualStyleBackColor = true;
+            this.bot_atras.Location = new System.Drawing.Point(6, 25);
+            this.bot_atras.Name = "bot_atras";
+            this.bot_atras.Size = new System.Drawing.Size(124, 40);
+            this.bot_atras.TabIndex = 13;
+            this.bot_atras.Text = "Atrás";
+            this.bot_atras.UseVisualStyleBackColor = true;
+            this.bot_atras.Click += new System.EventHandler(this.bot_atras_Click_1);
             // 
             // bot_guardar
             // 
@@ -175,7 +176,7 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(51, 117);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(83, 19);
+            this.label12.Size = new System.Drawing.Size(82, 19);
             this.label12.TabIndex = 37;
             this.label12.Text = "Dirección *";
             // 
@@ -193,7 +194,7 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(51, 181);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(51, 19);
+            this.label10.Size = new System.Drawing.Size(50, 19);
             this.label10.TabIndex = 35;
             this.label10.Text = "Mail *";
             // 
@@ -202,7 +203,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(51, 213);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 19);
+            this.label7.Size = new System.Drawing.Size(95, 19);
             this.label7.TabIndex = 32;
             this.label7.Text = "Estado civil *";
             // 
@@ -211,7 +212,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(51, 245);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(219, 19);
+            this.label6.Size = new System.Drawing.Size(218, 19);
             this.label6.TabIndex = 31;
             this.label6.Text = "Cant. hijos/familiares a cargo *°";
             // 
@@ -220,7 +221,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(51, 277);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(101, 19);
+            this.label5.Size = new System.Drawing.Size(100, 19);
             this.label5.TabIndex = 30;
             this.label5.Text = "Plan médico *";
             // 
@@ -252,7 +253,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button bot_mprincipal;
+        private System.Windows.Forms.Button bot_atras;
         private System.Windows.Forms.Button bot_guardar;
         private System.Windows.Forms.Button bot_borrar;
         private System.Windows.Forms.GroupBox group_alta;

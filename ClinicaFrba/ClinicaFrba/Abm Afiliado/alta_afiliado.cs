@@ -39,11 +39,11 @@ namespace ClinicaFrba.Abm_Afiliado
             sexo.Items.Add("F");
             sexo.Items.Add("M");
 
-            ecivil.Items.Add("Soltera/o");
-            ecivil.Items.Add("Casada/o");
-            ecivil.Items.Add("Viuda/o");
-            ecivil.Items.Add("Concubinato");
-            ecivil.Items.Add("Divorciada/o");
+            ecivil.Items.Add("SOLTERO/A");
+            ecivil.Items.Add("CASADO/A");
+            ecivil.Items.Add("VIUDO/A");
+            ecivil.Items.Add("CONCUBINATO");
+            ecivil.Items.Add("DIVORCIADO/A");
         }
 
         private void inicializarcomboplanes()

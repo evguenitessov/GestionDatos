@@ -61,11 +61,11 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void cargarcomboboxes()
         {
-            ecivil.Items.Add("Soltera/o");
-            ecivil.Items.Add("Casada/o");
-            ecivil.Items.Add("Viuda/o");
-            ecivil.Items.Add("Concubinato");
-            ecivil.Items.Add("Divorciada/o");
+            ecivil.Items.Add("SOLTERO/A");
+            ecivil.Items.Add("CASADO/A");
+            ecivil.Items.Add("VIUDO/A");
+            ecivil.Items.Add("CONCUBINATO");
+            ecivil.Items.Add("DIVORCIADO/A");
 
             SqlConnection conexion = new SqlConnection(Access.Conexion);
             conexion.Open();
@@ -94,8 +94,9 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (verificardatos().Equals(true))
             {
-                //actualizarafiliados();
+                actualizarafiliados();
                 actualizarcontacto();
+                MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
             }
         }
 
@@ -120,8 +121,8 @@ namespace ClinicaFrba.Abm_Afiliado
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
-                    param = new SqlParameter("@tel", telef.Text);
-                    param.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    param = new SqlParameter("@telef",Convert.ToDecimal(telef.Text));
+                    param.SqlDbType = System.Data.SqlDbType.Decimal;
                     command.Parameters.Add(param);
 
                     param = new SqlParameter("@mail", mail.Text);
@@ -130,7 +131,6 @@ namespace ClinicaFrba.Abm_Afiliado
 
                     command.ExecuteNonQuery();
                     sqlTransact.Commit();
-                    MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
                 }
                 catch (Exception ex)
                 {
@@ -178,7 +178,7 @@ namespace ClinicaFrba.Abm_Afiliado
 
                     command.ExecuteNonQuery();
                     sqlTransact.Commit();
-                    MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
+                    
                 }
                 catch (Exception ex)
                 {
@@ -234,6 +234,13 @@ namespace ClinicaFrba.Abm_Afiliado
             }
 
             return true;
+        }
+
+        private void bot_atras_Click_1(object sender, EventArgs e)
+        {
+            Abm_Afiliado.listado_afiliado listado = new Abm_Afiliado.listado_afiliado();
+            this.Hide();
+            listado.Show();
         }
     }
 }

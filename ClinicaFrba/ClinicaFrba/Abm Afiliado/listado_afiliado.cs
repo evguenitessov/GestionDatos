@@ -16,7 +16,6 @@ namespace ClinicaFrba.Abm_Afiliado
         public DBAccess Access { get; set; }
         SqlDataAdapter pagingAdapter;
         DataSet pagingDS;
-        private string nombreplan;
 
         public listado_afiliado()
         {
@@ -28,6 +27,9 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             usuario.Clear();
             nroafiliado.Clear();
+            mail.Clear();
+            nroflia.Clear();
+
         }
 
         private void grid_afiliados_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -45,7 +47,6 @@ namespace ClinicaFrba.Abm_Afiliado
                 string direc = (string)grid_afiliados.Rows[e.RowIndex].Cells["Direccion"].Value.ToString();
                 string telef = (string)grid_afiliados.Rows[e.RowIndex].Cells["Telefono"].Value.ToString();
                 string mail = (string)grid_afiliados.Rows[e.RowIndex].Cells["Mail"].Value.ToString();
-
                 
                 string nombreplan= buscarnombreplan(idplan);
 
@@ -110,25 +111,33 @@ namespace ClinicaFrba.Abm_Afiliado
             string nombreusuario = usuario.Text;
             string nroafi = nroafiliado.Text;
             string email = mail.Text;
-            //crear vista datosafiliados
+            string nrofamilia = nroflia.Text;
+
+            if (!(email.Equals("")))
+            {
+                nombre += string.Format("{0} Mail = '{1}'", condicion, email);
+                condicion = "AND";
+            }
+
             if (!(nombreusuario.Equals("")))
             {
-                nombre += string.Format("{0} Nombre_Usuario LIKE '%{1}%'", condicion, nombreusuario);
+                nombre += string.Format("{0} Nombre_Usuario = '{1}'", condicion, nombreusuario);
                 condicion = "AND";
 
             }
 
-            //if (!(nroafi.Equals("")))
-            //{
-            //    nombre += string.Format("{0} Numero_Afiliado LIKE '%{1}%'", condicion, nroafi);
-            //    condicion = "AND";
-
-            //}
-
-            if (!(mail.Equals("")))
+            if (!(nroafi.Equals("")))
             {
-                nombre += string.Format("{0} Mail = '{1}'", condicion, email);
+                nombre += string.Format("{0} Numero_Afiliado = '{1}'", condicion, nroafi);
                 condicion = "AND";
+
+            }
+
+            if (!(nrofamilia.Equals("")))
+            {
+                nombre += string.Format("{0} Numero_Familia = '{1}'", condicion, nrofamilia);
+                condicion = "AND";
+
             }
 
             cargarenlagrid(nombre);
@@ -146,6 +155,5 @@ namespace ClinicaFrba.Abm_Afiliado
             grid_afiliados.DataSource = pagingDS.Tables[0];
             pagingAdapter.Update(pagingDS.Tables[0]);
         }
-
     }
 }

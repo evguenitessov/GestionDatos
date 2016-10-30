@@ -35,6 +35,7 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.nroafiliado = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.usuario = new System.Windows.Forms.ToolStripTextBox();
@@ -44,6 +45,7 @@
             this.bot_mprincipal = new System.Windows.Forms.Button();
             this.bot_buscar = new System.Windows.Forms.Button();
             this.bot_borrar = new System.Windows.Forms.Button();
+            this.nroflia = new System.Windows.Forms.ToolStripTextBox();
             this.filtros.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -91,7 +93,9 @@
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
-            this.nroafiliado});
+            this.nroafiliado,
+            this.toolStripLabel3,
+            this.nroflia});
             this.toolStrip2.Location = new System.Drawing.Point(4, 49);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(569, 25);
@@ -108,6 +112,12 @@
             // 
             this.nroafiliado.Name = "nroafiliado";
             this.nroafiliado.Size = new System.Drawing.Size(100, 25);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(71, 22);
+            this.toolStripLabel3.Text = "Nro. Familia";
             // 
             // toolStrip1
             // 
@@ -189,6 +199,11 @@
             this.bot_borrar.UseVisualStyleBackColor = true;
             this.bot_borrar.Click += new System.EventHandler(this.bot_borrar_Click);
             // 
+            // nroflia
+            // 
+            this.nroflia.Name = "nroflia";
+            this.nroflia.Size = new System.Drawing.Size(100, 25);
+            // 
             // listado_afiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -234,5 +249,7 @@
         private System.Windows.Forms.Button bot_mprincipal;
         private System.Windows.Forms.Button bot_buscar;
         private System.Windows.Forms.Button bot_borrar;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripTextBox nroflia;
     }
 }
