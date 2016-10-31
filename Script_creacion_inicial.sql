@@ -225,8 +225,6 @@ BEGIN
 		WHERE DATEPART(wk,[Fecha])=@Week_Aux AND DATEPART(YY,[Fecha]) = DATEPART(yy,@Fecha_Desde)
 		GROUP BY DATEPART(wk,[Fecha]),A.[Id_Especialidad_Medico])+@CantHoras
 		SET @Week_Aux = @Week_Aux + 1
-		PRINT 'HORAS SEMA'
-		PRINT @Horas_Sem 
 		IF 	@Horas_Sem <=48
 		BEGIN
 		  SET @Week_Aux = @Week_Aux + 1
@@ -256,6 +254,7 @@ BEGIN TRAN
 	DECLARE @Hora_Aux_Inicio TIME;
 	DECLARE @Hora_Aux_Fin TIME;
 	DECLARE @Especialidad varchar(30);
+	
 	
 	INSERT INTO [UN_CORTADO].[AGENDA]
 	       ([Dia_Atencion]
