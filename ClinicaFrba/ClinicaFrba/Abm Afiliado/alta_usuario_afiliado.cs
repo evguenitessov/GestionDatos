@@ -14,14 +14,17 @@ namespace ClinicaFrba.Abm_Afiliado
     public partial class alta_usuario_afiliado : Form
     {
         public DBAccess Access { get; set; }
-        private bool conyuge;
-        private string ecivil;
-        private decimal id_plan;
+        public bool conyuge;
+        public string ecivil;
+        public decimal id_plan;
 
-        public alta_usuario_afiliado()
+        public alta_usuario_afiliado(bool p1, decimal p2, string p3)
         {
             InitializeComponent();
             Access = new DBAccess();
+            this.conyuge = p1;
+            this.id_plan = p2;
+            this.ecivil = p3;
             MessageBox.Show(conyuge.ToString());
         }
 
@@ -29,15 +32,14 @@ namespace ClinicaFrba.Abm_Afiliado
         {
             if (conyuge.Equals(true))
             {
-                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text);
+                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text,true,ecivil,id_plan);
                 this.Hide();
-                alta_afi.agregarconyuge(true, ecivil, id_plan);
                 alta_afi.Show();
             }
             else
             {
                 MessageBox.Show("sin conyu");
-                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text);
+                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text, false, null, 0);
                 this.Hide();
                 alta_afi.Show();
             }
@@ -131,13 +133,6 @@ namespace ClinicaFrba.Abm_Afiliado
                 }
             }
 
-
-        public void agregarconyuge(bool p1, string p2, decimal p3)
-        {
-            conyuge = p1;
-            ecivil = p2;
-            id_plan = p3;
-        }
 
     }
     }

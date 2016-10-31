@@ -15,41 +15,44 @@ namespace ClinicaFrba.Abm_Afiliado
     {
         public DBAccess Access { get; set; }
         private string usuario;
-        private bool conyuge;
-        private string estado_civil;
-        private decimal iddelplan;
+        public bool conyuge;
+        public string estado_civil;
+        private decimal id_plan;
 
-        public void agregarconyuge(bool p, string ecivil, decimal id_plan)
+        public alta_afiliado(string usuario, bool p2, string ecivil1, decimal idplan)
         {
-            conyuge = p;
-            estado_civil = ecivil;
-            iddelplan = id_plan;
-        }
-
-        public alta_afiliado(string usuario)
-        {
+            // TODO: Complete member initialization
             InitializeComponent();
             Access = new DBAccess();
+            this.usuario = usuario;
+            this.conyuge = p2;
+            this.estado_civil = ecivil1;
+            this.id_plan = idplan;
             MessageBox.Show(conyuge.ToString());
             verificarconyugetrue();
-            this.usuario = usuario;
-
         }
 
         private void verificarconyugetrue()
         {
-            if(conyuge.Equals(true))
-            {
-                inicializarcombobox();
+            //if (conyuge.)
+            //{
                 ecivil.Visible.Equals(false);
                 label_ecivil.Visible.Equals(false);
                 label_planmed.Visible.Equals(false);
                 planmed.Visible.Equals(false);
-            }
-            else
-            {
-                inicializarcombobox();
-            }
+
+            //    //tipodoc.Items.Add("DNI");
+            //    //tipodoc.Items.Add("CI");
+            //    //tipodoc.Items.Add("LC");
+
+            //    //sexo.Items.Add("F");
+            //    //sexo.Items.Add("M");
+
+            //}
+            //else if (conyuge.Equals(false))
+            //{
+            //    inicializarcombobox();
+            //}
         }
 
         private void inicializarcombobox()
@@ -165,7 +168,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     param.SqlDbType = System.Data.SqlDbType.TinyInt;
                     command.Parameters.Add(param);
 
-                    param = new SqlParameter("@id_plan", iddelplan);
+                    param = new SqlParameter("@id_plan", id_plan);
                     param.SqlDbType = System.Data.SqlDbType.Int;
                     command.Parameters.Add(param);
 
@@ -348,9 +351,8 @@ namespace ClinicaFrba.Abm_Afiliado
                 if (opcionelegida.Equals(DialogResult.Yes))
                 {
                     this.Hide();
-                    Abm_Afiliado.alta_usuario_afiliado altausuafiliado = new Abm_Afiliado.alta_usuario_afiliado();
+                    Abm_Afiliado.alta_usuario_afiliado altausuafiliado = new Abm_Afiliado.alta_usuario_afiliado(true,buscaridplan(),ecivil.SelectedItem.ToString());
                     altausuafiliado.Show();
-                    altausuafiliado.agregarconyuge(true,ecivil.SelectedItem.ToString(),buscaridplan());
                 }
                 else if (opcionelegida.Equals(DialogResult.No))
                 {
