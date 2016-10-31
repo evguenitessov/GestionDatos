@@ -21,11 +21,12 @@ namespace ClinicaFrba.Registro_Llegada
             CargarProfesionales();
         }
 
+        
         private void CargarProfesionales()
         {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT Apellido +' '+ Nombre as Apellido_Y_Nombre FROM [GD2C2016].[UN_CORTADO].[CONTACTO] C ,[GD2C2016].[UN_CORTADO].[PROFESIONALES] P WHERE C.Nombre_Usuario=P.Nombre_Usuario ORDER BY Apellido");
+                string query = String.Format("SELECT DISTINCT Apellido +' '+  Nombre  AS Apellido_Y_Nombre  FROM [GD2C2016].[UN_CORTADO].[registro_llegada] ORDER BY Apellido_Y_Nombre");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -75,12 +76,12 @@ namespace ClinicaFrba.Registro_Llegada
         {   
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT E.Nombre FROM [GD2C2016].[UN_CORTADO].ESPECIALIDADES E WHERE E.Id IN(SELECT Id_Especialidad FROM [GD2C2016].[UN_CORTADO].ESPECIALIDADPORPROFESIONAL EP WHERE EP.Id_Medico=(SELECT Nombre_Usuario FROM [GD2C2016].[UN_CORTADO].CONTACTO C WHERE (C.Apellido + ' ' + C.Nombre)= 'Acosta SAYA' ))");
+                string query = String.Format("SELECT Especialidades FROM [GD2C2016].[UN_CORTADO].[registro_llegada] WHERE (Apellido + ' ' + Nombre)=@NombreMedico");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
 
-                SqlParameter param = new SqlParameter("@NombreMedico", comboBusqueda.SelectedText);
+                SqlParameter param = new SqlParameter("@NombreMedico", comboBusqueda.SelectedItem);
                 param.SqlDbType = System.Data.SqlDbType.VarChar;
                 cmd.Parameters.Add(param);
 
@@ -103,7 +104,37 @@ namespace ClinicaFrba.Registro_Llegada
                 }
             }
         }
-        private void CargarProfesionalSegunEspecialidad(){}
+        private void CargarProfesionalSegunEspecialidad(){
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                string query = String.Format("SELECT DISTINCT Apellido +' '+  Nombre  AS Apellido_Y_Nombre FROM [GD2C2016].[UN_CORTADO].[registro_llegada] WHERE Especialidades=@NombreEspecialidad ORDER BY Apellido_Y_Nombre");
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+
+                SqlParameter param = new SqlParameter("@NombreEspecialidad", comboBusqueda.SelectedItem);
+                param.SqlDbType = System.Data.SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
+
+
+                try
+                {
+                    conexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        comboBusqueda2.Items.Add(dr[0]);
+                    }
+
+                    comboBusqueda2.SelectedIndex = 0;
+                }
+
+                catch
+                {
+
+                }
+            }
+        }
         private void registrar_llegada_Load(object sender, EventArgs e)
         {
             pnlCrit.Visible = false;
@@ -181,7 +212,7 @@ namespace ClinicaFrba.Registro_Llegada
 
         private void comboBusqueda_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

@@ -49,6 +49,7 @@ DROP PROCEDURE [UN_CORTADO].[Migracion]
 
 DROP PROCEDURE [UN_CORTADO].[CARGAR_AGENDA]
 
+DROP VIEW [UN_CORTADO].[registro_llegada]
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
 ********************************************/
