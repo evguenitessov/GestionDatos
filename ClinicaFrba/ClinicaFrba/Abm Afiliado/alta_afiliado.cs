@@ -28,31 +28,30 @@ namespace ClinicaFrba.Abm_Afiliado
             this.conyuge = p2;
             this.estado_civil = ecivil1;
             this.id_plan = idplan;
-            MessageBox.Show(conyuge.ToString());
             verificarconyugetrue();
         }
 
         private void verificarconyugetrue()
         {
-            //if (conyuge.)
-            //{
-                ecivil.Visible.Equals(false);
-                label_ecivil.Visible.Equals(false);
-                label_planmed.Visible.Equals(false);
-                planmed.Visible.Equals(false);
+            if (conyuge.Equals(true))
+            {
+                ecivil.Hide();
+                label_ecivil.Hide();
+                label_planmed.Hide();
+                planmed.Hide();
 
-            //    //tipodoc.Items.Add("DNI");
-            //    //tipodoc.Items.Add("CI");
-            //    //tipodoc.Items.Add("LC");
+                tipodoc.Items.Add("DNI");
+                tipodoc.Items.Add("CI");
+                tipodoc.Items.Add("LC");
 
-            //    //sexo.Items.Add("F");
-            //    //sexo.Items.Add("M");
+                sexo.Items.Add("F");
+                sexo.Items.Add("M");
 
-            //}
-            //else if (conyuge.Equals(false))
-            //{
-            //    inicializarcombobox();
-            //}
+            }
+            else
+            {
+                inicializarcombobox();
+            }
         }
 
         private void inicializarcombobox()
@@ -110,15 +109,9 @@ namespace ClinicaFrba.Abm_Afiliado
 
         private void bot_guardar_Click(object sender, EventArgs e) //guarda si son correctos en la bd
         {
-            if (chequeartodoscamposcompletos().Equals(0) && chequeartipodatos().Equals(0))
+            if (chequeartipodatos().Equals(0))
             {
-                if (conyuge.Equals(true))
-                {
-                    cargarenlabdafiliadoconyuge();
-                    cargarenlabdcontacto();
-                    MessageBox.Show("El cónyuge ha sido registrado exitosamente.", "Exito");                                                        
-                }
-                else
+                if (chequeartodoscamposcompletos().Equals(0))
                 {
                     cargarenlabdafiliados();
                     cargarenlabdcontacto();
@@ -126,12 +119,47 @@ namespace ClinicaFrba.Abm_Afiliado
                     verificarconyuge();
                 }
 
+                else if (chequeartodoscamposcompletosconyuge().Equals(0) && conyuge.Equals(true))
+                {
+                    cargarenlabdafiliadoconyuge();
+                    cargarenlabdcontacto();
+                    MessageBox.Show("El cónyuge ha sido registrado exitosamente.", "Exito");
+                    //ir al menu principal
+                }
             }
             else
             {
                 MessageBox.Show("Verifique que todos los campos estén completados adecuadamente y los datos correctamente ingresados.", "Error al guardar");
             }
 
+        }
+
+        private object chequeartipodatosconyuge()
+        {
+            if (IsNumeric(nombre.Text).Equals(true) || IsNumeric(apellido.Text).Equals(true) ||
+            IsNumeric(nrodoc.Text).Equals(false) || IsNumeric(telef.Text).Equals(false) ||
+            IsNumeric(canthijosfamcargo.Text).Equals(false))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        private object chequeartodoscamposcompletosconyuge()
+        {
+            if (nombre.Text.Equals("") || apellido.Text.Equals("") || tipodoc.SelectedIndex.Equals(-1) ||
+            nrodoc.Text.Equals("") || direccion.Text.Equals("") || mail.Text.Equals("") || telef.Text.Equals("") ||
+            sexo.SelectedIndex.Equals(-1) || canthijosfamcargo.Text.Equals(""))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void cargarenlabdafiliadoconyuge()
