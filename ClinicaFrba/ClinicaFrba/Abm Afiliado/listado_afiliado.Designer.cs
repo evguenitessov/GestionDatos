@@ -36,6 +36,7 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.nroafiliado = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.nroflia = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.usuario = new System.Windows.Forms.ToolStripTextBox();
@@ -45,7 +46,6 @@
             this.bot_mprincipal = new System.Windows.Forms.Button();
             this.bot_buscar = new System.Windows.Forms.Button();
             this.bot_borrar = new System.Windows.Forms.Button();
-            this.nroflia = new System.Windows.Forms.ToolStripTextBox();
             this.filtros.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -116,8 +116,13 @@
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(71, 22);
-            this.toolStripLabel3.Text = "Nro. Familia";
+            this.toolStripLabel3.Size = new System.Drawing.Size(85, 22);
+            this.toolStripLabel3.Text = "Nro. de familia";
+            // 
+            // nroflia
+            // 
+            this.nroflia.Name = "nroflia";
+            this.nroflia.Size = new System.Drawing.Size(100, 25);
             // 
             // toolStrip1
             // 
@@ -198,11 +203,6 @@
             this.bot_borrar.Text = "Borrar";
             this.bot_borrar.UseVisualStyleBackColor = true;
             this.bot_borrar.Click += new System.EventHandler(this.bot_borrar_Click);
-            // 
-            // nroflia
-            // 
-            this.nroflia.Name = "nroflia";
-            this.nroflia.Size = new System.Drawing.Size(100, 25);
             // 
             // listado_afiliado
             // 

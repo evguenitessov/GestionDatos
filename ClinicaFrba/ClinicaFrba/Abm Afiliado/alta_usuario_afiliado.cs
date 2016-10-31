@@ -14,11 +14,33 @@ namespace ClinicaFrba.Abm_Afiliado
     public partial class alta_usuario_afiliado : Form
     {
         public DBAccess Access { get; set; }
+        private bool conyuge;
+        private string ecivil;
+        private decimal id_plan;
 
         public alta_usuario_afiliado()
         {
             InitializeComponent();
             Access = new DBAccess();
+            MessageBox.Show(conyuge.ToString());
+        }
+
+        private void verificaragregarconyuge()
+        {
+            if (conyuge.Equals(true))
+            {
+                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text);
+                this.Hide();
+                alta_afi.agregarconyuge(true, ecivil, id_plan);
+                alta_afi.Show();
+            }
+            else
+            {
+                MessageBox.Show("sin conyu");
+                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text);
+                this.Hide();
+                alta_afi.Show();
+            }
         }
 
         private void bot_borrar_Click(object sender, EventArgs e)
@@ -34,9 +56,7 @@ namespace ClinicaFrba.Abm_Afiliado
                if(verificacionusuario().Equals(true))
                {   
                    cargarusuarioenbd();
-                   Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text);
-                   this.Hide();
-                   alta_afi.Show();
+                   verificaragregarconyuge();
                }
            }
         }
@@ -110,6 +130,15 @@ namespace ClinicaFrba.Abm_Afiliado
                     return true;
                 }
             }
+
+
+        public void agregarconyuge(bool p1, string p2, decimal p3)
+        {
+            conyuge = p1;
+            ecivil = p2;
+            id_plan = p3;
         }
+
+    }
     }
 
