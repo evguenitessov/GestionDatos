@@ -200,6 +200,48 @@ CREATE TABLE [UN_CORTADO].[#TMP1] (
 	PRIMARY KEY ([Nombre_Usuario])	
 )
 GO
+--/***********************************************    
+--***** FUNCION CONTROL 48 HS SEMANALES **********		
+--************************************************/
+CREATE FUNCTION [UN_CORTADO].[CONTROL_HORAS] (@Id_Especialidad_Medico Int,@Fecha_Desde DATE,@Fecha_Hasta DATE,@CantHoras INT) RETURNS int AS
+BEGIN
+	DECLARE @Week_Inicial	INT
+	DECLARE @Week_Hasta		INT
+	DECLARE @Week_Aux		INT
+	DECLARE @Horas_Sem		INT
+	DECLARE @Return			INT
+	
+	SET @Week_Inicial= DATEPART(wk,@Fecha_Desde)
+	SET @Week_Hasta= DATEPART(wk,@Fecha_Hasta)
+	SET @Week_Aux = @Week_Inicial
+	SET @Horas_Sem = 0
+
+	WHILE @Week_Aux<=@Week_Hasta	
+	BEGIN
+		SET @Horas_Sem =  (SELECT COUNT (*) / 2
+		FROM [GD2C2016].[UN_CORTADO].[TURNOS]
+		INNER JOIN [UN_CORTADO].[AGENDA] AS A
+	    ON   [Id_Agenda]=A.[Id] AND @Id_Especialidad_Medico=A.Id_Especialidad_Medico
+		WHERE DATEPART(wk,[Fecha])=@Week_Aux AND DATEPART(YY,[Fecha]) = DATEPART(yy,@Fecha_Desde)
+		GROUP BY DATEPART(wk,[Fecha]),A.[Id_Especialidad_Medico])+@CantHoras
+		SET @Week_Aux = @Week_Aux + 1
+		PRINT 'HORAS SEMA'
+		PRINT @Horas_Sem 
+		IF 	@Horas_Sem <=48
+		BEGIN
+		  SET @Week_Aux = @Week_Aux + 1
+		  SET @Return = 1
+		  CONTINUE
+		END  -- IF
+		ELSE
+		BEGIN
+			SET @Return = 0
+			BREAK
+		END --ELSE
+	END --WHILE
+	RETURN @Return 
+END --FUNCTION
+GO
 
 --/***********************************************    @OBS ANTES DE INSETAR EN AGENDA VALIDAR 40 HS SEM y VALIDAR EL RANGO HORARIO
 --***** PROCEDURE CARGA AGENDA********************		OSEA SOLO MOSTRAR LO DISPONIBLE
@@ -268,6 +310,17 @@ BEGIN TRAN
 	END --END 1 WHILE
 COMMIT TRAN
 END --PROCEDURE
+GO
+
+
+--CREO VISTA PARA REGISTRAR_LLEGADA
+CREATE VIEW UN_CORTADO.registro_llegada as
+SELECT      UN_CORTADO.PROFESIONALES.Nombre_Usuario, UN_CORTADO.CONTACTO.Nombre, UN_CORTADO.CONTACTO.Apellido, UN_CORTADO.ESPECIALIDADES.Nombre AS Especialidades
+FROM        UN_CORTADO.PROFESIONALES INNER JOIN
+            UN_CORTADO.ESPECIALIDADPORPROFESIONAL ON UN_CORTADO.PROFESIONALES.Nombre_Usuario = UN_CORTADO.ESPECIALIDADPORPROFESIONAL.Id_Medico INNER JOIN
+            UN_CORTADO.ESPECIALIDADES ON UN_CORTADO.ESPECIALIDADPORPROFESIONAL.Id_Especialidad = UN_CORTADO.ESPECIALIDADES.Id INNER JOIN
+            UN_CORTADO.CONTACTO ON UN_CORTADO.PROFESIONALES.Nombre_Usuario = UN_CORTADO.CONTACTO.Nombre_Usuario
+
 GO
 
 --/*******************************************
@@ -489,12 +542,3 @@ BEGIN
 END
 GO
 
---CREO VISTA PARA REGISTRAR_LLEGADA
-CREATE VIEW UN_CORTADO.registro_llegada as
-SELECT      UN_CORTADO.PROFESIONALES.Nombre_Usuario, UN_CORTADO.CONTACTO.Nombre, UN_CORTADO.CONTACTO.Apellido, UN_CORTADO.ESPECIALIDADES.Nombre AS Especialidades
-FROM        UN_CORTADO.PROFESIONALES INNER JOIN
-            UN_CORTADO.ESPECIALIDADPORPROFESIONAL ON UN_CORTADO.PROFESIONALES.Nombre_Usuario = UN_CORTADO.ESPECIALIDADPORPROFESIONAL.Id_Medico INNER JOIN
-            UN_CORTADO.ESPECIALIDADES ON UN_CORTADO.ESPECIALIDADPORPROFESIONAL.Id_Especialidad = UN_CORTADO.ESPECIALIDADES.Id INNER JOIN
-            UN_CORTADO.CONTACTO ON UN_CORTADO.PROFESIONALES.Nombre_Usuario = UN_CORTADO.CONTACTO.Nombre_Usuario
-
-GO
