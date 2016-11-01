@@ -171,6 +171,7 @@ namespace ClinicaFrba.Registro_Llegada
             textBox2.Text = "2";
             checkEspecialidad.Enabled = true;
             checkProfesional.Enabled = false;
+            comboBusqueda2.Items.Clear();
         }
 
         private void checkEspecialidad_CheckedChanged(object sender, EventArgs e)
@@ -189,6 +190,7 @@ namespace ClinicaFrba.Registro_Llegada
             textBox2.Text = "1";
             checkEspecialidad.Enabled = false;            
             checkProfesional.Enabled = true;
+            comboBusqueda2.Items.Clear();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -213,6 +215,51 @@ namespace ClinicaFrba.Registro_Llegada
         private void comboBusqueda_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cargarTurnos();
+        }
+        private void cargarTurnos() {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                string query = String.Format("SELECT T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) = 'Toledo RENZO')) ");
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+                if (textBox1.Text == "1" && textBox2.Text == "2")
+                {
+                    SqlParameter param = new SqlParameter("@NombreProfesional", comboBusqueda.SelectedItem);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    cmd.Parameters.Add(param);
+                }
+                else 
+                {
+                    SqlParameter param = new SqlParameter("@NombreProfesional", comboBusqueda2.SelectedItem);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    cmd.Parameters.Add(param);
+                }
+                
+
+
+                try
+                {
+                    conexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        comboBusqueda2.Items.Add(dr[0]);
+                    }
+
+                    comboBusqueda2.SelectedIndex = 0;
+                }
+
+                catch
+                {
+
+                }
+            }
         }
     }
 }

@@ -245,5 +245,10 @@ namespace ClinicaFrba.AbmRol
             if (nuevoRol.ShowDialog() == DialogResult.OK)
                 CargarRoles();
         }
+
+        private void roles_dgrvw_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

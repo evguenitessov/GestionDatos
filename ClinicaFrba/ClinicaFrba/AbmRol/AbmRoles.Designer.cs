@@ -407,6 +407,7 @@
             this.roles_dgrvw.Name = "roles_dgrvw";
             this.roles_dgrvw.Size = new System.Drawing.Size(194, 291);
             this.roles_dgrvw.TabIndex = 0;
+            this.roles_dgrvw.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.roles_dgrvw_CellContentClick);
             // 
             // AbmRoles
             // 

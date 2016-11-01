@@ -38,7 +38,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnBuscarTurnosDisp = new System.Windows.Forms.Button();
             this.comboBusqueda2 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.fechaDeTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -151,7 +151,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnBuscarTurnosDisp);
             this.groupBox2.Controls.Add(this.comboBusqueda2);
             this.groupBox2.Location = new System.Drawing.Point(95, 122);
             this.groupBox2.Name = "groupBox2";
@@ -161,14 +161,15 @@
             this.groupBox2.Text = "Seleccionar Especialidad";
             this.groupBox2.Visible = false;
             // 
-            // button1
+            // btnBuscarTurnosDisp
             // 
-            this.button1.Location = new System.Drawing.Point(163, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(49, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnBuscarTurnosDisp.Location = new System.Drawing.Point(163, 27);
+            this.btnBuscarTurnosDisp.Name = "btnBuscarTurnosDisp";
+            this.btnBuscarTurnosDisp.Size = new System.Drawing.Size(49, 23);
+            this.btnBuscarTurnosDisp.TabIndex = 3;
+            this.btnBuscarTurnosDisp.Text = "Buscar";
+            this.btnBuscarTurnosDisp.UseVisualStyleBackColor = true;
+            this.btnBuscarTurnosDisp.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBusqueda2
             // 
@@ -310,7 +311,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnBuscarTurnosDisp;
         private System.Windows.Forms.ComboBox comboBusqueda2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaDeTurno;
