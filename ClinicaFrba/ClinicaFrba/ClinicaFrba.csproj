@@ -68,6 +68,12 @@
     <Compile Include="Abm Afiliado\modif_afiliado.Designer.cs">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Afiliado\motivo_cambio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\motivo_cambio.Designer.cs">
+      <DependentUpon>motivo_cambio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Especialidades Medicas\abmEspMedicas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\modif_afiliado.resx">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\motivo_cambio.resx">
+      <DependentUpon>motivo_cambio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Planes\abmPlan.resx">
       <DependentUpon>abmPlan.cs</DependentUpon>

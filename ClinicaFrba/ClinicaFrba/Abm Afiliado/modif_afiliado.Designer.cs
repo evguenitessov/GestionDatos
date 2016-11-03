@@ -47,6 +47,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.group_alta.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +97,7 @@
             // group_alta
             // 
             this.group_alta.BackColor = System.Drawing.Color.Transparent;
+            this.group_alta.Controls.Add(this.label1);
             this.group_alta.Controls.Add(this.label14);
             this.group_alta.Controls.Add(this.mail);
             this.group_alta.Controls.Add(this.planmed);
@@ -203,9 +205,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(51, 213);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 19);
+            this.label7.Size = new System.Drawing.Size(99, 19);
             this.label7.TabIndex = 32;
-            this.label7.Text = "Estado civil *";
+            this.label7.Text = "Estado civil *\'";
             // 
             // label6
             // 
@@ -221,9 +223,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(51, 277);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 19);
+            this.label5.Size = new System.Drawing.Size(104, 19);
             this.label5.TabIndex = 30;
-            this.label5.Text = "Plan médico *";
+            this.label5.Text = "Plan médico *\'";
             // 
             // label13
             // 
@@ -233,6 +235,15 @@
             this.label13.Size = new System.Drawing.Size(156, 19);
             this.label13.TabIndex = 25;
             this.label13.Text = "* campos obligatorios.";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(124, 440);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(148, 19);
+            this.label1.TabIndex = 51;
+            this.label1.Text = "\' volver a seleccionar.";
             // 
             // modif_afiliado
             // 
@@ -271,5 +282,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox canthijosfamcargo;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -20,17 +20,8 @@ namespace ClinicaFrba.Abm_Afiliado
         private string direc1;
         private string telef1;
         private string mail1;
-        private int id_plan;
 
         public DBAccess Access { get; set; }
-
-        public modif_afiliado()
-        {
-            InitializeComponent();
-            Access = new DBAccess();
-            cargardatos();
-            cargarcomboboxes();
-        }
 
         public modif_afiliado(string usu, string eciv, string canthijos, string nombreplan, string direc1, string telef1, string mail1)
         {
@@ -47,6 +38,20 @@ namespace ClinicaFrba.Abm_Afiliado
 
             cargardatos();
             cargarcomboboxes();
+        }
+
+        private void verificarCambioPlan()
+        {
+            if (String.Equals(nombreplan, planmed.SelectedItem.ToString()))
+            {
+
+            }
+            else
+            {
+                Abm_Afiliado.motivo_cambio motivo = new Abm_Afiliado.motivo_cambio(usu, nombreplan);
+                MessageBox.Show("El afiliado cambió su plan. Indique el motivo.", "Modificación de plan.");
+                motivo.Show();
+            }
         }
 
         private void cargardatos()
@@ -96,7 +101,7 @@ namespace ClinicaFrba.Abm_Afiliado
             {
                 actualizarafiliados();
                 actualizarcontacto();
-                MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
+                verificarCambioPlan();
             }
         }
 
@@ -131,6 +136,8 @@ namespace ClinicaFrba.Abm_Afiliado
 
                     command.ExecuteNonQuery();
                     sqlTransact.Commit();
+
+                    MessageBox.Show("El afiliado ha sido modificado exitosamente.", "Exito");
                 }
                 catch (Exception ex)
                 {
@@ -162,7 +169,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
-                    param = new SqlParameter("@ecivil", ecivil.SelectedItem);
+                    param = new SqlParameter("@ecivil", ecivil.SelectedItem.ToString());
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
@@ -171,8 +178,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     param.SqlDbType = System.Data.SqlDbType.TinyInt;
                     command.Parameters.Add(param);
 
-                    buscaridplan();
-                    param = new SqlParameter("@idplan", id_plan);
+                    param = new SqlParameter("@idplan", buscaridplan(planmed.SelectedItem.ToString()));
                     param.SqlDbType = System.Data.SqlDbType.Int;
                     command.Parameters.Add(param);
 
@@ -193,18 +199,15 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void buscaridplan()
-        {            
+        private decimal buscaridplan(string nombreplan)
+        {
             SqlConnection conexion = new SqlConnection(Access.Conexion);
             conexion.Open();
             string query = "SELECT Id FROM UN_CORTADO.PLANES WHERE Nombre=@nombreplan";
             SqlCommand cmd = new SqlCommand(query, conexion);
-            cmd.Parameters.AddWithValue("@nombreplan", planmed.SelectedItem);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
-            {
-                id_plan = dr.GetInt32(0);
-            }
+            cmd.Parameters.AddWithValue("@nombreplan", nombreplan);
+            Decimal idplan = Convert.ToDecimal(cmd.ExecuteScalar());
+            return idplan;
         }
 
         private bool verificardatos()
