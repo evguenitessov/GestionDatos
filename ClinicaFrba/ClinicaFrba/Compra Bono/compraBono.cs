@@ -15,6 +15,8 @@ namespace ClinicaFrba.Compra_Bono
     {
         private string rol;
         private string usuario;
+        private decimal total;
+        private decimal cantid;
         public DBAccess Access { get; set; }
         public compraBono(string rol, string usuario)
         {
@@ -34,20 +36,7 @@ namespace ClinicaFrba.Compra_Bono
             if (rol.Equals("Afiliado"))
             {
                 groupBox_bonosadmi.Hide();
-            }
-
-        }
-
-        private void atras_Click(object sender, EventArgs e)
-        {
-            if(rol.Equals("Administrativo"))
-            {
-                //ir al menu del administrativo
-            }
-            else if (rol.Equals("Afiliado"))
-            {
-                //ir al menu del afiliado
-            }          
+            }   
 
         }
 
@@ -55,16 +44,60 @@ namespace ClinicaFrba.Compra_Bono
         {
             if (rol.Equals("Administrativo"))
             {
-                Decimal canti2 = Decimal.Parse(cantidad2.Text);
-                Decimal total = obtenermontosegunplan(canti2);
+                cantid = Decimal.Parse(cantidad2.Text);
+                total = obtenermontosegunplan(cantid);
                 montoapagar2.Text = total.ToString();
+                cargarenlabd(obtenerusuario());
             }
 
             if (rol.Equals("Afiliado"))
             {
-                Decimal canti = Decimal.Parse(cantidad.Text);
-                Decimal total = obtenermontoconusuario(canti);
+                cantid = Decimal.Parse(cantidad.Text);
+                total = obtenermontoconusuario(cantid);
                 montoapagar.Text = total.ToString();
+                cargarenlabd(usuario);
+            }
+        }
+
+        private void cargarenlabd(string user)
+        {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                SqlTransaction sqlTransact = conexion.BeginTransaction();
+                SqlCommand command = conexion.CreateCommand();
+                command.Transaction = sqlTransact;
+                try
+                {
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[COMPRABONOS] ([Nombre_Usuario], [Cantidad_Bonos],[Precio_Total]) VALUES (@usuario,@cantbonos,@total)");
+                    command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@usuario", user);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@cantbonos", cantid);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@total", total);
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
+                    command.ExecuteNonQuery();
+                    sqlTransact.Commit();
+                    MessageBox.Show("Operación realizada exitosamente.", "Exito");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
+                    sqlTransact.Rollback();
+                }
+                finally
+                {
+                    if (conexion.State == System.Data.ConnectionState.Open)
+                        conexion.Dispose();
+                }
             }
         }
 
@@ -158,6 +191,11 @@ namespace ClinicaFrba.Compra_Bono
             Decimal habilitado = Convert.ToDecimal(cmd.ExecuteScalar());
             return habilitado;
        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -35,15 +35,15 @@
             this.label_cant = new System.Windows.Forms.Label();
             this.cantidad = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.atras = new System.Windows.Forms.Button();
             this.groupBox_bonosadmi = new System.Windows.Forms.GroupBox();
+            this.nroafi = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.montoapagar2 = new System.Windows.Forms.TextBox();
             this.confirmar2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cantidad2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.nroafi = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox_bonosafi.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox_bonosadmi.SuspendLayout();
@@ -110,23 +110,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.atras);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 479);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(560, 70);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            // 
-            // atras
-            // 
-            this.atras.Location = new System.Drawing.Point(176, 25);
-            this.atras.Name = "atras";
-            this.atras.Size = new System.Drawing.Size(187, 30);
-            this.atras.TabIndex = 5;
-            this.atras.Text = "Atrás";
-            this.atras.UseVisualStyleBackColor = true;
-            this.atras.Click += new System.EventHandler(this.atras_Click);
             // 
             // groupBox_bonosadmi
             // 
@@ -144,6 +134,23 @@
             this.groupBox_bonosadmi.TabIndex = 5;
             this.groupBox_bonosadmi.TabStop = false;
             this.groupBox_bonosadmi.Text = "Cantidad de bonos a comprar";
+            // 
+            // nroafi
+            // 
+            this.nroafi.Location = new System.Drawing.Point(177, 57);
+            this.nroafi.Name = "nroafi";
+            this.nroafi.Size = new System.Drawing.Size(187, 26);
+            this.nroafi.TabIndex = 6;
+            this.nroafi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(219, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(105, 18);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Nro. de Afiliado";
             // 
             // label2
             // 
@@ -189,22 +196,15 @@
             this.cantidad2.TabIndex = 0;
             this.cantidad2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label4
+            // button1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(219, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 18);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Nro. de Afiliado";
-            // 
-            // nroafi
-            // 
-            this.nroafi.Location = new System.Drawing.Point(177, 57);
-            this.nroafi.Name = "nroafi";
-            this.nroafi.Size = new System.Drawing.Size(187, 26);
-            this.nroafi.TabIndex = 6;
-            this.nroafi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.button1.Location = new System.Drawing.Point(176, 25);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(187, 30);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Cerrar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // compraBono
             // 
@@ -234,7 +234,6 @@
         private System.Windows.Forms.Label label_cant;
         private System.Windows.Forms.TextBox cantidad;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button atras;
         private System.Windows.Forms.GroupBox groupBox_bonosadmi;
         private System.Windows.Forms.TextBox nroafi;
         private System.Windows.Forms.Label label4;
@@ -243,5 +242,6 @@
         private System.Windows.Forms.Button confirmar2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox cantidad2;
+        private System.Windows.Forms.Button button1;
     }
 }
