@@ -28,10 +28,10 @@ namespace ClinicaFrba.Abm_Afiliado
             this.conyuge = p2;
             this.estado_civil = ecivil1;
             this.id_plan = idplan;
-            verificarconyugetrue();
+            cargarobjetos();
         }
 
-        private void verificarconyugetrue()
+        private void cargarobjetos()
         {
             if (conyuge.Equals(true))
             {
@@ -48,11 +48,41 @@ namespace ClinicaFrba.Abm_Afiliado
                 sexo.Items.Add("M");
 
             }
+            else if (conyuge.Equals(false) && id_plan > 0)
+            {
+                tipodoc.Items.Add("DNI");
+                tipodoc.Items.Add("CI");
+                tipodoc.Items.Add("LC");
+
+                sexo.Items.Add("F");
+                sexo.Items.Add("M");
+
+                ecivil.Items.Add("SOLTERO/A");
+                ecivil.Items.Add("CASADO/A");
+                ecivil.Items.Add("VIUDO/A");
+                ecivil.Items.Add("CONCUBINATO");
+                ecivil.Items.Add("DIVORCIADO/A");
+
+                planmed.Hide();
+                label_planmed.Hide();
+            }
             else
             {
-                inicializarcombobox();
+                inicializarcombobox(); 
             }
         }
+
+        private decimal maximoNroFamilia()
+        {
+            SqlConnection conexion = new SqlConnection(Access.Conexion);
+            conexion.Open();
+            string query = "SELECT MAX(Numero_Familia) FROM UN_CORTADO.AFILIADOS WHERE Numero_Afiliado=@nroafiliado";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.Parameters.AddWithValue("@nroafiliado", mismonrodeafiliado());
+            Decimal maxNroFlia = Convert.ToDecimal(cmd.ExecuteScalar());
+            return maxNroFlia + 1; 
+        }
+
 
         private void inicializarcombobox()
         {
@@ -110,13 +140,13 @@ namespace ClinicaFrba.Abm_Afiliado
         private void bot_guardar_Click(object sender, EventArgs e) //guarda si son correctos en la bd
         {
             if (chequeartipodatos().Equals(0))
-            {
+               {
                 if (chequeartodoscamposcompletos().Equals(0))
                 {
                     cargarenlabdafiliados();
                     cargarenlabdcontacto();
                     MessageBox.Show("El afiliado ha sido registrado exitosamente.", "Exito");
-                    verificarconyuge();
+                    verificarconyugeyfamiliares();
                 }
 
                 else if (chequeartodoscamposcompletosconyuge().Equals(0) && conyuge.Equals(true))
@@ -124,14 +154,75 @@ namespace ClinicaFrba.Abm_Afiliado
                     cargarenlabdafiliadoconyuge();
                     cargarenlabdcontacto();
                     MessageBox.Show("El cónyuge ha sido registrado exitosamente.", "Exito");
+                    this.Hide();
                     //ir al menu principal
                 }
+                else if (conyuge.Equals(false) && id_plan > 0)
+                {
+                    cargarenlabdafiliadofamiliar();
+                    cargarenlabdcontacto();
+                    MessageBox.Show("El hijo/familiar ha sido registrado exitosamente.", "Exito");
+                    this.Hide();
+                }
             }
-            else
-            {
-                MessageBox.Show("Verifique que todos los campos estén completados adecuadamente y los datos correctamente ingresados.", "Error al guardar");
-            }
+                else
+                {
+                    MessageBox.Show("Verifique que todos los campos estén completados adecuadamente y los datos correctamente ingresados.", "Error al guardar");
+                }
 
+        }
+
+        private void cargarenlabdafiliadofamiliar()
+        {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                SqlTransaction sqlTransact = conexion.BeginTransaction();
+                SqlCommand command = conexion.CreateCommand();
+                command.Transaction = sqlTransact;
+                try
+                {
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[AFILIADOS] VALUES (@usuario,@nroafi,@nroflia,@ecivil, @cant_hijos, @id_plan)");
+                    command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@usuario", usuario);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@nroafi", mismonrodeafiliado());
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@nroflia", maximoNroFamilia());
+                    param.SqlDbType = System.Data.SqlDbType.TinyInt;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@ecivil", ecivil.SelectedItem.ToString());
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@cant_hijos", Decimal.Parse(canthijosfamcargo.Text));
+                    param.SqlDbType = System.Data.SqlDbType.TinyInt;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@id_plan", id_plan);
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
+                    command.ExecuteNonQuery();
+                    sqlTransact.Commit();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
+                    sqlTransact.Rollback();
+                }
+                finally
+                {
+                    if (conexion.State == System.Data.ConnectionState.Open)
+                        conexion.Dispose();
+                }
+            }
         }
 
         private object chequeartipodatosconyuge()
@@ -183,8 +274,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     param.SqlDbType = System.Data.SqlDbType.Int;
                     command.Parameters.Add(param);
 
-                    Int16 nrofamilia = 1;
-                    param = new SqlParameter("@nroflia", nrofamilia);
+                    param = new SqlParameter("@nroflia", maximoNroFamilia());
                     param.SqlDbType = System.Data.SqlDbType.TinyInt;
                     command.Parameters.Add(param);
 
@@ -371,22 +461,51 @@ namespace ClinicaFrba.Abm_Afiliado
             }
         }
 
-        private void verificarconyuge()
+        private void verificarconyugeyfamiliares()
         {
+            decimal cantfamiacargo= Convert.ToDecimal(canthijosfamcargo.Text);
             if (ecivil.SelectedItem.Equals("CASADO/A") || ecivil.SelectedItem.Equals("CONCUBINATO"))
             {
                 DialogResult opcionelegida = MessageBox.Show("¿Le gustaría asociar a su cónyuge?", "Alta de afiliado", MessageBoxButtons.YesNo);
                 if (opcionelegida.Equals(DialogResult.Yes))
                 {
-                    this.Hide();
-                    Abm_Afiliado.alta_usuario_afiliado altausuafiliado = new Abm_Afiliado.alta_usuario_afiliado(true,buscaridplan(),ecivil.SelectedItem.ToString());
+                    Abm_Afiliado.alta_usuario_afiliado altausuafiliado = new Abm_Afiliado.alta_usuario_afiliado(true, buscaridplan(), ecivil.SelectedItem.ToString());
                     altausuafiliado.Show();
                 }
                 else if (opcionelegida.Equals(DialogResult.No))
                 {
-                    //ir al menú principal
+                    //no hace nada
                 }
             }
+            if (cantfamiacargo>0)
+            {
+                DialogResult opcionelegida = MessageBox.Show("¿Le gustaría asociar a sus hijos/familiares a su cargo?", "Alta de afiliado", MessageBoxButtons.YesNo);
+                if (opcionelegida.Equals(DialogResult.Yes))
+                {
+
+                    for (int i = 0; i < cantfamiacargo; i++)
+                    {
+                        Abm_Afiliado.alta_usuario_afiliado altausuafiliado = new Abm_Afiliado.alta_usuario_afiliado(false, buscarplan(), null);
+                        altausuafiliado.Show();
+                    }
+                }
+                else if (opcionelegida.Equals(DialogResult.No))
+                {
+                    //menu principal                  
+                }
+            }
+            this.Hide();
+        }
+
+        private decimal buscarplan()
+        {
+             SqlConnection conexion = new SqlConnection(Access.Conexion);
+             conexion.Open();
+             string query = "SELECT Id_Plan FROM UN_CORTADO.listado_afiliados WHERE Numero_Afiliado=@nroafi";
+             SqlCommand cmd = new SqlCommand(query, conexion);
+             cmd.Parameters.AddWithValue("@nroafi", mismonrodeafiliado());
+             Decimal idplan = Convert.ToDecimal(cmd.ExecuteScalar());
+             return idplan;
         }
 
         private void verificarfamacargo()

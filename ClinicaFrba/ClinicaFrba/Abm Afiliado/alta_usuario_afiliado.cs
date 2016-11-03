@@ -26,22 +26,52 @@ namespace ClinicaFrba.Abm_Afiliado
             this.id_plan = p2;
             this.ecivil = p3;
             MessageBox.Show(conyuge.ToString());
+            cargarlabels();
+        }
+
+        private void cargarlabels()
+        {
+            if (conyuge.Equals(true) && id_plan > 0)
+            {
+                label_hijosfam.Hide();
+            }
+
+            else if (conyuge.Equals(false) && id_plan > 0)
+            {
+                label_conyuge.Hide();
+            }
+            else if (id_plan.Equals(0))
+            {
+                label_conyuge.Hide();
+                label_hijosfam.Hide();
+            }
         }
 
         private void verificaragregarconyuge()
         {
-            if (conyuge.Equals(true))
+            if (conyuge.Equals(true) && id_plan>0)
             {
                 Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text,true,ecivil,id_plan);
                 this.Hide();
                 alta_afi.Show();
+                label_hijosfam.Hide();
             }
-            else
+
+            else if (conyuge.Equals(false) && id_plan > 0)
+            {
+                Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text, false, null, id_plan);
+                this.Hide();
+                alta_afi.Show();
+                label_conyuge.Hide();
+            }
+            else if (id_plan.Equals(0))
             {
                 MessageBox.Show("sin conyu");
                 Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text, false, null, 0);
                 this.Hide();
                 alta_afi.Show();
+                label_conyuge.Hide();
+                label_hijosfam.Hide();
             }
         }
 

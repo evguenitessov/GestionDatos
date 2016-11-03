@@ -38,6 +38,8 @@
             this.bot_atras = new System.Windows.Forms.Button();
             this.bot_siguiente = new System.Windows.Forms.Button();
             this.bot_borrar = new System.Windows.Forms.Button();
+            this.label_conyuge = new System.Windows.Forms.Label();
+            this.label_hijosfam = new System.Windows.Forms.Label();
             this.group_alta.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +47,8 @@
             // group_alta
             // 
             this.group_alta.BackColor = System.Drawing.Color.Transparent;
+            this.group_alta.Controls.Add(this.label_conyuge);
+            this.group_alta.Controls.Add(this.label_hijosfam);
             this.group_alta.Controls.Add(this.label13);
             this.group_alta.Controls.Add(this.contra);
             this.group_alta.Controls.Add(this.usuario);
@@ -140,6 +144,24 @@
             this.bot_borrar.UseVisualStyleBackColor = true;
             this.bot_borrar.Click += new System.EventHandler(this.bot_borrar_Click);
             // 
+            // label_conyuge
+            // 
+            this.label_conyuge.AutoSize = true;
+            this.label_conyuge.Location = new System.Drawing.Point(213, 23);
+            this.label_conyuge.Name = "label_conyuge";
+            this.label_conyuge.Size = new System.Drawing.Size(132, 19);
+            this.label_conyuge.TabIndex = 16;
+            this.label_conyuge.Text = "ALTA DE CONYUGE";
+            // 
+            // label_hijosfam
+            // 
+            this.label_hijosfam.AutoSize = true;
+            this.label_hijosfam.Location = new System.Drawing.Point(190, 42);
+            this.label_hijosfam.Name = "label_hijosfam";
+            this.label_hijosfam.Size = new System.Drawing.Size(185, 19);
+            this.label_hijosfam.TabIndex = 26;
+            this.label_hijosfam.Text = "ALTA DE HIJOS/FAMILIARES";
+            // 
             // alta_usuario_afiliado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,5 +190,7 @@
         private System.Windows.Forms.Button bot_atras;
         private System.Windows.Forms.Button bot_siguiente;
         private System.Windows.Forms.Button bot_borrar;
+        private System.Windows.Forms.Label label_conyuge;
+        private System.Windows.Forms.Label label_hijosfam;
     }
 }
