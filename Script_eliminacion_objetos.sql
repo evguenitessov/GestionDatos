@@ -51,8 +51,11 @@ DROP PROCEDURE [UN_CORTADO].[CARGAR_AGENDA]
 
 DROP FUNCTION [UN_CORTADO].[CONTROL_HORAS]
 
+DROP FUNCTION [UN_CORTADO].[CONTROL_AGENDA_EXISTENTE]
+
 DROP VIEW [UN_CORTADO].[registro_llegada]
 
+DROP VIEW [UN_CORTADO].[ProfesionalesYSusEspecialidades]
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
 ********************************************/

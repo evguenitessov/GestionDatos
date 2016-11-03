@@ -241,6 +241,30 @@ BEGIN
 END --FUNCTION
 GO
 
+--/***********************************************    
+--***** FUNCION CONTROL AGENDA EXISTENTE **********		
+--************************************************/
+CREATE FUNCTION [UN_CORTADO].[CONTROL_AGENDA_EXISTENTE] (@Id_Especialidad_Medico Int,@Fecha_Desde DATE) 
+RETURNS int AS
+BEGIN
+
+declare @retorno int
+
+if exists( SELECT 1 
+		   FROM [GD2C2016].[UN_CORTADO].[TURNOS] 
+		   INNER JOIN [UN_CORTADO].[AGENDA] AS A 
+		   ON [Id_Agenda]=A.[Id] AND @Id_Especialidad_Medico = A.Id_Especialidad_Medico 
+		   WHERE DATEPART(wk,[Fecha])=DATEPART(wk,@Fecha_Desde) AND DATEPART(YY,[Fecha]) = DATEPART(yy,@Fecha_Desde) 
+		   GROUP BY DATEPART(wk,[Fecha]),A.[Id_Especialidad_Medico] ) 
+			set @retorno = 1 
+else 
+	set @retorno = 0
+
+RETURN @retorno
+
+END
+GO
+
 --/***********************************************    @OBS ANTES DE INSETAR EN AGENDA VALIDAR 40 HS SEM y VALIDAR EL RANGO HORARIO
 --***** PROCEDURE CARGA AGENDA********************		OSEA SOLO MOSTRAR LO DISPONIBLE
 --************************************************/
