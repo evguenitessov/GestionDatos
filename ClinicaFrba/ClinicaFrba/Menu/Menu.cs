@@ -143,8 +143,18 @@ namespace ClinicaFrba.Menu
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Compra_Bono.compraBono compraBono = new Compra_Bono.compraBono();
-            compraBono.Show();
+            if(Rol.Equals("Afiliado"))
+            {
+                Compra_Bono.compraBono compraBono = new Compra_Bono.compraBono("Afiliado",Usuario);
+                compraBono.Show();
+                this.Hide();
+            }
+            if (Rol.Equals("Administrativo"))
+            {
+                Compra_Bono.compraBono compraBono = new Compra_Bono.compraBono("Administrativo", null);
+                compraBono.Show();
+                this.Hide();
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
