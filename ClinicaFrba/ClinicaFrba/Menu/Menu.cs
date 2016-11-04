@@ -121,8 +121,8 @@ namespace ClinicaFrba.Menu
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Abm_Afiliado.alta_usuario_afiliado altaUsuario = new Abm_Afiliado.alta_usuario_afiliado(false, 0, null);
-            altaUsuario.Show();
+            Abm_Afiliado.menu_abmafiliado afi_menu = new Abm_Afiliado.menu_abmafiliado();
+            afi_menu.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -25,7 +25,6 @@ namespace ClinicaFrba.Abm_Afiliado
             this.conyuge = p1;
             this.id_plan = p2;
             this.ecivil = p3;
-            MessageBox.Show(conyuge.ToString());
             cargarlabels();
         }
 
@@ -66,7 +65,6 @@ namespace ClinicaFrba.Abm_Afiliado
             }
             else if (id_plan.Equals(0))
             {
-                MessageBox.Show("sin conyu");
                 Abm_Afiliado.alta_afiliado alta_afi = new Abm_Afiliado.alta_afiliado(usuario.Text, false, null, 0);
                 this.Hide();
                 alta_afi.Show();
@@ -162,6 +160,13 @@ namespace ClinicaFrba.Abm_Afiliado
                     return true;
                 }
             }
+
+        private void bot_atras_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Abm_Afiliado.menu_abmafiliado menu_afi = new Abm_Afiliado.menu_abmafiliado();
+            menu_afi.Show();
+        }
 
 
     }

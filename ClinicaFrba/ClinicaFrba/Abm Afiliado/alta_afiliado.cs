@@ -154,8 +154,7 @@ namespace ClinicaFrba.Abm_Afiliado
                     cargarenlabdafiliadoconyuge();
                     cargarenlabdcontacto();
                     MessageBox.Show("El cónyuge ha sido registrado exitosamente.", "Exito");
-                    this.Hide();
-                    //ir al menu principal
+                    this.Hide();                 
                 }
                 else if (conyuge.Equals(false) && id_plan > 0)
                 {

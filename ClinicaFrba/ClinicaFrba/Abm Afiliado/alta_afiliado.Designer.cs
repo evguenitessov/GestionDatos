@@ -57,7 +57,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bot_borrar = new System.Windows.Forms.Button();
             this.bot_guardar = new System.Windows.Forms.Button();
-            this.bot_atras = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.group_alta.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -321,7 +320,7 @@
             // 
             // bot_borrar
             // 
-            this.bot_borrar.Location = new System.Drawing.Point(217, 25);
+            this.bot_borrar.Location = new System.Drawing.Point(6, 25);
             this.bot_borrar.Name = "bot_borrar";
             this.bot_borrar.Size = new System.Drawing.Size(124, 40);
             this.bot_borrar.TabIndex = 11;
@@ -339,18 +338,8 @@
             this.bot_guardar.UseVisualStyleBackColor = true;
             this.bot_guardar.Click += new System.EventHandler(this.bot_guardar_Click);
             // 
-            // bot_atras
-            // 
-            this.bot_atras.Location = new System.Drawing.Point(6, 25);
-            this.bot_atras.Name = "bot_atras";
-            this.bot_atras.Size = new System.Drawing.Size(124, 40);
-            this.bot_atras.TabIndex = 13;
-            this.bot_atras.Text = "Atrás";
-            this.bot_atras.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bot_atras);
             this.groupBox1.Controls.Add(this.bot_guardar);
             this.groupBox1.Controls.Add(this.bot_borrar);
             this.groupBox1.Location = new System.Drawing.Point(12, 464);
@@ -407,7 +396,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bot_borrar;
         private System.Windows.Forms.Button bot_guardar;
-        private System.Windows.Forms.Button bot_atras;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label14;
     }

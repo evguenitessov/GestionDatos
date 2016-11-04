@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.group_alta = new System.Windows.Forms.GroupBox();
+            this.label_conyuge = new System.Windows.Forms.Label();
+            this.label_hijosfam = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.contra = new System.Windows.Forms.TextBox();
             this.usuario = new System.Windows.Forms.TextBox();
@@ -38,8 +40,6 @@
             this.bot_atras = new System.Windows.Forms.Button();
             this.bot_siguiente = new System.Windows.Forms.Button();
             this.bot_borrar = new System.Windows.Forms.Button();
-            this.label_conyuge = new System.Windows.Forms.Label();
-            this.label_hijosfam = new System.Windows.Forms.Label();
             this.group_alta.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +61,24 @@
             this.group_alta.TabIndex = 1;
             this.group_alta.TabStop = false;
             this.group_alta.Text = "Nuevo afiliado";
+            // 
+            // label_conyuge
+            // 
+            this.label_conyuge.AutoSize = true;
+            this.label_conyuge.Location = new System.Drawing.Point(213, 23);
+            this.label_conyuge.Name = "label_conyuge";
+            this.label_conyuge.Size = new System.Drawing.Size(132, 19);
+            this.label_conyuge.TabIndex = 16;
+            this.label_conyuge.Text = "ALTA DE CONYUGE";
+            // 
+            // label_hijosfam
+            // 
+            this.label_hijosfam.AutoSize = true;
+            this.label_hijosfam.Location = new System.Drawing.Point(190, 42);
+            this.label_hijosfam.Name = "label_hijosfam";
+            this.label_hijosfam.Size = new System.Drawing.Size(185, 19);
+            this.label_hijosfam.TabIndex = 26;
+            this.label_hijosfam.Text = "ALTA DE HIJOS/FAMILIARES";
             // 
             // label13
             // 
@@ -123,6 +141,7 @@
             this.bot_atras.TabIndex = 13;
             this.bot_atras.Text = "Atrás";
             this.bot_atras.UseVisualStyleBackColor = true;
+            this.bot_atras.Click += new System.EventHandler(this.bot_atras_Click);
             // 
             // bot_siguiente
             // 
@@ -143,24 +162,6 @@
             this.bot_borrar.Text = "Borrar";
             this.bot_borrar.UseVisualStyleBackColor = true;
             this.bot_borrar.Click += new System.EventHandler(this.bot_borrar_Click);
-            // 
-            // label_conyuge
-            // 
-            this.label_conyuge.AutoSize = true;
-            this.label_conyuge.Location = new System.Drawing.Point(213, 23);
-            this.label_conyuge.Name = "label_conyuge";
-            this.label_conyuge.Size = new System.Drawing.Size(132, 19);
-            this.label_conyuge.TabIndex = 16;
-            this.label_conyuge.Text = "ALTA DE CONYUGE";
-            // 
-            // label_hijosfam
-            // 
-            this.label_hijosfam.AutoSize = true;
-            this.label_hijosfam.Location = new System.Drawing.Point(190, 42);
-            this.label_hijosfam.Name = "label_hijosfam";
-            this.label_hijosfam.Size = new System.Drawing.Size(185, 19);
-            this.label_hijosfam.TabIndex = 26;
-            this.label_hijosfam.Text = "ALTA DE HIJOS/FAMILIARES";
             // 
             // alta_usuario_afiliado
             // 

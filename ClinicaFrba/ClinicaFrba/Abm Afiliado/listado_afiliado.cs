@@ -155,5 +155,12 @@ namespace ClinicaFrba.Abm_Afiliado
             grid_afiliados.DataSource = pagingDS.Tables[0];
             pagingAdapter.Update(pagingDS.Tables[0]);
         }
+
+        private void bot_mprincipal_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Abm_Afiliado.menu_abmafiliado menu = new Abm_Afiliado.menu_abmafiliado();
+            menu.Show();
+        }
     }
 }

@@ -179,8 +179,9 @@
             this.bot_mprincipal.Name = "bot_mprincipal";
             this.bot_mprincipal.Size = new System.Drawing.Size(124, 40);
             this.bot_mprincipal.TabIndex = 13;
-            this.bot_mprincipal.Text = "Menú Principal";
+            this.bot_mprincipal.Text = "Atrás";
             this.bot_mprincipal.UseVisualStyleBackColor = true;
+            this.bot_mprincipal.Click += new System.EventHandler(this.bot_mprincipal_Click);
             // 
             // bot_buscar
             // 

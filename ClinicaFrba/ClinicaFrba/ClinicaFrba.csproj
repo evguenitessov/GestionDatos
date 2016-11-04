@@ -62,6 +62,12 @@
     <Compile Include="Abm Afiliado\listado_afiliado.Designer.cs">
       <DependentUpon>listado_afiliado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Afiliado\menu_abmafiliado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Afiliado\menu_abmafiliado.Designer.cs">
+      <DependentUpon>menu_abmafiliado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Afiliado\modif_afiliado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\listado_afiliado.resx">
       <DependentUpon>listado_afiliado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Afiliado\menu_abmafiliado.resx">
+      <DependentUpon>menu_abmafiliado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Afiliado\modif_afiliado.resx">
       <DependentUpon>modif_afiliado.cs</DependentUpon>
