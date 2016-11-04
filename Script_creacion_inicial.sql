@@ -364,6 +364,21 @@ FROM            UN_CORTADO.AFILIADOS INNER JOIN
                          UN_CORTADO.CONTACTO.Nombre_Usuario = UN_CORTADO.USUARIOS.Nombre_Usuario
 GO
 
+--VIEW TOP5 ESPECIALIDADES
+
+CREATE VIEW UN_CORTADO.TOP5_ESPECIALIDADES as
+SELECT  TOP 5 E.Nombre ESPECIALIDADES,COUNT(*) AS CANT_CANCELACIONES 
+      FROM [GD2C2016].[UN_CORTADO].[CANCELACIONES] C
+  INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
+  ON C.Id_Turno = T.Id
+  INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
+  ON T.Especialidad = E.Id
+  GROUP BY T.Especialidad,E.Nombre
+  ORDER BY COUNT(*) DESC
+GO
+
+
+
 --/*******************************************
 --***** POBLADO DE TABLAS ******************** 
 --********************************************/
