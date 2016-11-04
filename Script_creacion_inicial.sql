@@ -354,6 +354,16 @@ FROM          UN_CORTADO.ESPECIALIDADES INNER JOIN
 			  UN_CORTADO.AGENDA ON UN_CORTADO.ESPECIALIDADPORPROFESIONAL.Id = UN_CORTADO.AGENDA.Id_Especialidad_Medico INNER JOIN
               UN_CORTADO.CONTACTO ON UN_CORTADO.ESPECIALIDADPORPROFESIONAL.Id_Medico = UN_CORTADO.CONTACTO.Nombre_Usuario
 GO
+
+CREATE VIEW UN_CORTADO.listado_afiliados as
+SELECT        UN_CORTADO.AFILIADOS.Nombre_Usuario, UN_CORTADO.AFILIADOS.Estado_Civil, UN_CORTADO.AFILIADOS.Cantidad_Hijos, UN_CORTADO.AFILIADOS.Id_Plan, UN_CORTADO.CONTACTO.Direccion,
+                         UN_CORTADO.CONTACTO.Telefono, UN_CORTADO.CONTACTO.Mail, UN_CORTADO.USUARIOS.Habilitado, UN_CORTADO.AFILIADOS.Numero_Afiliado, UN_CORTADO.AFILIADOS.Numero_Familia
+FROM            UN_CORTADO.AFILIADOS INNER JOIN
+                         UN_CORTADO.CONTACTO ON UN_CORTADO.AFILIADOS.Nombre_Usuario = UN_CORTADO.CONTACTO.Nombre_Usuario INNER JOIN
+                         UN_CORTADO.USUARIOS ON UN_CORTADO.AFILIADOS.Nombre_Usuario = UN_CORTADO.USUARIOS.Nombre_Usuario AND
+                         UN_CORTADO.CONTACTO.Nombre_Usuario = UN_CORTADO.USUARIOS.Nombre_Usuario
+GO
+
 --/*******************************************
 --***** POBLADO DE TABLAS ******************** 
 --********************************************/

@@ -56,6 +56,8 @@ DROP FUNCTION [UN_CORTADO].[CONTROL_AGENDA_EXISTENTE]
 DROP VIEW [UN_CORTADO].[registro_llegada]
 
 DROP VIEW [UN_CORTADO].[ProfesionalesYSusEspecialidades]
+
+DROP VIEW [UN_CORTADO].[listado_afiliados]
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
 ********************************************/
