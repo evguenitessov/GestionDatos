@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pnlCrit = new System.Windows.Forms.Panel();
             this.checkProfesional = new System.Windows.Forms.CheckBox();
@@ -41,10 +42,7 @@
             this.btnBuscarTurnosDisp = new System.Windows.Forms.Button();
             this.comboBusqueda2 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.fechaDeTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.horaDeInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.horaDeFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.llegada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tURNOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.comboAfiliado = new System.Windows.Forms.ComboBox();
@@ -55,6 +53,7 @@
             this.pnlCrit.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tURNOSBindingSource)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBonosDisponibles)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -182,36 +181,11 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.fechaDeTurno,
-            this.horaDeInicio,
-            this.horaDeFin,
-            this.llegada});
             this.dataGridView1.Location = new System.Drawing.Point(12, 203);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(560, 164);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // fechaDeTurno
-            // 
-            this.fechaDeTurno.HeaderText = "Fecha";
-            this.fechaDeTurno.Name = "fechaDeTurno";
-            // 
-            // horaDeInicio
-            // 
-            this.horaDeInicio.HeaderText = "Hora de Inicio";
-            this.horaDeInicio.Name = "horaDeInicio";
-            // 
-            // horaDeFin
-            // 
-            this.horaDeFin.HeaderText = "Hora de Fin";
-            this.horaDeFin.Name = "horaDeFin";
-            // 
-            // llegada
-            // 
-            this.llegada.HeaderText = "Llegada de Afiliado";
-            this.llegada.Name = "llegada";
             // 
             // groupBox3
             // 
@@ -291,6 +265,7 @@
             this.pnlCrit.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tURNOSBindingSource)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBonosDisponibles)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -314,15 +289,18 @@
         private System.Windows.Forms.Button btnBuscarTurnosDisp;
         private System.Windows.Forms.ComboBox comboBusqueda2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaDeTurno;
-        private System.Windows.Forms.DataGridViewTextBoxColumn horaDeInicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn horaDeFin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn llegada;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboAfiliado;
         private System.Windows.Forms.DataGridView gridBonosDisponibles;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnConfirmar;
+       
+        private System.Windows.Forms.BindingSource tURNOSBindingSource;
+     
+        private System.Windows.Forms.DataGridViewTextBoxColumn horaInicioDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn horaFinDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn disponibleDataGridViewCheckBoxColumn;
     }
 }

@@ -56,3 +56,7 @@ C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaF
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Registrar_Agenta_Medico.registrar_agenda.resources
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Planes.abmPlan.resources
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Llegada.registrar_llegada.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.menu_abmafiliado.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.motivo_cambio.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.cancelarAtencion.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.compraBono.resources

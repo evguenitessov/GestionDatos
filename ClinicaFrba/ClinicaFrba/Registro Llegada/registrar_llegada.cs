@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -137,6 +139,8 @@ namespace ClinicaFrba.Registro_Llegada
         }
         private void registrar_llegada_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2016DataSet.TURNOS' Puede moverla o quitarla según sea necesario.
+            
             pnlCrit.Visible = false;
             checkProfesional.Checked = true;
             checkProfesional.Enabled = false;
@@ -224,7 +228,7 @@ namespace ClinicaFrba.Registro_Llegada
         private void cargarTurnos() {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) = 'Toledo RENZO')) ");
+                string query = String.Format("SELECT T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 1)) ");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -247,12 +251,18 @@ namespace ClinicaFrba.Registro_Llegada
                 {
                     conexion.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        comboBusqueda2.Items.Add(dr[0]);
-                    }
+                    
 
-                    comboBusqueda2.SelectedIndex = 0;
+                    ArrayList turnos = new ArrayList();
+                    if (dr.HasRows)
+                        foreach (DbDataRecord item in dr)
+                            turnos.Add(item);
+
+                    dataGridView1.DataSource = turnos;  
+                    
+                    
+                  
+                   
                 }
 
                 catch
