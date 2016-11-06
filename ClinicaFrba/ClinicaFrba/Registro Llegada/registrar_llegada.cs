@@ -147,6 +147,35 @@ namespace ClinicaFrba.Registro_Llegada
             textBox1.Text = "1";
             textBox2.Text = "2";
         }
+        private void HabilitarUsuarios()
+        {
+            groupBox3.Visible = true;
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                string query = String.Format("SELECT Apellido + ' ' + Nombre FROM GD2C2016.UN_CORTADO.CONTACTO C WHERE C.Nombre_Usuario IN (SELECT Nombre_Usuario FROM GD2C2016.UN_CORTADO.listado_afiliados) ORDER BY 1");
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+
+               try
+                {
+                    conexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        comboAfiliado.Items.Add(dr[0]);
+                    }
+
+                    comboAfiliado.SelectedIndex = 0;
+                }
+
+                catch
+                {
+
+                }
+            }
+            
+        }
 
         private void btnCrit_Click(object sender, EventArgs e)
         {
@@ -228,7 +257,7 @@ namespace ClinicaFrba.Registro_Llegada
         private void cargarTurnos() {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 1)) ");
+                string query = String.Format("SELECT T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 0)) ");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -269,7 +298,11 @@ namespace ClinicaFrba.Registro_Llegada
                 {
 
                 }
+
+                HabilitarUsuarios();
             }
         }
     }
+
+     
 }
