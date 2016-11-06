@@ -18,11 +18,11 @@ namespace ClinicaFrba.AbmRol
         public string Usuario { get; set; }
         public DBAccess Access { get; set; }
 
-        public AbmRoles()
+        public AbmRoles(string usr)
         {
             InitializeComponent();
             Access = new DBAccess();
-            Usuario = "admin";
+            Usuario = usr;
             CargarRoles();
         }
 

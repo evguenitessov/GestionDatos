@@ -86,13 +86,13 @@ namespace ClinicaFrba.Menu
 
         private void btnAbmRol_Click(object sender, EventArgs e)
         {
-             AbmRol.AbmRoles abmRoles = new AbmRol.AbmRoles();
+             AbmRol.AbmRoles abmRoles = new AbmRol.AbmRoles(Usuario);
              abmRoles.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Registrar_Agenta_Medico.registrar_agenda abmAgenda = new Registrar_Agenta_Medico.registrar_agenda();
+            Registrar_Agenta_Medico.registrar_agenda abmAgenda = new Registrar_Agenta_Medico.registrar_agenda(Usuario);
             abmAgenda.Show();
         }
 
@@ -132,7 +132,7 @@ namespace ClinicaFrba.Menu
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Cancelar_Atencion.cancelarAtencion cancelAtencion = new Cancelar_Atencion.cancelarAtencion();
+            Cancelar_Atencion.cancelarAtencion cancelAtencion = new Cancelar_Atencion.cancelarAtencion(Rol, Usuario);
             cancelAtencion.Show();
         }
 

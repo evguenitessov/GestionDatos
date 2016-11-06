@@ -19,7 +19,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
         public string Usuario { get; set; }
         public DBAccess Access { get; set; }
 
-        public registrar_agenda()
+        public registrar_agenda(string usr)
         {
             InitializeComponent();
             desde.CustomFormat = "HH";
@@ -27,7 +27,7 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
             desde_sab.CustomFormat = "HH";
             hasta_sab.CustomFormat = "HH";
             Access = new DBAccess();
-            Usuario = "10675835";
+            Usuario = usr;
 
             CargarEspecialidades();
         }

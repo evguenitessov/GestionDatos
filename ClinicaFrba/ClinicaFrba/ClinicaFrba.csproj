@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -205,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmRol\NuevoRol.resx">
       <DependentUpon>NuevoRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\cancelarAtencion.resx">
+      <DependentUpon>cancelarAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra Bono\compraBono.resx">
       <DependentUpon>compraBono.cs</DependentUpon>
