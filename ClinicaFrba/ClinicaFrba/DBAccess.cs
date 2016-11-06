@@ -33,7 +33,7 @@ namespace ClinicaFrba
             }
             config.Close();
 
-            return (linea.Substring(13, 4) + "-" + linea.Substring(7, 2)) + "-" + linea.Substring(10, 2); ;
+            return (linea.Substring(7, 2) + "-" + linea.Substring(10, 2)) + "-" + linea.Substring(13, 4); ;
 
         }
 

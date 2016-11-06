@@ -206,7 +206,7 @@
             this.afiliado_grbx.Controls.Add(this.label3);
             this.afiliado_grbx.Controls.Add(this.textBox2);
             this.afiliado_grbx.Controls.Add(this.label6);
-            this.afiliado_grbx.Location = new System.Drawing.Point(35, 7);
+            this.afiliado_grbx.Location = new System.Drawing.Point(36, 7);
             this.afiliado_grbx.Name = "afiliado_grbx";
             this.afiliado_grbx.Size = new System.Drawing.Size(939, 484);
             this.afiliado_grbx.TabIndex = 2;

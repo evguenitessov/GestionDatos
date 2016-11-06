@@ -25,8 +25,8 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             InitializeComponent();
 
-            Rol = rol;
-            Usuario = usuario;
+            Rol = "Afiliado";
+            Usuario = "80633765";
             Access = new DBAccess();
 
             if (Rol == "Profesional")
@@ -297,7 +297,17 @@ namespace ClinicaFrba.Cancelar_Atencion
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        {            
+            string diaTurno = (turnos_dgrvw.CurrentRow.Cells["Fecha"].Value.ToString()).Substring(0, 2);
+            string diaSistema = (DBAccess.fechaSystem()).Substring(0, 2);
+
+            if (diaTurno == diaSistema)
+            {
+                MessageBox.Show("No puede cancelar el turno el mismo dia de atencion.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
                 conexion.Open();
