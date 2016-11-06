@@ -302,6 +302,47 @@ namespace ClinicaFrba.Registro_Llegada
                 HabilitarUsuarios();
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                string query = String.Format("SELECT B.id FROM GD2C2016.UN_CORTADO.BONOS B WHERE B.Id_Compra_Bono IN (SELECT id FROM GD2C2016.UN_CORTADO.compraDeBonos C WHERE C.apellido + ' ' + C.Nombre=@NombreAfiliado)");
+
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+                    SqlParameter param = new SqlParameter("@NombreAfiliado", comboAfiliado.SelectedItem);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    cmd.Parameters.Add(param);
+                   
+                
+                try
+                {
+                    conexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    
+
+                    ArrayList bonos = new ArrayList();
+                    if (dr.HasRows)
+                        foreach (DbDataRecord item in dr)
+                            bonos.Add(item);
+
+                    gridBonosDisponibles.DataSource = bonos;  
+                    
+                    
+                  
+                   
+                }
+
+                catch
+                {
+
+                }
+
+               
+            }
+            
+        }
     }
 
      
