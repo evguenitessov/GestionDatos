@@ -110,7 +110,7 @@ namespace ClinicaFrba.Menu
 
         private void button10_Click(object sender, EventArgs e)
         {
-            Registro_Resultado.registroResultado registroResultado = new Registro_Resultado.registroResultado();
+            Registro_Resultado.registro_resultado registroResultado = new Registro_Resultado.registro_resultado(Usuario);
             registroResultado.Show();
         }
 

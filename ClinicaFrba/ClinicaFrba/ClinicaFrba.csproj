@@ -168,11 +168,11 @@
     <Compile Include="Registro Llegada\registrar_llegada.Designer.cs">
       <DependentUpon>registrar_llegada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Resultado\registroResultado.cs">
+    <Compile Include="Registro Resultado\registro_resultado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Resultado\registroResultado.Designer.cs">
-      <DependentUpon>registroResultado.cs</DependentUpon>
+    <Compile Include="Registro Resultado\registro_resultado.Designer.cs">
+      <DependentUpon>registro_resultado.cs</DependentUpon>
     </Compile>
     <Compile Include="Roles\Rol.cs">
       <SubType>Form</SubType>
@@ -239,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Llegada\registrar_llegada.resx">
       <DependentUpon>registrar_llegada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Resultado\registro_resultado.resx">
+      <DependentUpon>registro_resultado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Roles\Rol.resx">
       <DependentUpon>Rol.cs</DependentUpon>
