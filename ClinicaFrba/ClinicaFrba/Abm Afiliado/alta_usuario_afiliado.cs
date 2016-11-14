@@ -86,9 +86,47 @@ namespace ClinicaFrba.Abm_Afiliado
                if(verificacionusuario().Equals(true))
                {   
                    cargarusuarioenbd();
+                   cargarusuariorolxusuario();
                    verificaragregarconyuge();
                }
            }
+        }
+
+        private void cargarusuariorolxusuario()
+        {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                SqlTransaction sqlTransact = conexion.BeginTransaction();
+                SqlCommand command = conexion.CreateCommand();
+                command.Transaction = sqlTransact;
+                try
+                {
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[ROLPORUSUARIO] ([Nombre_Usuario], [Id_Rol]) VALUES (@Usuario, @idrol)");
+                    command.CommandText = query;
+
+                    SqlParameter param = new SqlParameter("@Usuario", usuario.Text);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@idrol", 3);
+                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
+                    command.ExecuteNonQuery();
+                    sqlTransact.Commit();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
+                    sqlTransact.Rollback();
+                }
+                finally
+                {
+                    if (conexion.State == System.Data.ConnectionState.Open)
+                        conexion.Dispose();
+                }
+            }
         }
 
         private void cargarusuarioenbd()
