@@ -69,8 +69,6 @@ DROP VIEW [UN_CORTADO].[ProfesionalesYSusEspecialidades]
 
 DROP VIEW [UN_CORTADO].[listado_afiliados]
 
-DROP VIEW [UN_CORTADO].[TOP5_ESPECIALIDADES]
-
 DROP VIEW [UN_CORTADO].[compraDeBonos]
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
