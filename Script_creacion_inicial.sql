@@ -163,7 +163,7 @@ CREATE TABLE [UN_CORTADO].[TURNOS] (                        --@NUMERO PARA QUE E
 	[Id_Afiliado]				VARCHAR(30) REFERENCES [UN_CORTADO].[AFILIADOS],	
 	--[Numero]					INT NOT NULL,
 	[Hora_Llegada_Afiliado]		TIME DEFAULT NULL,
-	[Bono_Usado]				NUMERIC(18,0) REFERENCES [UN_CORTADO].[BONOS]	
+	[Bono_Usado]				NUMERIC(18,0),
 )
 GO
 
@@ -173,9 +173,10 @@ CREATE TABLE [UN_CORTADO].[ATENCIONMEDICA] (   --@DIAGNOSTICO DE DONDE SE SACA
 	[Enfermedad]				VARCHAR(255) NOT NULL,
 	[Sintomas]					VARCHAR(255) NOT NULL,
 	[Diagnosticos]				VARCHAR(30) NULL,		
-	[Fecha_Hora]				DATETIME NOT NULL,
-	[Nombre_Afiliado]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],
-	[Îd_turno]			        INT NOT NULL REFERENCES [UN_CORTADO].[TURNOS],
+	--[Fecha_Hora]				DATETIME NOT NULL, No hace falta
+	--[Nombre_Afiliado]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],
+	[Id_turno]			        INT NOT NULL REFERENCES [UN_CORTADO].[TURNOS],
+	[Bono_Usado]				NUMERIC(18,0) REFERENCES [UN_CORTADO].[BONOS],	
 )
 GO
 
@@ -384,14 +385,14 @@ BEGIN
 	BEGIN
 		SELECT TOP 5  B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*) AS CANT_CON
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
-		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
-		ON A.Îd_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[BONOS] B
-		ON T.Bono_Usado = B.Id
+		ON A.Bono_Usado = B.Id
+		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
+		ON A.Id_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
 		ON T.Especialidad=E.Id
-		WHERE B.[Plan]=@PLANES  AND DATEPART(YY,A.[Fecha_hora])=@YEAR  AND
-			 DATEPART(MM,A.[Fecha_hora]) IN (1,2,3,4,5,6)
+		WHERE B.[Plan]=@PLANES  AND DATEPART(YY,T.[Fecha])=@YEAR  AND
+			 DATEPART(MM,T.[Fecha]) IN (1,2,3,4,5,6)
 				  GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
 				  ORDER BY B.[Plan],COUNT(*) DESC
 		FETCH NEXT FROM plan_cursor INTO @Planes; 
@@ -400,14 +401,14 @@ BEGIN
 	BEGIN
 		SELECT TOP 5  B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*) AS CANT_CON
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
-		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
-		ON A.Îd_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[BONOS] B
-		ON T.Bono_Usado = B.Id
+		ON A.Bono_Usado = B.Id
+		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
+		ON A.Id_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
 		ON T.Especialidad=E.Id
-		WHERE B.[Plan]=@PLANES  AND DATEPART(YY,A.[Fecha_hora])=@YEAR  AND
-			 DATEPART(MM,A.[Fecha_hora]) IN (7,8,9,10,11,12)
+		WHERE B.[Plan]=@PLANES  AND DATEPART(YY,T.[Fecha])=@YEAR  AND
+			 DATEPART(MM,T.[Fecha]) IN (7,8,9,10,11,12)
 				  GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
 				  ORDER BY B.[Plan],COUNT(*) DESC
 		FETCH NEXT FROM plan_cursor INTO @Planes; 
@@ -425,29 +426,29 @@ BEGIN
 	BEGIN
 		SELECT TOP 5 B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*)/2 AS HORAS_TRABAJADAS
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
-		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
-		ON A.Îd_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[BONOS] B
-		ON T.Bono_Usado = B.Id
+		ON A.Bono_Usado = B.Id
+		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
+		ON A.Id_turno = T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
 		ON T.Especialidad=E.Id
-		WHERE DATEPART(YY,A.[Fecha_hora])=@YEAR  AND
-		      DATEPART(MM,A.[Fecha_hora]) IN (1,2,3,4,5,6)
+		WHERE DATEPART(YY,T.[Fecha])=@YEAR  AND
+		      DATEPART(MM,T.[Fecha]) IN (1,2,3,4,5,6)
 		GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
 		ORDER BY B.[Plan],COUNT(*) ASC
 	END --IF
 		IF @SEMESTRE = 2 
 	BEGIN
-		SELECT TOP 5  B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*)/2 AS HORAS_TRABAJADAS
+		SELECT TOP 5 B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*)/2 AS HORAS_TRABAJADAS
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
-		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
-		ON A.Îd_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[BONOS] B
-		ON T.Bono_Usado = B.Id
+		ON A.Bono_Usado = B.Id
+		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
+		ON A.Id_turno = T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
 		ON T.Especialidad=E.Id
-		WHERE DATEPART(YY,A.[Fecha_hora])=@YEAR  AND
-		      DATEPART(MM,A.[Fecha_hora]) IN (7,8,9,10,11,12)
+		WHERE DATEPART(YY,T.[Fecha])=@YEAR  AND
+		      DATEPART(MM,T.[Fecha]) IN (7,8,9,10,11,12)
 		GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
 		ORDER BY B.[Plan],COUNT(*) ASC
 	END --IF
@@ -498,8 +499,10 @@ BEGIN
 	IF @SEMESTRE = 1 
 	BEGIN
 		SELECT TOP 5 E.Nombre
-					 ,COUNT(T.Bono_Usado) AS CANT_BONOS_USADOS		
+					 ,COUNT(AT.Bono_Usado) AS CANT_BONOS_USADOS		
 		FROM [GD2C2016].[UN_CORTADO].[TURNOS] T
+		INNER JOIN [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] AT
+		ON AT.Id_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[AGENDA] A
 		ON T.Id_Agenda = A.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] EP
@@ -509,13 +512,15 @@ BEGIN
 		WHERE DATEPART(YY,T.Fecha)=@YEAR  AND
 		      DATEPART(MM,T.Fecha) IN (1,2,3,4,5,6)
 		GROUP BY E.Nombre 
-		ORDER BY COUNT(T.Bono_Usado) DESC
+		ORDER BY COUNT(AT.Bono_Usado) DESC
 	END -- IF
 		IF @SEMESTRE = 2 
 	BEGIN
 		SELECT TOP 5 E.Nombre
-					 ,COUNT(T.Bono_Usado) AS CANT_BONOS_USADOS		
+					 ,COUNT(AT.Bono_Usado) AS CANT_BONOS_USADOS		
 		FROM [GD2C2016].[UN_CORTADO].[TURNOS] T
+		INNER JOIN [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] AT
+		ON AT.Id_turno=T.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[AGENDA] A
 		ON T.Id_Agenda = A.Id
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] EP
@@ -525,10 +530,11 @@ BEGIN
 		WHERE DATEPART(YY,T.Fecha)=@YEAR  AND
 		      DATEPART(MM,T.Fecha) IN (7,8,9,10,11,12)
 		GROUP BY E.Nombre 
-		ORDER BY COUNT(T.Bono_Usado) DESC
+		ORDER BY COUNT(AT.Bono_Usado) DESC
 	END -- IF
 END -- PROCEDURE
 GO
+
 
 --CREO VISTA PARA REGISTRAR_LLEGADA
 CREATE VIEW UN_CORTADO.registro_llegada as
@@ -776,10 +782,9 @@ INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
            ([Nombre_Profecional]
            ,[Enfermedad]
            ,[Sintomas]
-		   ,[Fecha_Hora]
-           ,[Nombre_Afiliado]
-           ,[Îd_turno])
-SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],[Turno_Fecha],[Paciente_Dni] AS ID_AF,T.Id
+           ,[Id_turno]
+		   ,[Bono_Usado])
+SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],T.Id,[Bono_Consulta_Numero]
 FROM [GD2C2016].[gd_esquema].[Maestra]
 INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
@@ -796,4 +801,10 @@ BEGIN
 	EXECUTE [UN_CORTADO].[MIGRACION]
 END
 GO
+
+-- HACER DROP DE LA COLUMNA BONO USADO DE TURNOS
+
+ALTER TABLE [UN_CORTADO].[TURNOS] DROP COLUMN Bono_Usado
+
+--GO
 

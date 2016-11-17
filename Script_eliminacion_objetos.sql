@@ -71,7 +71,6 @@ DROP VIEW [UN_CORTADO].[listado_afiliados]
 
 DROP VIEW [UN_CORTADO].[compraDeBonos]
 
-DROP VIEW [UN_CORTADO].TOP5_ESPECIALIDADES
 /*******************************************
 ***** ELIMINAR ESQUEMA ***************** 
 ********************************************/
