@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -139,15 +140,19 @@ namespace ClinicaFrba.Abm_Afiliado
                 command.Transaction = sqlTransact;
                 try
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[USUARIOS] ([Nombre_Usuario], [Contraseña]) VALUES (@Usuario, HASHBYTES('SHA2_256', @Contraseña))");
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[USUARIOS] ([Nombre_Usuario], [Contraseña]) VALUES (@Usuario,@Contraseña)");
                     command.CommandText = query;
 
                     SqlParameter param = new SqlParameter("@Usuario", usuario.Text);
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
-                    param = new SqlParameter("@Contraseña", contra.Text);
-                    param.SqlDbType = System.Data.SqlDbType.NVarChar;
+                    SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
+                    byte[] inputBytes = Encoding.UTF8.GetBytes(contra.Text);
+                    byte[] a2 = provider.ComputeHash(inputBytes);
+
+                    param = new SqlParameter("@Contraseña", a2);
+                    param.SqlDbType = System.Data.SqlDbType.VarBinary;
                     command.Parameters.Add(param);
 
                     command.ExecuteNonQuery();
@@ -206,7 +211,7 @@ namespace ClinicaFrba.Abm_Afiliado
             menu_afi.Show();
         }
 
+    }
+}
 
-    }
-    }
 
