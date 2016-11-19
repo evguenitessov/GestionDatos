@@ -173,7 +173,7 @@ CREATE TABLE [UN_CORTADO].[ATENCIONMEDICA] (   --@DIAGNOSTICO DE DONDE SE SACA
 	[Enfermedad]				VARCHAR(255) NOT NULL,
 	[Sintomas]					VARCHAR(255) NOT NULL,
 	[Diagnosticos]				VARCHAR(30) NULL,		
-	--[Fecha_Hora]				DATETIME NOT NULL, No hace falta
+	[Fecha_Hora]				DATETIME DEFAULT GETDATE(), 
 	--[Nombre_Afiliado]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],
 	[Id_turno]			        INT NOT NULL REFERENCES [UN_CORTADO].[TURNOS],
 	[Bono_Usado]				NUMERIC(18,0) REFERENCES [UN_CORTADO].[BONOS],	
@@ -782,6 +782,7 @@ INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
            ([Nombre_Profecional]
            ,[Enfermedad]
            ,[Sintomas]
+		   ,[Fecha_Hora]
            ,[Id_turno]
 		   ,[Bono_Usado])
 SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],T.Id,[Bono_Consulta_Numero]
