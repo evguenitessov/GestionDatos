@@ -25,8 +25,8 @@ namespace ClinicaFrba.Cancelar_Atencion
         {
             InitializeComponent();
 
-            Rol = "Afiliado";
-            Usuario = "80633765";
+            Rol = rol;
+            Usuario = usuario;
             Access = new DBAccess();
 
             if (Rol == "Profesional")
