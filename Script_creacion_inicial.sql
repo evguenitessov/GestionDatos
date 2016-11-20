@@ -784,10 +784,11 @@ INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
            ([Nombre_Profecional]
            ,[Enfermedad]
            ,[Sintomas]
-		   ,[Diagnosticos]		   
+		   ,[Diagnosticos]
+		   ,[Fecha_Hora]		   
            ,[Id_turno]
 		   ,[Bono_Usado])
-SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],NULL,T.Id,[Bono_Consulta_Numero]
+SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],NULL,[Turno_Fecha],T.Id,[Bono_Consulta_Numero]
 FROM [GD2C2016].[gd_esquema].[Maestra]
 INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
