@@ -130,11 +130,41 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listados\Form1.cs">
+    <Compile Include="Listados\afiliados_mas_bonos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listados\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listados\afiliados_mas_bonos.Designer.cs">
+      <DependentUpon>afiliados_mas_bonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\especialidades_mas_bonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\especialidades_mas_bonos.Designer.cs">
+      <DependentUpon>especialidades_mas_bonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\especialidades_mas_cancelaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\especialidades_mas_cancelaciones.Designer.cs">
+      <DependentUpon>especialidades_mas_cancelaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\listados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\listados.Designer.cs">
+      <DependentUpon>listados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\profesionales_mas_consultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\profesionales_mas_consultados.Designer.cs">
+      <DependentUpon>profesionales_mas_consultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listados\profesionales_menos_horas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\profesionales_menos_horas.Designer.cs">
+      <DependentUpon>profesionales_menos_horas.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
@@ -213,8 +243,23 @@
     <EmbeddedResource Include="Compra Bono\compraBono.resx">
       <DependentUpon>compraBono.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Listados\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Listados\afiliados_mas_bonos.resx">
+      <DependentUpon>afiliados_mas_bonos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\especialidades_mas_bonos.resx">
+      <DependentUpon>especialidades_mas_bonos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\especialidades_mas_cancelaciones.resx">
+      <DependentUpon>especialidades_mas_cancelaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\listados.resx">
+      <DependentUpon>listados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\profesionales_mas_consultados.resx">
+      <DependentUpon>profesionales_mas_consultados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\profesionales_menos_horas.resx">
+      <DependentUpon>profesionales_menos_horas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
