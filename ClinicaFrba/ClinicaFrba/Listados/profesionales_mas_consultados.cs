@@ -61,19 +61,34 @@ namespace ClinicaFrba.Listados
             }
             else
             {
+                //DataTable dt = new DataTable();
                 //using (SqlConnection con = new SqlConnection(Access.Conexion))
                 //{
-                //    Int16 sem = Convert.ToInt16(semestre);
-                //    Int16 año = Convert.ToInt16(anio);
+                //    Int16 sem = Convert.ToInt16(semestre.ToString());
+                //    Int16 año = Convert.ToInt16(anio.ToString());
                 //    using (SqlCommand cmd = new SqlCommand("[UN_CORTADO].[TOP5_PROFESIONAL_PLAN]", con))
                 //    {
                 //        cmd.CommandType = CommandType.StoredProcedure;
+                //        cmd.Parameters.Add("@semestre", SqlDbType.Int).Value = sem;
+                //        cmd.Parameters.Add("@year", SqlDbType.Int).Value = año;
+                //        cmd.Parameters.Add("@
+                //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                //        try
+                //        {
+                //            con.Open();
+                //            da.Fill(dt);
+                //        }
+                //        catch (Exception)
+                //        {
+                //            MessageBox.Show("Ocurrio un error", "Error");
+                //        }
+                //        finally
+                //        {
+                //            if (con.State == ConnectionState.Open)
+                //                con.Close();
+                //        }
 
-                //        cmd.Parameters.Add("@semestre", SqlDbType.VarChar).Value = sem;
-                //        cmd.Parameters.Add("@anio", SqlDbType.VarChar).Value = año;
-
-                //        con.Open();
-                //        cmd.ExecuteNonQuery();
+                //        dataGridView1.DataSource = dt;
                 //    }
                 //}
             }

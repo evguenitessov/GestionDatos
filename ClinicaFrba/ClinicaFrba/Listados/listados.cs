@@ -23,7 +23,7 @@ namespace ClinicaFrba.Listados
         {
             if(chequearcamposllenos().Equals(true))
             {
-                Listados.especialidades_mas_cancelaciones especmascan = new Listados.especialidades_mas_cancelaciones(textBox1.Text, combo_trimestre.SelectedText);
+                Listados.especialidades_mas_cancelaciones especmascan = new Listados.especialidades_mas_cancelaciones(textBox1.Text, combo_trimestre.SelectedItem.ToString());
                 especmascan.Show();
             }
         }
@@ -45,7 +45,7 @@ namespace ClinicaFrba.Listados
         {
             if (chequearcamposllenos().Equals(true))
             {
-                Listados.profesionales_mas_consultados profmasconsul = new Listados.profesionales_mas_consultados(textBox1.Text,combo_trimestre.SelectedText);
+                Listados.profesionales_mas_consultados profmasconsul = new Listados.profesionales_mas_consultados(textBox1.Text, combo_trimestre.SelectedItem.ToString());
                 profmasconsul.Show();
             }
         }
@@ -54,7 +54,7 @@ namespace ClinicaFrba.Listados
         {
             if (chequearcamposllenos().Equals(true))
             {
-                Listados.afiliados_mas_bonos afimasbonos = new Listados.afiliados_mas_bonos(textBox1.Text, combo_trimestre.SelectedText);
+                Listados.afiliados_mas_bonos afimasbonos = new Listados.afiliados_mas_bonos(textBox1.Text, combo_trimestre.SelectedItem.ToString());
                 afimasbonos.Show();
             }
         }
@@ -63,7 +63,7 @@ namespace ClinicaFrba.Listados
         {
             if (chequearcamposllenos().Equals(true))
             {
-                Listados.profesionales_menos_horas profvagos = new Listados.profesionales_menos_horas(textBox1.Text, combo_trimestre.SelectedText);
+                Listados.profesionales_menos_horas profvagos = new Listados.profesionales_menos_horas(textBox1.Text, combo_trimestre.SelectedItem.ToString());
                 profvagos.Show();
             }
         }
@@ -72,7 +72,7 @@ namespace ClinicaFrba.Listados
         {
             if (chequearcamposllenos().Equals(true))
             {
-                Listados.especialidades_mas_bonos especmasbonos = new Listados.especialidades_mas_bonos(textBox1.Text, combo_trimestre.SelectedText);
+                Listados.especialidades_mas_bonos especmasbonos = new Listados.especialidades_mas_bonos(textBox1.Text, combo_trimestre.SelectedItem.ToString());
                 especmasbonos.Show();
             }
         }
