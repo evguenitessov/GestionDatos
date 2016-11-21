@@ -172,7 +172,7 @@ CREATE TABLE [UN_CORTADO].[ATENCIONMEDICA] (   --@DIAGNOSTICO DE DONDE SE SACA
 	[Nombre_Profecional]		VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[PROFESIONALES],
 	[Enfermedad]				VARCHAR(255) NOT NULL,
 	[Sintomas]					VARCHAR(255) NOT NULL,
-	[Diagnosticos]				VARCHAR(30) NULL,		
+	--[Diagnosticos]				VARCHAR(30) NULL,		
 	[Fecha_Hora]				DATETIME DEFAULT GETDATE(), 
 	--[Nombre_Afiliado]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],
 	[Id_turno]			        INT NOT NULL REFERENCES [UN_CORTADO].[TURNOS],
@@ -371,17 +371,9 @@ GO
 
 -- PROCEDURE TOP5_PROFESIONALES X PLAN LISTADO ESTADISTICO 2
 
-CREATE PROCEDURE [UN_CORTADO].[TOP5_PROFESIONAL_PLAN]  (@SEMESTRE INT,@YEAR INT) AS
+CREATE PROCEDURE [UN_CORTADO].[TOP5_PROFESIONAL_PLAN]  (@SEMESTRE INT,@YEAR INT,@PLANES INT) AS
 BEGIN
-	DECLARE plan_cursor CURSOR  
-		FOR SELECT * FROM (SELECT DISTINCT P.Id
-							  FROM [GD2C2016].[UN_CORTADO].[PLANES] P ) AS P2
-	ORDER BY P2.Id DESC
-	OPEN plan_cursor
-	DECLARE @PLANES INT
-
-	FETCH NEXT FROM plan_cursor INTO @Planes
-	WHILE @@FETCH_STATUS = 0 AND @SEMESTRE =1
+	IF @SEMESTRE =1
 	BEGIN
 		SELECT TOP 5  B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*) AS CANT_CON
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
@@ -395,9 +387,8 @@ BEGIN
 			 DATEPART(MM,T.[Fecha]) IN (1,2,3,4,5,6)
 				  GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
 				  ORDER BY B.[Plan],COUNT(*) DESC
-		FETCH NEXT FROM plan_cursor INTO @Planes; 
-	END  -- WHILE
-	WHILE @@FETCH_STATUS = 0 AND @SEMESTRE =2
+	END -- IF 1 SEMESTRE
+	IF  @SEMESTRE =2
 	BEGIN
 		SELECT TOP 5  B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*) AS CANT_CON
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
@@ -408,13 +399,10 @@ BEGIN
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
 		ON T.Especialidad=E.Id
 		WHERE B.[Plan]=@PLANES  AND DATEPART(YY,T.[Fecha])=@YEAR  AND
-			 DATEPART(MM,T.[Fecha]) IN (7,8,9,10,11,12)
-				  GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
-				  ORDER BY B.[Plan],COUNT(*) DESC
-		FETCH NEXT FROM plan_cursor INTO @Planes; 
-	END  -- WHILE
-	CLOSE plan_cursor  
-	DEALLOCATE plan_cursor
+		DATEPART(MM,T.[Fecha]) IN (7,8,9,10,11,12)
+		GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
+		ORDER BY B.[Plan],COUNT(*) DESC
+	END  -- IF 2 SEMESTRE	
 END --PROCEDURE
 GO
 
@@ -784,11 +772,10 @@ INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
            ([Nombre_Profecional]
            ,[Enfermedad]
            ,[Sintomas]
-		   ,[Diagnosticos]
 		   ,[Fecha_Hora]		   
            ,[Id_turno]
 		   ,[Bono_Usado])
-SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],NULL,[Turno_Fecha],T.Id,[Bono_Consulta_Numero]
+SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],[Turno_Fecha],T.Id,[Bono_Consulta_Numero]
 FROM [GD2C2016].[gd_esquema].[Maestra]
 INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
