@@ -46,7 +46,7 @@ namespace ClinicaFrba.Registro_Resultado
                 command.Transaction = sqlTransact;
                 try
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[ATENCIONMEDICA] VALUES (@usuario,@enfermedad,@sintoma,@diagnostico, @idturno, @bonousado)");
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[ATENCIONMEDICA] VALUES (@usuario,@enfermedad,@sintoma, @idturno, @bonousado)");
                     command.CommandText = query;
 
                     SqlParameter param = new SqlParameter("@usuario", usuario);
@@ -58,10 +58,6 @@ namespace ClinicaFrba.Registro_Resultado
                     command.Parameters.Add(param);
 
                     param = new SqlParameter("@sintoma", sintoma.Text);
-                    param.SqlDbType = System.Data.SqlDbType.VarChar;
-                    command.Parameters.Add(param);
-
-                    param = new SqlParameter("@diagnostico", diagnostico.Text);
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
