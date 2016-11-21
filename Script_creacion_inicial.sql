@@ -172,7 +172,7 @@ CREATE TABLE [UN_CORTADO].[ATENCIONMEDICA] (   --@DIAGNOSTICO DE DONDE SE SACA
 	[Nombre_Profecional]		VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[PROFESIONALES],
 	[Enfermedad]				VARCHAR(255) NOT NULL,
 	[Sintomas]					VARCHAR(255) NOT NULL,
-	[Diagnosticos]				VARCHAR(30) NULL,		
+	--[Diagnosticos]				VARCHAR(30) NULL,		
 	[Fecha_Hora]				DATETIME DEFAULT GETDATE(), 
 	--[Nombre_Afiliado]			VARCHAR(30) NOT NULL REFERENCES [UN_CORTADO].[AFILIADOS],
 	[Id_turno]			        INT NOT NULL REFERENCES [UN_CORTADO].[TURNOS],
@@ -772,11 +772,10 @@ INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
            ([Nombre_Profecional]
            ,[Enfermedad]
            ,[Sintomas]
-		   ,[Diagnosticos]
 		   ,[Fecha_Hora]		   
            ,[Id_turno]
 		   ,[Bono_Usado])
-SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],NULL,[Turno_Fecha],T.Id,[Bono_Consulta_Numero]
+SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],[Turno_Fecha],T.Id,[Bono_Consulta_Numero]
 FROM [GD2C2016].[gd_esquema].[Maestra]
 INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
