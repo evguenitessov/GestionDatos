@@ -420,18 +420,18 @@ GO
 
 -- PROCEDURE TOP5_PROFESIONALES MENOS HORAS TRABAJADAS LISTADO ESTADISTICO 3
 
-CREATE PROCEDURE [UN_CORTADO].[TOP5_PROFESIONAL_MENOSHORAS]  (@SEMESTRE INT,@YEAR INT) AS
+CREATE PROCEDURE [UN_CORTADO].[TOP5_PROFESIONAL_MENOSHORAS]  (@SEMESTRE INT,@YEAR INT,@PLAN INT,@ESPECIALIDAD INT) AS
 BEGIN
 	IF @SEMESTRE = 1 
 	BEGIN
 		SELECT TOP 5 B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*)/2 AS HORAS_TRABAJADAS
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
 		INNER JOIN [GD2C2016].[UN_CORTADO].[BONOS] B
-		ON A.Bono_Usado = B.Id
+		ON A.Bono_Usado = B.Id AND B.[Plan] = @PLAN
 		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
-		ON A.Id_turno = T.Id
+		ON A.Id_turno = T.Id 
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
-		ON T.Especialidad=E.Id
+		ON T.Especialidad=E.Id AND E.Id = @ESPECIALIDAD 
 		WHERE DATEPART(YY,T.[Fecha])=@YEAR  AND
 		      DATEPART(MM,T.[Fecha]) IN (1,2,3,4,5,6)
 		GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
@@ -442,11 +442,11 @@ BEGIN
 		SELECT TOP 5 B.[Plan],E.[Nombre],A.[Nombre_Profecional],COUNT(*)/2 AS HORAS_TRABAJADAS
 		FROM [GD2C2016].[UN_CORTADO].[ATENCIONMEDICA] A
 		INNER JOIN [GD2C2016].[UN_CORTADO].[BONOS] B
-		ON A.Bono_Usado = B.Id
+		ON A.Bono_Usado = B.Id AND B.[Plan] = @PLAN
 		INNER JOIN [GD2C2016].[UN_CORTADO].[TURNOS] T
-		ON A.Id_turno = T.Id
+		ON A.Id_turno = T.Id 
 		INNER JOIN [GD2C2016].[UN_CORTADO].[ESPECIALIDADES] E
-		ON T.Especialidad=E.Id
+		ON T.Especialidad=E.Id AND E.Id = @ESPECIALIDAD 
 		WHERE DATEPART(YY,T.[Fecha])=@YEAR  AND
 		      DATEPART(MM,T.[Fecha]) IN (7,8,9,10,11,12)
 		GROUP BY B.[Plan],E.[Nombre],A.[Nombre_Profecional]
@@ -784,10 +784,11 @@ INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
            ([Nombre_Profecional]
            ,[Enfermedad]
            ,[Sintomas]
-		   ,[Diagnosticos]		   
+		   ,[Diagnosticos]
+		   ,[Fecha_Hora]		   
            ,[Id_turno]
 		   ,[Bono_Usado])
-SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],NULL,T.Id,[Bono_Consulta_Numero]
+SELECT DISTINCT EM.Id_Medico,[Consulta_Enfermedades],[Consulta_Sintomas],NULL,[Turno_Fecha],T.Id,[Bono_Consulta_Numero]
 FROM [GD2C2016].[gd_esquema].[Maestra]
 INNER JOIN [UN_CORTADO].[ESPECIALIDADPORPROFESIONAL] AS EM
 ON EM.Id_Especialidad = [Especialidad_Codigo] AND EM.Id_Medico = [Medico_Dni]
