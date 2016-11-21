@@ -33,8 +33,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buscar = new System.Windows.Forms.Button();
-            this.combo_especialidades = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -46,8 +44,6 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Controls.Add(this.buscar);
-            this.groupBox1.Controls.Add(this.combo_especialidades);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -93,24 +89,6 @@
             this.buscar.UseVisualStyleBackColor = true;
             this.buscar.Click += new System.EventHandler(this.buscar_Click);
             // 
-            // combo_especialidades
-            // 
-            this.combo_especialidades.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combo_especialidades.FormattingEnabled = true;
-            this.combo_especialidades.Location = new System.Drawing.Point(186, 120);
-            this.combo_especialidades.Name = "combo_especialidades";
-            this.combo_especialidades.Size = new System.Drawing.Size(188, 26);
-            this.combo_especialidades.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(235, 99);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 18);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Especialidad";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -140,11 +118,9 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buscar;
-        private System.Windows.Forms.ComboBox combo_especialidades;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox combo_plan;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buscar;
     }
 }

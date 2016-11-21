@@ -76,5 +76,10 @@ namespace ClinicaFrba.Listados
                 especmasbonos.Show();
             }
         }
+
+        private void bot_atras_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

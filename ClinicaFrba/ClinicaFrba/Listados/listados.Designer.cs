@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.combo_trimestre = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.especmasbonos = new System.Windows.Forms.Button();
+            this.afimasbonos = new System.Windows.Forms.Button();
+            this.profvagos = new System.Windows.Forms.Button();
+            this.profmasconsul = new System.Windows.Forms.Button();
+            this.especmascan = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bot_atras = new System.Windows.Forms.Button();
-            this.especmascan = new System.Windows.Forms.Button();
-            this.profmasconsul = new System.Windows.Forms.Button();
-            this.profvagos = new System.Windows.Forms.Button();
-            this.afimasbonos = new System.Windows.Forms.Button();
-            this.especmasbonos = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.combo_trimestre = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +63,90 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Estadísticas  ";
             // 
+            // combo_trimestre
+            // 
+            this.combo_trimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combo_trimestre.FormattingEnabled = true;
+            this.combo_trimestre.Location = new System.Drawing.Point(208, 118);
+            this.combo_trimestre.Name = "combo_trimestre";
+            this.combo_trimestre.Size = new System.Drawing.Size(134, 26);
+            this.combo_trimestre.TabIndex = 22;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(208, 68);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(134, 26);
+            this.textBox1.TabIndex = 21;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(255, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 18);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Año";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(241, 97);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 18);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Semestre";
+            // 
+            // especmasbonos
+            // 
+            this.especmasbonos.Location = new System.Drawing.Point(372, 195);
+            this.especmasbonos.Name = "especmasbonos";
+            this.especmasbonos.Size = new System.Drawing.Size(134, 80);
+            this.especmasbonos.TabIndex = 18;
+            this.especmasbonos.Text = "TOP 5 Especialidades con más bonos de consulta usados";
+            this.especmasbonos.UseVisualStyleBackColor = true;
+            this.especmasbonos.Click += new System.EventHandler(this.especmasbonos_Click);
+            // 
+            // afimasbonos
+            // 
+            this.afimasbonos.Location = new System.Drawing.Point(289, 298);
+            this.afimasbonos.Name = "afimasbonos";
+            this.afimasbonos.Size = new System.Drawing.Size(134, 80);
+            this.afimasbonos.TabIndex = 17;
+            this.afimasbonos.Text = "TOP 5  Afiliados que adquirieron mas bonos";
+            this.afimasbonos.UseVisualStyleBackColor = true;
+            this.afimasbonos.Click += new System.EventHandler(this.afimasbonos_Click);
+            // 
+            // profvagos
+            // 
+            this.profvagos.Location = new System.Drawing.Point(208, 195);
+            this.profvagos.Name = "profvagos";
+            this.profvagos.Size = new System.Drawing.Size(134, 80);
+            this.profvagos.TabIndex = 16;
+            this.profvagos.Text = "TOP 5 Profesionales con menos horas trabajadas";
+            this.profvagos.UseVisualStyleBackColor = true;
+            this.profvagos.Click += new System.EventHandler(this.profvagos_Click);
+            // 
+            // profmasconsul
+            // 
+            this.profmasconsul.Location = new System.Drawing.Point(44, 195);
+            this.profmasconsul.Name = "profmasconsul";
+            this.profmasconsul.Size = new System.Drawing.Size(134, 80);
+            this.profmasconsul.TabIndex = 15;
+            this.profmasconsul.Text = "TOP 5 Profesionales más consultados por plan";
+            this.profmasconsul.UseVisualStyleBackColor = true;
+            this.profmasconsul.Click += new System.EventHandler(this.profmasconsul_Click);
+            // 
+            // especmascan
+            // 
+            this.especmascan.Location = new System.Drawing.Point(130, 298);
+            this.especmascan.Name = "especmascan";
+            this.especmascan.Size = new System.Drawing.Size(134, 80);
+            this.especmascan.TabIndex = 14;
+            this.especmascan.Text = "TOP 5 Especialidades con más cancelaciones";
+            this.especmascan.UseVisualStyleBackColor = true;
+            this.especmascan.Click += new System.EventHandler(this.especmascan_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.bot_atras);
@@ -81,90 +165,7 @@
             this.bot_atras.TabIndex = 13;
             this.bot_atras.Text = "Atrás";
             this.bot_atras.UseVisualStyleBackColor = true;
-            // 
-            // especmascan
-            // 
-            this.especmascan.Location = new System.Drawing.Point(130, 298);
-            this.especmascan.Name = "especmascan";
-            this.especmascan.Size = new System.Drawing.Size(134, 80);
-            this.especmascan.TabIndex = 14;
-            this.especmascan.Text = "TOP 5 Especialidades con más cancelaciones";
-            this.especmascan.UseVisualStyleBackColor = true;
-            this.especmascan.Click += new System.EventHandler(this.especmascan_Click);
-            // 
-            // profmasconsul
-            // 
-            this.profmasconsul.Location = new System.Drawing.Point(44, 195);
-            this.profmasconsul.Name = "profmasconsul";
-            this.profmasconsul.Size = new System.Drawing.Size(134, 80);
-            this.profmasconsul.TabIndex = 15;
-            this.profmasconsul.Text = "TOP 5 Profesionales más consultados por plan/especialidad";
-            this.profmasconsul.UseVisualStyleBackColor = true;
-            this.profmasconsul.Click += new System.EventHandler(this.profmasconsul_Click);
-            // 
-            // profvagos
-            // 
-            this.profvagos.Location = new System.Drawing.Point(208, 195);
-            this.profvagos.Name = "profvagos";
-            this.profvagos.Size = new System.Drawing.Size(134, 80);
-            this.profvagos.TabIndex = 16;
-            this.profvagos.Text = "TOP 5 Profesionales con menos horas trabajadas";
-            this.profvagos.UseVisualStyleBackColor = true;
-            this.profvagos.Click += new System.EventHandler(this.profvagos_Click);
-            // 
-            // afimasbonos
-            // 
-            this.afimasbonos.Location = new System.Drawing.Point(289, 298);
-            this.afimasbonos.Name = "afimasbonos";
-            this.afimasbonos.Size = new System.Drawing.Size(134, 80);
-            this.afimasbonos.TabIndex = 17;
-            this.afimasbonos.Text = "TOP 5  Afiliados que adquirieron mas bonos";
-            this.afimasbonos.UseVisualStyleBackColor = true;
-            this.afimasbonos.Click += new System.EventHandler(this.afimasbonos_Click);
-            // 
-            // especmasbonos
-            // 
-            this.especmasbonos.Location = new System.Drawing.Point(372, 195);
-            this.especmasbonos.Name = "especmasbonos";
-            this.especmasbonos.Size = new System.Drawing.Size(134, 80);
-            this.especmasbonos.TabIndex = 18;
-            this.especmasbonos.Text = "TOP 5 Especialidades con más bonos de consulta usados";
-            this.especmasbonos.UseVisualStyleBackColor = true;
-            this.especmasbonos.Click += new System.EventHandler(this.especmasbonos_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(241, 97);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 18);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Semestre";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(255, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 18);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Año";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(208, 68);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(134, 26);
-            this.textBox1.TabIndex = 21;
-            // 
-            // combo_trimestre
-            // 
-            this.combo_trimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.combo_trimestre.FormattingEnabled = true;
-            this.combo_trimestre.Location = new System.Drawing.Point(208, 118);
-            this.combo_trimestre.Name = "combo_trimestre";
-            this.combo_trimestre.Size = new System.Drawing.Size(134, 26);
-            this.combo_trimestre.TabIndex = 22;
+            this.bot_atras.Click += new System.EventHandler(this.bot_atras_Click);
             // 
             // listados
             // 

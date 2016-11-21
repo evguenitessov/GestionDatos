@@ -23,7 +23,6 @@ namespace ClinicaFrba.Listados
             Access = new DBAccess();
             this.anio = anio;
             this.semestre = semestre;
-            cargarespecialidades();
             cargarplanes();
         }
 
@@ -40,57 +39,45 @@ namespace ClinicaFrba.Listados
             }
         }
 
-        private void cargarespecialidades()
-        {
-            SqlConnection conexion = new SqlConnection(Access.Conexion);
-            conexion.Open();
-            string query = "SELECT Nombre FROM UN_CORTADO.ESPECIALIDADES";
-            SqlCommand cmd = new SqlCommand(query, conexion);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
-            {
-                combo_especialidades.Items.Add(dr[0]);
-            }
-        }
-
         private void buscar_Click(object sender, EventArgs e)
         {
-            if(combo_especialidades.SelectedIndex.Equals(-1) || combo_plan.SelectedIndex.Equals(-1))
+            if(combo_plan.SelectedIndex.Equals(-1))
             {
                 MessageBox.Show("Seleccionar plan y especialidad.", "Error");
             }
             else
             {
-                //DataTable dt = new DataTable();
-                //using (SqlConnection con = new SqlConnection(Access.Conexion))
-                //{
-                //    Int16 sem = Convert.ToInt16(semestre.ToString());
-                //    Int16 año = Convert.ToInt16(anio.ToString());
-                //    using (SqlCommand cmd = new SqlCommand("[UN_CORTADO].[TOP5_PROFESIONAL_PLAN]", con))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
-                //        cmd.Parameters.Add("@semestre", SqlDbType.Int).Value = sem;
-                //        cmd.Parameters.Add("@year", SqlDbType.Int).Value = año;
-                //        cmd.Parameters.Add("@
-                //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //        try
-                //        {
-                //            con.Open();
-                //            da.Fill(dt);
-                //        }
-                //        catch (Exception)
-                //        {
-                //            MessageBox.Show("Ocurrio un error", "Error");
-                //        }
-                //        finally
-                //        {
-                //            if (con.State == ConnectionState.Open)
-                //                con.Close();
-                //        }
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(Access.Conexion))
+                {
+                    Int16 sem = Convert.ToInt16(semestre.ToString());
+                    Int16 año = Convert.ToInt16(anio.ToString());                    
+                    Decimal plan = Convert.ToDecimal(combo_plan.SelectedItem.ToString());
+                    using (SqlCommand cmd = new SqlCommand("[UN_CORTADO].[TOP5_PROFESIONAL_PLAN]", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@semestre", SqlDbType.Int).Value = sem;
+                        cmd.Parameters.Add("@year", SqlDbType.Int).Value = año;
+                        cmd.Parameters.Add("@planes", SqlDbType.Int).Value = plan;
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        try
+                        {
+                            con.Open();
+                            da.Fill(dt);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Ocurrio un error", "Error");
+                        }
+                        finally
+                        {
+                            if (con.State == ConnectionState.Open)
+                                con.Close();
+                        }
 
-                //        dataGridView1.DataSource = dt;
-                //    }
-                //}
+                        dataGridView1.DataSource = dt;
+                    }
+                }
             }
         }
         
