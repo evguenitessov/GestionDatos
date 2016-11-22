@@ -60,4 +60,10 @@ C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaF
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Abm_Afiliado.motivo_cambio.resources
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Cancelar_Atencion.cancelarAtencion.resources
 C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Compra_Bono.compraBono.resources
-C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.Form1.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Registro_Resultado.registro_resultado.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.afiliados_mas_bonos.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.especialidades_mas_bonos.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.especialidades_mas_cancelaciones.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.listados.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.profesionales_mas_consultados.resources
+C:\Users\luciano\Desktop\GestionDatos\ClinicaFrba\ClinicaFrba\obj\Debug\ClinicaFrba.Listados.profesionales_menos_horas.resources

@@ -162,6 +162,12 @@ namespace ClinicaFrba.Menu
             Pedir_Turno.pedir_turno pedirTurno = new Pedir_Turno.pedir_turno();
             pedirTurno.Show();
         }
+
+        private void buttonListado_Click(object sender, EventArgs e)
+        {
+            Listados.listados listados = new Listados.listados();
+            listados.Show();
+        }
         
     }
 }

@@ -40,6 +40,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAbmRol = new System.Windows.Forms.Button();
+            this.buttonListado = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button5
@@ -174,11 +175,23 @@
             this.btnAbmRol.UseVisualStyleBackColor = true;
             this.btnAbmRol.Click += new System.EventHandler(this.btnAbmRol_Click);
             // 
+            // buttonListado
+            // 
+            this.buttonListado.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonListado.Location = new System.Drawing.Point(271, 346);
+            this.buttonListado.Name = "buttonListado";
+            this.buttonListado.Size = new System.Drawing.Size(167, 102);
+            this.buttonListado.TabIndex = 18;
+            this.buttonListado.Text = "Listados Estadisticos";
+            this.buttonListado.UseVisualStyleBackColor = true;
+            this.buttonListado.Click += new System.EventHandler(this.buttonListado_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 361);
+            this.ClientSize = new System.Drawing.Size(715, 470);
+            this.Controls.Add(this.buttonListado);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -213,5 +226,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnAbmRol;
+        private System.Windows.Forms.Button buttonListado;
     }
 }
