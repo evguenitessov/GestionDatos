@@ -613,13 +613,13 @@ INSERT INTO [UN_CORTADO].[ROLES] (Nombre)
 INSERT INTO [UN_CORTADO].[FUNCIONES] (Nombre)
 	VALUES ('Registrar agenda del medico'), ('Registro de llegada para atencion medica'), ('ABM Profesional'), ('ABM Rol'),
 		('Registrar resultado para atencion medica'), ('ABM Especialidades Medicas'), ('ABM Afiliado'), ('ABM Plan'),
-		('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno')
+		('Cancelar atencion medica'), ('Registro de Usuario'), ('Compra de bonos'), ('Pedir Turno'),('Listado Estadistico')
 --LOAD TABLA [FUNCIONESPORROL]
 INSERT INTO [UN_CORTADO].[FUNCIONESPORROL] (Id_Funcion, Id_Rol)
 	VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1),
-		   (8, 1), (9, 1), (10, 1), (11, 1), (12, 1),
-		   (1, 2), (5, 2), (9, 2),
-		   (9, 3), (11, 3), (12, 3)
+		   (8, 1), (9, 1), (10, 1), (11, 1), (12, 1),(13,1),
+		   (1, 2), (5, 2), (9, 2), (13,2),
+		   (9, 3), (11, 3), (12, 3), (13,3)
 --LOAD DE TABLA [TIPOESPECIALIDAD]
 SET IDENTITY_INSERT [UN_CORTADO].[TIPOESPECIALIDAD] ON
 INSERT INTO [UN_CORTADO].[TIPOESPECIALIDAD]
