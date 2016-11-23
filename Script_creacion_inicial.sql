@@ -543,6 +543,23 @@ BEGIN
 END --PROCEDURE
 GO
 
+CREATE PROCEDURE [UN_CORTADO].[REGISTRO_RESULTADO](@MEDICO varchar(30),@ENFERMEDAD varchar(255),@SINTOMAS varchar(255),@ID_TURNO INT,@BONO_USADO numeric(18,0)) AS
+BEGIN
+	INSERT INTO [UN_CORTADO].[ATENCIONMEDICA]
+			   ([Nombre_Profecional]
+			   ,[Enfermedad]
+			   ,[Sintomas]
+			   ,[Id_turno]
+			   ,[Bono_Usado])
+		 VALUES
+			   (@MEDICO
+			   ,@ENFERMEDAD
+			   ,@SINTOMAS
+			   ,@ID_TURNO
+			   ,@BONO_USADO)
+END
+GO
+
 
 --CREO VISTA PARA REGISTRAR_LLEGADA
 CREATE VIEW UN_CORTADO.registro_llegada as
