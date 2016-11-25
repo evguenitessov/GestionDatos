@@ -159,7 +159,7 @@ namespace ClinicaFrba.Menu
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Pedir_Turno.pedir_turno pedirTurno = new Pedir_Turno.pedir_turno();
+            Pedir_Turno.pedir_turno pedirTurno = new Pedir_Turno.pedir_turno(Usuario);
             pedirTurno.Show();
         }
 

@@ -14,10 +14,13 @@ namespace ClinicaFrba.Pedir_Turno
     public partial class pedir_turno : Form
     {
        public DBAccess Access { get; set; }
-       public pedir_turno()
+       private string usuario;
+       private string id_turno;
+       public pedir_turno(string usuario)
         {
             InitializeComponent();
             Access = new DBAccess();
+            this.usuario= usuario;
             profesional.Hide();
             fecha.Hide();
             cargarespecialidades();
@@ -141,58 +144,34 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void aceptar_fecha_Click_1(object sender, EventArgs e)
         {
-            //using (SqlConnection conexion = new SqlConnection(Access.Conexion))
-            //{
-            //    conexion.Open();
-            //    SqlTransaction sqlTransact = conexion.BeginTransaction();
-            //    SqlCommand command = conexion.CreateCommand();
-            //    command.Transaction = sqlTransact;
-            //    try
-            //    {
-            //        string query = String.Format("INSERT INTO [UN_CORTADO].[TURNOS]([Id_Agenda],[Hora_Inicio],[Hora_Fin],[Fecha],[Especialidad],[Disponible]) VALUES (@idagenda,@horainicio,@horafin,@fecha,@especialidad,@disponible)");
-            //        command.CommandText = query;
-
-            //        SqlParameter param = new SqlParameter("@idagenda", idagenda);
-            //        param.SqlDbType = System.Data.SqlDbType.Int;
-            //        command.Parameters.Add(param);
-
-            //        param = new SqlParameter("@horainicio", horainicio);
-            //        param.SqlDbType = System.Data.SqlDbType.Time;
-            //        command.Parameters.Add(param);
-
-            //        param = new SqlParameter("@horafin", horafin);
-            //        param.SqlDbType = System.Data.SqlDbType.Time;
-            //        command.Parameters.Add(param);
-
-            //        param = new SqlParameter("@fecha", fecha);
-            //        param.SqlDbType = System.Data.SqlDbType.Date;
-            //        command.Parameters.Add(param);
-
-            //        param = new SqlParameter("@id_especialidad", id_especialidad);
-            //        param.SqlDbType = System.Data.SqlDbType.VarChar;
-            //        command.Parameters.Add(param);
-
-            //        param = new SqlParameter("@disponible", 1);
-            //        param.SqlDbType = System.Data.SqlDbType.Int;
-            //        command.Parameters.Add(param);
-
-            //        command.ExecuteNonQuery();
-            //        sqlTransact.Commit();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
-            //        sqlTransact.Rollback();
-            //    }
-            //    finally
-            //    {
-            //        if (conexion.State == System.Data.ConnectionState.Open)
-            //            conexion.Dispose();
-            //    }
-            //}
+            obtenerdatosdelagrid();
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+                string query = "UPDATE UN_CORTADO.TURNOS SET Disponible=0,Id_Afiliado=@idafiliado WHERE Id=@idturno";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.Parameters.AddWithValue("@idafiliado", usuario);
+                cmd.Parameters.AddWithValue("@idturno", Convert.ToDecimal(id_turno));
+                cmd.ExecuteNonQuery();                
+             }
+            MessageBox.Show("Su turno fue registrado exitosamente.", "EXITO");
+            this.Hide();
         }
+        
 
-    }
+        private void obtenerdatosdelagrid()
+        {
+            foreach (DataGridViewRow row in grid_fechas.Rows)
+            {
+                DataGridViewCheckBoxCell checkeado = row.Cells[0] as DataGridViewCheckBoxCell;
+                bool estacheckeado = (null != checkeado && null != checkeado.Value && true == (bool)checkeado.Value);
+                if (estacheckeado.Equals(true))
+                {
+                    id_turno = row.Cells[1].Value.ToString();
+                }
+            }
+        }
+}
 }
 
 
