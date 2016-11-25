@@ -14,7 +14,6 @@ namespace ClinicaFrba.Registro_Resultado
     public partial class registro_resultado : Form
     {
         private string usuario;
-        private char p;
         public DBAccess Access { get; set; }
 
         public registro_resultado(string usuario)
@@ -46,7 +45,7 @@ namespace ClinicaFrba.Registro_Resultado
                 command.Transaction = sqlTransact;
                 try
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[ATENCIONMEDICA] VALUES (@usuario,@enfermedad,@sintoma, @idturno, @bonousado)");
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[ATENCIONMEDICA] VALUES (@usuario,@enfermedad,@sintoma,@fechahora,@idturno)");
                     command.CommandText = query;
 
                     SqlParameter param = new SqlParameter("@usuario", usuario);
@@ -61,11 +60,11 @@ namespace ClinicaFrba.Registro_Resultado
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
-                    param = new SqlParameter("@idturno", conseguiridturno());
-                    param.SqlDbType = System.Data.SqlDbType.Int;
+                    param = new SqlParameter("@fechahora", DateTime.Now);
+                    param.SqlDbType = System.Data.SqlDbType.VarChar;
                     command.Parameters.Add(param);
 
-                    param = new SqlParameter("@bonousado", conseguirbonousado());
+                    param = new SqlParameter("@idturno", conseguiridturno());
                     param.SqlDbType = System.Data.SqlDbType.Int;
                     command.Parameters.Add(param);
 
