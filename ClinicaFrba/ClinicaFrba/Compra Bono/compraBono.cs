@@ -69,7 +69,7 @@ namespace ClinicaFrba.Compra_Bono
                 command.Transaction = sqlTransact;
                 try
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[COMPRABONOS] ([Nombre_Usuario], [Cantidad_Bonos],[Precio_Total]) VALUES (@usuario,@cantbonos,@total)");
+                    string query = String.Format("INSERT INTO [UN_CORTADO].[COMPRABONOS] ([Nombre_Usuario], [Cantidad_Bonos],[Precio_Total],[Fecha_Compra]) VALUES (@usuario,@cantbonos,@total,@fechacompra)");
                     command.CommandText = query;
 
                     SqlParameter param = new SqlParameter("@usuario", user);
@@ -82,6 +82,10 @@ namespace ClinicaFrba.Compra_Bono
 
                     param = new SqlParameter("@total", total);
                     param.SqlDbType = System.Data.SqlDbType.Int;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@fechacompra", Convert.ToDateTime(DBAccess.fechaSystem()));
+                    param.SqlDbType = System.Data.SqlDbType.DateTime;
                     command.Parameters.Add(param);
 
                     command.ExecuteNonQuery();
