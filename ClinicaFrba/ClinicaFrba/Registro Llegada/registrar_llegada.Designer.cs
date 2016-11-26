@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pnlCrit = new System.Windows.Forms.Panel();
             this.checkProfesional = new System.Windows.Forms.CheckBox();
@@ -42,21 +41,21 @@
             this.btnBuscarTurnosDisp = new System.Windows.Forms.Button();
             this.comboBusqueda2 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tURNOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.comboAfiliado = new System.Windows.Forms.ComboBox();
             this.gridBonosDisponibles = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.pnlCrit.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tURNOSBindingSource)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridBonosDisponibles)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -181,9 +180,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 203);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 19);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(560, 164);
+            this.dataGridView1.Size = new System.Drawing.Size(551, 164);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -191,7 +190,7 @@
             // 
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.comboAfiliado);
-            this.groupBox3.Location = new System.Drawing.Point(12, 403);
+            this.groupBox3.Location = new System.Drawing.Point(12, 419);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(226, 75);
             this.groupBox3.TabIndex = 5;
@@ -228,7 +227,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.gridBonosDisponibles);
-            this.groupBox4.Location = new System.Drawing.Point(258, 385);
+            this.groupBox4.Location = new System.Drawing.Point(258, 403);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(314, 146);
             this.groupBox4.TabIndex = 7;
@@ -243,16 +242,27 @@
             this.btnConfirmar.TabIndex = 8;
             this.btnConfirmar.Text = "Confirmar Llegada";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.dataGridView1);
+            this.groupBox5.Location = new System.Drawing.Point(9, 202);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(563, 195);
+            this.groupBox5.TabIndex = 9;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Seleccionar Turno";
             // 
             // registrar_llegada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 561);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -266,10 +276,10 @@
             this.pnlCrit.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tURNOSBindingSource)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridBonosDisponibles)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,12 +306,11 @@
         private System.Windows.Forms.DataGridView gridBonosDisponibles;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnConfirmar;
-       
-        private System.Windows.Forms.BindingSource tURNOSBindingSource;
      
         private System.Windows.Forms.DataGridViewTextBoxColumn horaInicioDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn horaFinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn disponibleDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }

@@ -257,7 +257,7 @@ namespace ClinicaFrba.Registro_Llegada
         private void cargarTurnos() {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 0)) ");
+                string query = String.Format("SELECT T.Id ,T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 0)) ");
 
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
@@ -298,7 +298,7 @@ namespace ClinicaFrba.Registro_Llegada
                 {
 
                 }
-
+                dataGridView1.Columns["Id"].Visible = false;
                 HabilitarUsuarios();
             }
         }
@@ -327,8 +327,8 @@ namespace ClinicaFrba.Registro_Llegada
                         foreach (DbDataRecord item in dr)
                             bonos.Add(item);
 
-                    gridBonosDisponibles.DataSource = bonos;  
-                    
+                    gridBonosDisponibles.DataSource = bonos;
+                   
                     
                   
                    
@@ -341,6 +341,46 @@ namespace ClinicaFrba.Registro_Llegada
 
                
             }
+            
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            {
+                conexion.Open();
+
+                //MODIFICO LA TABLA TURNOS
+                //Cuando agreguen bono usado a turnos borrar este y dejar el que está comentado
+                string query = "UPDATE UN_CORTADO.TURNOS SET Hora_Llegada_Afiliado=GETDATE() WHERE Id=@idturno";
+                //string query = "UPDATE UN_CORTADO.TURNOS SET Hora_Llegada_Afiliado=GETDATE(),Bono_Usado=@idBono WHERE Id=@idturno";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+
+                cmd.Parameters.AddWithValue("@idturno", Convert.ToInt64(dataGridView1.CurrentRow.Cells["Id"].Value));
+                cmd.Parameters.AddWithValue("@idBono", Convert.ToInt64(gridBonosDisponibles.CurrentRow.Cells["Id"].Value));
+                cmd.ExecuteNonQuery(); 
+
+                //MODIFICO LA TABLA BONOS
+                string query2 = "UPDATE UN_CORTADO.BONOS SET Habilitado=0, Nombre_Usuario_Uso=(SELECT Nombre_Usuario FROM [GD2C2016].[UN_CORTADO].[listado_afiliados] WHERE Apellido +' '+  Nombre=@NombreUsuario), Fecha_Uso=@GETDATE() WHERE Id=@idBono";
+
+
+                SqlParameter param = new SqlParameter("@NombreUsuario", comboAfiliado.SelectedItem);
+                param.SqlDbType = System.Data.SqlDbType.VarChar;
+                cmd.Parameters.Add(param);
+             
+               SqlCommand cmd2 = new SqlCommand(query2, conexion);
+              try
+                {
+                    conexion.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    
+                }
+                catch
+                {
+
+                } 
+            }
+            MessageBox.Show("Se registró la llegada correctamente", "EXITO");
             
         }
     }
