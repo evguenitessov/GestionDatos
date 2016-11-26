@@ -30,12 +30,15 @@
         {
             this.profesional_grbx = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.aceptar_fechas = new System.Windows.Forms.Button();
             this.desde_fecha = new System.Windows.Forms.DateTimePicker();
             this.hasta_fecha = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.agenda_dgrvw = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.detalle_txbx = new System.Windows.Forms.TextBox();
@@ -49,6 +52,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.especialidades_cbx = new System.Windows.Forms.ComboBox();
             this.profesional_grbx.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -65,15 +69,17 @@
             this.profesional_grbx.Controls.Add(this.label2);
             this.profesional_grbx.Controls.Add(this.tipo_cancel_txbx);
             this.profesional_grbx.Controls.Add(this.label1);
-            this.profesional_grbx.Location = new System.Drawing.Point(12, 12);
+            this.profesional_grbx.Location = new System.Drawing.Point(39, 5);
             this.profesional_grbx.Name = "profesional_grbx";
-            this.profesional_grbx.Size = new System.Drawing.Size(725, 484);
+            this.profesional_grbx.Size = new System.Drawing.Size(922, 484);
             this.profesional_grbx.TabIndex = 1;
             this.profesional_grbx.TabStop = false;
             this.profesional_grbx.Text = "Candelacion del Profesional";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.especialidades_cbx);
+            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.aceptar_fechas);
@@ -81,16 +87,25 @@
             this.groupBox2.Controls.Add(this.hasta_fecha);
             this.groupBox2.Location = new System.Drawing.Point(17, 343);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(696, 136);
+            this.groupBox2.Size = new System.Drawing.Size(702, 120);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cancelar período";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 26);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(125, 13);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Seleccione especialidad:";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(181, 28);
+            this.label5.Location = new System.Drawing.Point(261, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 12;
@@ -99,7 +114,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(341, 28);
+            this.label4.Location = new System.Drawing.Point(421, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 13;
@@ -107,9 +122,9 @@
             // 
             // aceptar_fechas
             // 
-            this.aceptar_fechas.Location = new System.Drawing.Point(195, 81);
+            this.aceptar_fechas.Location = new System.Drawing.Point(549, 35);
             this.aceptar_fechas.Name = "aceptar_fechas";
-            this.aceptar_fechas.Size = new System.Drawing.Size(192, 32);
+            this.aceptar_fechas.Size = new System.Drawing.Size(147, 32);
             this.aceptar_fechas.TabIndex = 16;
             this.aceptar_fechas.Text = "Cancelar período";
             this.aceptar_fechas.UseVisualStyleBackColor = true;
@@ -118,7 +133,7 @@
             // desde_fecha
             // 
             this.desde_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.desde_fecha.Location = new System.Drawing.Point(156, 49);
+            this.desde_fecha.Location = new System.Drawing.Point(236, 47);
             this.desde_fecha.Name = "desde_fecha";
             this.desde_fecha.ShowUpDown = true;
             this.desde_fecha.Size = new System.Drawing.Size(131, 20);
@@ -127,7 +142,7 @@
             // hasta_fecha
             // 
             this.hasta_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.hasta_fecha.Location = new System.Drawing.Point(305, 49);
+            this.hasta_fecha.Location = new System.Drawing.Point(385, 47);
             this.hasta_fecha.Name = "hasta_fecha";
             this.hasta_fecha.ShowUpDown = true;
             this.hasta_fecha.Size = new System.Drawing.Size(125, 20);
@@ -135,6 +150,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.agenda_dgrvw);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(17, 109);
@@ -144,6 +161,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cancelar un dia de la agenda";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 186);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(93, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Fecha a cancelar:";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(111, 180);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(131, 20);
+            this.dateTimePicker1.TabIndex = 17;
             // 
             // agenda_dgrvw
             // 
@@ -206,7 +241,7 @@
             this.afiliado_grbx.Controls.Add(this.label3);
             this.afiliado_grbx.Controls.Add(this.textBox2);
             this.afiliado_grbx.Controls.Add(this.label6);
-            this.afiliado_grbx.Location = new System.Drawing.Point(36, 7);
+            this.afiliado_grbx.Location = new System.Drawing.Point(12, 11);
             this.afiliado_grbx.Name = "afiliado_grbx";
             this.afiliado_grbx.Size = new System.Drawing.Size(939, 484);
             this.afiliado_grbx.TabIndex = 2;
@@ -266,11 +301,20 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Tipo de cancelación:";
             // 
+            // especialidades_cbx
+            // 
+            this.especialidades_cbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.especialidades_cbx.FormattingEnabled = true;
+            this.especialidades_cbx.Location = new System.Drawing.Point(10, 50);
+            this.especialidades_cbx.Name = "especialidades_cbx";
+            this.especialidades_cbx.Size = new System.Drawing.Size(206, 21);
+            this.especialidades_cbx.TabIndex = 19;
+            // 
             // cancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 507);
+            this.ClientSize = new System.Drawing.Size(1023, 507);
             this.Controls.Add(this.profesional_grbx);
             this.Controls.Add(this.afiliado_grbx);
             this.Name = "cancelarAtencion";
@@ -281,6 +325,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.agenda_dgrvw)).EndInit();
             this.afiliado_grbx.ResumeLayout(false);
             this.afiliado_grbx.PerformLayout();
@@ -303,7 +348,6 @@
         private System.Windows.Forms.DateTimePicker hasta_fecha;
         private System.Windows.Forms.DateTimePicker desde_fecha;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox afiliado_grbx;
         private System.Windows.Forms.Button button2;
@@ -312,6 +356,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox especialidades_cbx;
 
     }
 }
