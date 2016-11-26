@@ -65,7 +65,6 @@ namespace ClinicaFrba.Roles
             this.Hide();
             Menu.Menu menu = new Menu.Menu(Usuario, rol);            
             menu.ShowDialog();
-            this.Show();
         }
 
         private void roles_cbx_SelectedIndexChanged(object sender, EventArgs e)

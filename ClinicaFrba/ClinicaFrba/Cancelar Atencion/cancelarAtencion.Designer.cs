@@ -271,8 +271,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 507);
-            this.Controls.Add(this.afiliado_grbx);
             this.Controls.Add(this.profesional_grbx);
+            this.Controls.Add(this.afiliado_grbx);
             this.Name = "cancelarAtencion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cancelar Atencion Médica";

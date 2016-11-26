@@ -66,15 +66,11 @@ namespace ClinicaFrba.Menu
         public void MostrarFuncionalidades(List<string> funcionalidades)
         {
             if (!funcionalidades.Contains(button5.Text)) button5.Hide();
-            if (!funcionalidades.Contains(button12.Text)) button12.Hide();                                    
-            if (!funcionalidades.Contains(button4.Text)) button4.Hide();
+            if (!funcionalidades.Contains(button12.Text)) button12.Hide(); 
             if (!funcionalidades.Contains(btnAbmRol.Text)) btnAbmRol.Hide();
             if (!funcionalidades.Contains(button10.Text)) button10.Hide();
-            if (!funcionalidades.Contains(button3.Text)) button3.Hide();
             if (!funcionalidades.Contains(button6.Text)) button6.Hide();
-            if (!funcionalidades.Contains(button2.Text)) button2.Hide();
             if (!funcionalidades.Contains(button8.Text)) button8.Hide();
-            if (!funcionalidades.Contains(button7.Text)) button7.Hide();
             if (!funcionalidades.Contains(button11.Text)) button11.Hide();
             if (!funcionalidades.Contains(button9.Text)) button9.Hide();
             if (!funcionalidades.Contains(buttonListado.Text)) buttonListado.Hide();
@@ -103,21 +99,10 @@ namespace ClinicaFrba.Menu
             registroLlegada.Show();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Esta opción no está disponible por el momento", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             Registro_Resultado.registro_resultado registroResultado = new Registro_Resultado.registro_resultado(Usuario);
             registroResultado.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Esta opción no está disponible por el momento", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -126,20 +111,10 @@ namespace ClinicaFrba.Menu
             afi_menu.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Esta opción no está disponible por el momento", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             Cancelar_Atencion.cancelarAtencion cancelAtencion = new Cancelar_Atencion.cancelarAtencion(Rol, Usuario);
             cancelAtencion.Show();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //Este deberia ser el registrar un nuevo usuario?
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -148,13 +123,11 @@ namespace ClinicaFrba.Menu
             {
                 Compra_Bono.compraBono compraBono = new Compra_Bono.compraBono("Afiliado",Usuario);
                 compraBono.Show();
-                this.Hide();
             }
             if (Rol.Equals("Administrativo"))
             {
                 Compra_Bono.compraBono compraBono = new Compra_Bono.compraBono("Administrativo", null);
                 compraBono.Show();
-                this.Hide();
             }
         }
 
@@ -168,6 +141,11 @@ namespace ClinicaFrba.Menu
         {
             Listados.listados listados = new Listados.listados();
             listados.Show();
+        }
+
+        private void button_salir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
         
     }

@@ -244,7 +244,6 @@ namespace ClinicaFrba.Login
                 Roles.Rol roles = new Roles.Rol(user_txt.Text);
                 this.Hide();                
                 roles.ShowDialog();
-                this.Show();
             }
         }
 
