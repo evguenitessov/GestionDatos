@@ -358,6 +358,12 @@ namespace ClinicaFrba.Cancelar_Atencion
                 return;
             }
 
+            if (desde_fecha.Value.Date > hasta_fecha.Value.Date)
+            {
+                MessageBox.Show("La fecha hasta debe ser mayor a la fecha desde.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
                 SqlCommand cmd = new SqlCommand("[UN_CORTADO].[CANCELAR_RANGO_FECHA]", conexion);
