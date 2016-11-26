@@ -182,7 +182,7 @@
             this.buttonListado.Name = "buttonListado";
             this.buttonListado.Size = new System.Drawing.Size(167, 102);
             this.buttonListado.TabIndex = 18;
-            this.buttonListado.Text = "Listados Estadisticos";
+            this.buttonListado.Text = "Listado Estadistico";
             this.buttonListado.UseVisualStyleBackColor = true;
             this.buttonListado.Click += new System.EventHandler(this.buttonListado_Click);
             // 

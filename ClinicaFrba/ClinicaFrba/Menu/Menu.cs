@@ -76,7 +76,8 @@ namespace ClinicaFrba.Menu
             if (!funcionalidades.Contains(button8.Text)) button8.Hide();
             if (!funcionalidades.Contains(button7.Text)) button7.Hide();
             if (!funcionalidades.Contains(button11.Text)) button11.Hide();
-            if (!funcionalidades.Contains(button9.Text)) button9.Hide();            
+            if (!funcionalidades.Contains(button9.Text)) button9.Hide();
+            if (!funcionalidades.Contains(buttonListado.Text)) buttonListado.Hide();
         }
 
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
