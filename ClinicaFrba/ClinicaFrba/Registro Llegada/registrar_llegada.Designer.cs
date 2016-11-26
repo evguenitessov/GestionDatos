@@ -129,7 +129,6 @@
             this.comboBusqueda.Name = "comboBusqueda";
             this.comboBusqueda.Size = new System.Drawing.Size(151, 21);
             this.comboBusqueda.TabIndex = 1;
-            this.comboBusqueda.SelectedIndexChanged += new System.EventHandler(this.comboBusqueda_SelectedIndexChanged);
             // 
             // textBox1
             // 
@@ -184,7 +183,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(551, 164);
             this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // groupBox3
             // 

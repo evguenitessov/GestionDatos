@@ -19,6 +19,7 @@ namespace ClinicaFrba.Registro_Resultado
         public registro_resultado(string usuario)
         {            
             InitializeComponent();
+            Access = new DBAccess();
             this.usuario = usuario;
             groupBox_diag.Hide();
         }
@@ -29,10 +30,8 @@ namespace ClinicaFrba.Registro_Resultado
         }
 
         private void button_atras_Click(object sender, EventArgs e)
-        {
-            //Menu.Menu menu = new Menu.Menu(Usuario, "Profesional");
-            //this.Hide();
-            //menu.Show();
+        {            
+            this.Hide();
         }
 
         private void confirmar_todo_Click(object sender, EventArgs e)
@@ -45,7 +44,7 @@ namespace ClinicaFrba.Registro_Resultado
                 command.Transaction = sqlTransact;
                 try
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[ATENCIONMEDICA] VALUES (@usuario,@enfermedad,@sintoma,@fechahora,@idturno)");
+                    string query = String.Format("UPDATE [UN_CORTADO].[ATENCIONMEDICA] SET Nombre_Profecional=@usuario,Enfermedad=@enfermedad,Sintomas=@sintoma,Fecha_Hora=GETDATE() WHERE Id=(SELECT max(Id) FROM UN_CORTADO.ATENCIONMEDICA)");
                     command.CommandText = query;
 
                     SqlParameter param = new SqlParameter("@usuario", usuario);
@@ -58,14 +57,6 @@ namespace ClinicaFrba.Registro_Resultado
 
                     param = new SqlParameter("@sintoma", sintoma.Text);
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
-                    command.Parameters.Add(param);
-
-                    param = new SqlParameter("@fechahora", DateTime.Now);
-                    param.SqlDbType = System.Data.SqlDbType.VarChar;
-                    command.Parameters.Add(param);
-
-                    param = new SqlParameter("@idturno", conseguiridturno());
-                    param.SqlDbType = System.Data.SqlDbType.Int;
                     command.Parameters.Add(param);
 
                     command.ExecuteNonQuery();
@@ -83,11 +74,6 @@ namespace ClinicaFrba.Registro_Resultado
                         conexion.Dispose();
                 }
             }
-        }
-
-        private object conseguiridturno()
-        {
-            throw new NotImplementedException();
         }
 
         private object conseguirbonousado()

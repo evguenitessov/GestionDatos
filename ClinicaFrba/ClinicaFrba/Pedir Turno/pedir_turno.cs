@@ -41,7 +41,7 @@ namespace ClinicaFrba.Pedir_Turno
 
         private void cargarprofesionales()
         {
-            String query = " SELECT NOMBRE_PROFESIONAL,APELLIDO_PROFESIONAL FROM UN_CORTADO.ProfesionalesYSusEspecialidades WHERE NOMBRE_ESPECIALIDAD=@especialidad";
+            String query = " SELECT Nombre,Apellido FROM UN_CORTADO.registro_llegada WHERE Especialidades=@especialidad";
             SqlConnection con = new SqlConnection(Access.Conexion);
             SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@especialidad", combo_especialidades.SelectedItem.ToString());
@@ -52,7 +52,7 @@ namespace ClinicaFrba.Pedir_Turno
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    string nombre_completo = dr["APELLIDO_PROFESIONAL"] + "," + dr["NOMBRE_PROFESIONAL"];
+                    string nombre_completo = dr["Apellido"] + "," + dr["Nombre"];
                     combo_profesionales.Items.Add(nombre_completo);
                 }
             }
