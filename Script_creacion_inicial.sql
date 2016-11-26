@@ -159,7 +159,7 @@ CREATE TABLE [UN_CORTADO].[TURNOS] (                        --@NUMERO PARA QUE E
 	[Hora_Fin]					TIME NOT NULL,
 	[Fecha]						DATE NOT NULL,
 	[Especialidad]				VARCHAR(30) NOT NULL,
-	[Disponible]				BIT DEFAULT 1,
+	[Disponible]				TINYINT DEFAULT 1,
 	[Id_Afiliado]				VARCHAR(30) REFERENCES [UN_CORTADO].[AFILIADOS],	
 	--[Numero]					INT NOT NULL,
 	[Hora_Llegada_Afiliado]		TIME DEFAULT NULL,
@@ -736,7 +736,7 @@ INSERT INTO [UN_CORTADO].[BONOS]
            ,[Plan]
            ,[Nombre_Usuario_Uso]
            ,[Habilitado])
-SELECT DISTINCT M.Bono_Consulta_Numero,1, C.id,M.Bono_Consulta_Fecha_Impresion,0,A.Id_Plan,C.Nombre_Usuario,1
+SELECT DISTINCT M.Bono_Consulta_Numero,1, C.id,M.Bono_Consulta_Fecha_Impresion,0,A.Id_Plan,C.Nombre_Usuario,0
   FROM [GD2C2016].[gd_esquema].[Maestra] AS M
   INNER JOIN [UN_CORTADO].[COMPRABONOS] AS C
   ON M.Paciente_Dni = C.Nombre_Usuario AND C.Fecha_Compra = M.Compra_Bono_Fecha 
