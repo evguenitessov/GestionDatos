@@ -299,11 +299,18 @@ namespace ClinicaFrba.Registro_Llegada
 
                     ArrayList bonos = new ArrayList();
                     if (dr.HasRows)
+                    {
                         foreach (DbDataRecord item in dr)
                             bonos.Add(item);
 
-                    gridBonosDisponibles.DataSource = bonos;                        
-                   
+                        gridBonosDisponibles.DataSource = bonos;
+
+                    }
+                    else 
+                    {
+                        MessageBox.Show("El afiliado no tiene bonos disponibles.","ADVERTENCIA");
+                    
+                    }
                 }
 
                 catch
@@ -332,9 +339,10 @@ namespace ClinicaFrba.Registro_Llegada
                 cmd2.Parameters.AddWithValue("@bonousado", Convert.ToInt64(gridBonosDisponibles.CurrentRow.Cells["Id"].Value));
                 cmd2.ExecuteNonQuery();
 
-                string query3 = "UPDATE UN_CORTADO.BONOS SET Habilitado=@habilitado, Nombre_Usuario_Uso=@NombreUsuario, Fecha_Uso=GETDATE() WHERE Id=@idBono";
+                string query3 = "UPDATE UN_CORTADO.BONOS SET Habilitado=@habilitado, Nombre_Usuario_Uso=@NombreUsuario, Fecha_Uso=@fechauso WHERE Id=@idBono";
                 SqlCommand cmd3 = new SqlCommand(query3, conexion);
                 cmd3.Parameters.AddWithValue("@habilitado", 0);
+                cmd3.Parameters.AddWithValue("@fechauso", Convert.ToDateTime(DBAccess.fechaSystem()));
                 cmd3.Parameters.AddWithValue("@idBono", Convert.ToInt64(gridBonosDisponibles.CurrentRow.Cells["Id"].Value));
                 cmd3.Parameters.AddWithValue("@NombreUsuario", buscaridafiliado());
                 cmd3.ExecuteNonQuery();

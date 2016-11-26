@@ -44,7 +44,7 @@ namespace ClinicaFrba.Registro_Resultado
                 command.Transaction = sqlTransact;
                 try
                 {
-                    string query = String.Format("UPDATE [UN_CORTADO].[ATENCIONMEDICA] SET Nombre_Profecional=@usuario,Enfermedad=@enfermedad,Sintomas=@sintoma,Fecha_Hora=GETDATE() WHERE Id=(SELECT max(Id) FROM UN_CORTADO.ATENCIONMEDICA)");
+                    string query = String.Format("UPDATE [UN_CORTADO].[ATENCIONMEDICA] SET Nombre_Profecional=@usuario,Enfermedad=@enfermedad,Sintomas=@sintoma,Fecha_Hora=@fechahora WHERE Id=(SELECT max(Id) FROM UN_CORTADO.ATENCIONMEDICA)");
                     command.CommandText = query;
 
                     SqlParameter param = new SqlParameter("@usuario", usuario);
@@ -57,6 +57,10 @@ namespace ClinicaFrba.Registro_Resultado
 
                     param = new SqlParameter("@sintoma", sintoma.Text);
                     param.SqlDbType = System.Data.SqlDbType.VarChar;
+                    command.Parameters.Add(param);
+
+                    param = new SqlParameter("@fechahora", conseguirfechayhora());
+                    param.SqlDbType = System.Data.SqlDbType.DateTime;
                     command.Parameters.Add(param);
 
                     command.ExecuteNonQuery();
@@ -76,14 +80,20 @@ namespace ClinicaFrba.Registro_Resultado
             }
         }
 
-        private object conseguirbonousado()
+        private DateTime conseguirfechayhora()
         {
-            throw new NotImplementedException();
+            DateTime resultado = Convert.ToDateTime(DBAccess.fechaSystem()) + conseguirhora();
+            return resultado;
         }
 
-        private object conseguirfechayhora()
+        private TimeSpan conseguirhora()
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = new SqlConnection(Access.Conexion);
+            conexion.Open();
+            string query = "SELECT Hora_Llegada_Afiliado  from UN_CORTADO.TURNOS where Id=(select Id_turno from UN_CORTADO.ATENCIONMEDICA where Id= (select max(Id) from UN_CORTADO.ATENCIONMEDICA))";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            TimeSpan hora = (TimeSpan) cmd.ExecuteScalar();
+            return hora;
         }
 
     }
