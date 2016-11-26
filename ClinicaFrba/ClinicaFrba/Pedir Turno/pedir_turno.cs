@@ -148,9 +148,8 @@ namespace ClinicaFrba.Pedir_Turno
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
                 conexion.Open();
-                string query = "UPDATE UN_CORTADO.TURNOS SET Disponible=0,Id_Afiliado=@idafiliado WHERE Id=@idturno";
+                string query = "UPDATE UN_CORTADO.TURNOS SET Disponible=0 WHERE Id=@idturno";
                 SqlCommand cmd = new SqlCommand(query, conexion);
-                cmd.Parameters.AddWithValue("@idafiliado", usuario);
                 cmd.Parameters.AddWithValue("@idturno", Convert.ToDecimal(id_turno));
                 cmd.ExecuteNonQuery();                
              }
