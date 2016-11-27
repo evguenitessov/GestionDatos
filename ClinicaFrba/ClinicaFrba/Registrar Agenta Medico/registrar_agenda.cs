@@ -51,18 +51,28 @@ namespace ClinicaFrba.Registrar_Agenta_Medico
                 {
                     conexion.Open();
                     SqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {                        
-                        comboSource.Add((int)dr[0], dr[1].ToString());                        
+
+                    if (!dr.Read())
+                    {
+                        MessageBox.Show("No posee especialidades, por lo tanto no puede registrar una agenda.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        box_dias.Enabled = false;
+                        return;
                     }
+                    else
+                    {
+                        while (dr.Read())
+                        {
+                            comboSource.Add((int)dr[0], dr[1].ToString());
+                        }
 
-                    roles_cbx.DataSource = new BindingSource(comboSource, null);
-                    roles_cbx.DisplayMember = "Value";
-                    roles_cbx.ValueMember = "Key";
+                        roles_cbx.DataSource = new BindingSource(comboSource, null);
+                        roles_cbx.DisplayMember = "Value";
+                        roles_cbx.ValueMember = "Key";
 
-                    roles_cbx.SelectedIndex = 0;
+                        roles_cbx.SelectedIndex = 0;
+                    }                    
                 }
-                catch
+                catch (Exception ex)
                 {
 
                 }
