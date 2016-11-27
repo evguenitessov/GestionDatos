@@ -934,8 +934,10 @@ GO
 -- HACER DROP DE LA COLUMNA BONO USADO DE TURNOS
 
 ALTER TABLE [UN_CORTADO].[TURNOS] DROP COLUMN Bono_Usado
-Insert into UN_CORTADO.AFILIADOS values('admin',0,0, 'SOLTERO/A',0,555559)
-Insert into UN_CORTADO.PROFESIONALES values('admin',0)
+insert into UN_CORTADO.AFILIADOS values('admin',0,0, 'SOLTERO/A',0,555559)
+insert into UN_CORTADO.PROFESIONALES values('admin',0)
+insert into UN_CORTADO.CONTACTO VALUES ('admin','ADMIN','admin','DNI','F',1234567,'Calle Falsa 123',44444444,'admin@admin.com','1993/02/02')
+insert into UN_CORTADO.ESPECIALIDADPORPROFESIONAL VALUES (10033,'admin')
 
 --GO
 
