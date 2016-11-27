@@ -47,7 +47,7 @@ namespace ClinicaFrba.Compra_Bono
                 cantid = Decimal.Parse(cantidad2.Text);
                 total = obtenermontosegunplan(cantid);
                 montoapagar2.Text = total.ToString();
-                cargarenlabd(obtenerusuario());
+                cargarenlabd(obtenerusuario(),cantidad2.Text);
             }
 
             if (rol.Equals("Afiliado"))
@@ -55,54 +55,116 @@ namespace ClinicaFrba.Compra_Bono
                 cantid = Decimal.Parse(cantidad.Text);
                 total = obtenermontoconusuario(cantid);
                 montoapagar.Text = total.ToString();
-                cargarenlabd(usuario);
+                cargarenlabd(usuario, cantidad.Text);
             }
         }
 
-        private void cargarenlabd(string user)
+        private void cargarenlabd(string user, string canti)
         {
-            using (SqlConnection conexion = new SqlConnection(Access.Conexion))
+            int quantity= Convert.ToInt16(canti);
+            int i;
+            for (i = 0; i < quantity; i++)
             {
-                conexion.Open();
-                SqlTransaction sqlTransact = conexion.BeginTransaction();
-                SqlCommand command = conexion.CreateCommand();
-                command.Transaction = sqlTransact;
-                try
+                using (SqlConnection conexion = new SqlConnection(Access.Conexion))
                 {
-                    string query = String.Format("INSERT INTO [UN_CORTADO].[COMPRABONOS] ([Nombre_Usuario], [Cantidad_Bonos],[Precio_Total],[Fecha_Compra]) VALUES (@usuario,@cantbonos,@total,@fechacompra)");
-                    command.CommandText = query;
+                    conexion.Open();
+                    SqlTransaction sqlTransact = conexion.BeginTransaction();
+                    SqlCommand command = conexion.CreateCommand();
+                    command.Transaction = sqlTransact;
+                    try
+                    {
+                        string query = String.Format("INSERT INTO [UN_CORTADO].[COMPRABONOS] ([Nombre_Usuario], [Cantidad_Bonos],[Precio_Total],[Fecha_Compra]) VALUES (@usuario,@cantbonos,@total,@fechacompra)");
+                        command.CommandText = query;
 
-                    SqlParameter param = new SqlParameter("@usuario", user);
-                    param.SqlDbType = System.Data.SqlDbType.VarChar;
-                    command.Parameters.Add(param);
+                        SqlParameter param = new SqlParameter("@usuario", user);
+                        param.SqlDbType = System.Data.SqlDbType.VarChar;
+                        command.Parameters.Add(param);
 
-                    param = new SqlParameter("@cantbonos", cantid);
-                    param.SqlDbType = System.Data.SqlDbType.VarChar;
-                    command.Parameters.Add(param);
+                        param = new SqlParameter("@cantbonos", Convert.ToString(1));
+                        param.SqlDbType = System.Data.SqlDbType.VarChar;
+                        command.Parameters.Add(param);
 
-                    param = new SqlParameter("@total", total);
-                    param.SqlDbType = System.Data.SqlDbType.Int;
-                    command.Parameters.Add(param);
+                        param = new SqlParameter("@total", total);
+                        param.SqlDbType = System.Data.SqlDbType.Int;
+                        command.Parameters.Add(param);
 
-                    param = new SqlParameter("@fechacompra", Convert.ToDateTime(DBAccess.fechaSystem()));
-                    param.SqlDbType = System.Data.SqlDbType.DateTime;
-                    command.Parameters.Add(param);
+                        param = new SqlParameter("@fechacompra", Convert.ToDateTime(DBAccess.fechaSystem()));
+                        param.SqlDbType = System.Data.SqlDbType.DateTime;
+                        command.Parameters.Add(param);
 
-                    command.ExecuteNonQuery();
-                    sqlTransact.Commit();
-                    MessageBox.Show("Operación realizada exitosamente.", "Exito");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
-                    sqlTransact.Rollback();
-                }
-                finally
-                {
-                    if (conexion.State == System.Data.ConnectionState.Open)
-                        conexion.Dispose();
+                        command.ExecuteNonQuery();
+                        sqlTransact.Commit();
+                        insertarenbonos();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ocurrió un error, vuelva a intentarlo", "Error");
+                        sqlTransact.Rollback();
+                    }
+                    finally
+                    {
+                        if (conexion.State == System.Data.ConnectionState.Open)
+                            conexion.Dispose();
+                    }
                 }
             }
+            MessageBox.Show("Operación realizada exitosamente.", "Exito");
+        }
+
+        private void insertarenbonos()
+        {
+            if (rol.Equals("Administrativo"))
+            {
+                SqlConnection conexion = new SqlConnection(Access.Conexion);
+                conexion.Open();
+                string query = "INSERT INTO UN_CORTADO.BONOS VALUES (@nroconsulta,@idcompra,@nrofamiliar,@plan,null,null,@habilitado)";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.Parameters.AddWithValue("@nroconsulta", 1);
+                cmd.Parameters.AddWithValue("@idcompra", idcompra());
+                cmd.Parameters.AddWithValue("@nrofamiliar", nrofamiliar(obtenerusuario()));
+                cmd.Parameters.AddWithValue("@plan", obteneridplansinusuario());
+                cmd.Parameters.AddWithValue("@habilitado", 1);
+                cmd.ExecuteNonQuery();
+            }
+            if (rol.Equals("Afiliado"))
+            {
+                SqlConnection conexion = new SqlConnection(Access.Conexion);
+                conexion.Open();
+                string query = "INSERT INTO UN_CORTADO.BONOS VALUES (@nroconsulta,@idcompra,@nrofamiliar,@plan,null,null,@habilitado)";
+                SqlCommand cmd = new SqlCommand(query, conexion);
+                cmd.Parameters.AddWithValue("@nroconsulta", 1);
+                cmd.Parameters.AddWithValue("@idcompra", idcompra());
+                cmd.Parameters.AddWithValue("@nrofamiliar", nrofamiliar(usuario));
+                cmd.Parameters.AddWithValue("@plan", obteneridplanconusuario());
+                cmd.Parameters.AddWithValue("@habilitado", 1);
+                cmd.ExecuteNonQuery();
+            }   
+        }
+
+        private Int16 idcompra()
+        {
+            SqlConnection conexion = new SqlConnection(Access.Conexion);
+            conexion.Open();
+            string query = "SELECT max(Id) FROM UN_CORTADO.COMPRABONOS";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            Int16 idcompra = Convert.ToInt16(cmd.ExecuteScalar());
+            return idcompra;
+        }
+
+        private object nrofamiliar(string usu)
+        {
+            SqlConnection conexion = new SqlConnection(Access.Conexion);
+            conexion.Open();
+            string query = "SELECT Numero_Familia FROM UN_CORTADO.AFILIADOS WHERE Nombre_Usuario=@nombreusuario";
+            SqlCommand cmd = new SqlCommand(query, conexion);
+            cmd.Parameters.AddWithValue("@nombreusuario",usu);
+            Int16 idcompra = Convert.ToInt16(cmd.ExecuteScalar());
+            return idcompra;
+        }
+
+        private object elplan()
+        {
+            throw new NotImplementedException();
         }
 
         private decimal obtenermontoconusuario(decimal canti)

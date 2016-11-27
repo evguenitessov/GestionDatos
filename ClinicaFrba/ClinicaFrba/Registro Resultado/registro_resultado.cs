@@ -66,6 +66,7 @@ namespace ClinicaFrba.Registro_Resultado
                     command.ExecuteNonQuery();
                     sqlTransact.Commit();
                     MessageBox.Show("Consulta médica registrada correctamente.", "Exito");
+                    this.Hide();
                 }
                 catch (Exception ex)
                 {

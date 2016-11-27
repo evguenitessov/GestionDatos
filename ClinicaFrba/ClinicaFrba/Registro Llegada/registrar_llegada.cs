@@ -240,7 +240,7 @@ namespace ClinicaFrba.Registro_Llegada
         {
             using (SqlConnection conexion = new SqlConnection(Access.Conexion))
             {
-                string query = String.Format("SELECT T.Id ,T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 0 AND Id_Afiliado IS NULL AND Hora_Llegada_Afiliado IS NULL)) ");
+                string query = String.Format("SELECT T.Id ,T.Hora_Inicio , T.Hora_Fin, T.Fecha FROM UN_CORTADO.TURNOS T WHERE T.Id_Agenda IN (SELECT ID_AGENDA FROM [GD2C2016].[UN_CORTADO].[ProfesionalesYSusEspecialidades] P WHERE ((P.APELLIDO_PROFESIONAL +' '+  P.NOMBRE_PROFESIONAL) =@NombreProfesional AND T.Disponible = 0 AND Id_Afiliado IS NOT NULL AND Hora_Llegada_Afiliado IS NULL)) ");
                 SqlCommand cmd = new SqlCommand(query, conexion);
 
                 if (textBox1.Text == "1" && textBox2.Text == "2")
@@ -347,7 +347,8 @@ namespace ClinicaFrba.Registro_Llegada
                 cmd3.Parameters.AddWithValue("@NombreUsuario", buscaridafiliado());
                 cmd3.ExecuteNonQuery();
 
-                MessageBox.Show("Se registró la llegada correctamente", "EXITO");   
+                MessageBox.Show("Se registró la llegada correctamente", "EXITO");
+                this.Hide();
             }                     
         }
 
